@@ -2,6 +2,9 @@
 
 {% block content %}
 
+{% load socialaccount %}
+
 <h1> Welcome to the stream </h1>
+<a href="{% provider_login_url 'twitch' %}">Login with Twitch</a>
 
 {% endblock %}

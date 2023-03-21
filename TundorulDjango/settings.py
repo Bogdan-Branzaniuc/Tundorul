@@ -33,6 +33,12 @@ ALLOWED_HOSTS = ['tundorul.herokuapp.com', '127.0.0.1']
 
 
 # Application definition
+SITE_ID = 1
+
+AUTHENTICATION_BACKENDS = [
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -40,11 +46,33 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount.providers.twitch',
+    'allauth.socialaccount',
     'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
     'Tundorul',
+
+    "django_extensions",
 ]
+# python manage.py runserver_plus --cert-file cert.pem --key-file key.pem               ---for testing https login
+
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+
+LOGIN_REDIRECT_URL= '/'
+LOGOUT_REDIRECT_URL= '/'
+
+SOCIALACCOUNT_PROVIDERS = {
+    'twitch': {
+        'APP': {
+            'client_id': 'hf3ftyp7rubp7kdu4ebr7fy0flzba8',
+            'secret': 'boxcbhf9h2yhd1vqhh39xiqh7xs69c',
+    }
+    }
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -69,6 +97,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.request',
             ],
         },
     },
