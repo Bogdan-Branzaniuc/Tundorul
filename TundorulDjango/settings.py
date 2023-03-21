@@ -29,7 +29,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['tundorul.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = ['tundorul.herokuapp.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -61,17 +61,18 @@ INSTALLED_APPS = [
 # python manage.py runserver_plus --cert-file cert.pem --key-file key.pem               ---for testing https login
 
 ACCOUNT_EMAIL_VERIFICATION = 'none'
-
-LOGIN_REDIRECT_URL= '/'
-LOGOUT_REDIRECT_URL= '/'
+#
+LOGIN_REDIRECT_URL= '/http://localhost:8000/accounts/twitch/login/callback/'
+# LOGOUT_REDIRECT_URL= '/'
 
 SOCIALACCOUNT_PROVIDERS = {
     'twitch': {
         'APP':{
-        'client_id': 'hf3ftyp7rubp7kdu4ebr7fy0flzba8',
-        'secret': 'boxcbhf9h2yhd1vqhh39xiqh7xs69c',
+            'SCOPE': ['user_read', 'user_subscriptions'],
+            'client_id': 'hf3ftyp7rubp7kdu4ebr7fy0flzba8',
+            'secret': 'boxcbhf9h2yhd1vqhh39xiqh7xs69c',
+            'REDIRECT_URI': 'http://localhost:8000/accounts/twitch/login/callback/',
     }
-
     }
 }
 
