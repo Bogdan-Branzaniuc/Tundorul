@@ -67,12 +67,18 @@ LOGOUT_REDIRECT_URL= '/'
 
 SOCIALACCOUNT_PROVIDERS = {
     'twitch': {
-        'APP': {
-            'client_id': 'hf3ftyp7rubp7kdu4ebr7fy0flzba8',
-            'secret': 'boxcbhf9h2yhd1vqhh39xiqh7xs69c',
+        'APP':{
+        'client_id': 'hf3ftyp7rubp7kdu4ebr7fy0flzba8',
+        'secret': 'boxcbhf9h2yhd1vqhh39xiqh7xs69c',
     }
+
     }
 }
+
+# curl -X POST 'https://id.twitch.tv/oauth2/token' \
+# -H 'Content-Type: application/x-www-form-urlencoded' \
+# -d 'client_id=hf3ftyp7rubp7kdu4ebr7fy0flzba8&client_secret=boxcbhf9h2yhd1vqhh39xiqh7xs69c&grant_type=client_credentials'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
