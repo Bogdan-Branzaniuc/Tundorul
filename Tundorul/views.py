@@ -2,12 +2,13 @@ from django.shortcuts import render, get_object_or_404, reverse
 from django.http import HttpResponse
 from django.views import View
 import requests
+from allauth.socialaccount.adapter import DefaultSocialAccountAdapter
+from django.shortcuts import render, get_object_or_404, reverse
+from django import forms
 
-
-class MyView(View):
+class PopulateUser(View):
 
     def get(self, request, *args, **kwargs):
-        template_name = 'index.html'
         return render(
             request,
             'index.html',
@@ -16,16 +17,14 @@ class MyView(View):
         return HttpResponse('')
 
 
-    def exchange_code_for_token(request):
-        code = request.GET.get('code')
-        redirect_uri = 'http://localhost:8000/accounts/twitch/login/callback/'
-        payload = {
-            'client_id': '<your-client-id>',
-            'client_secret': '<your-client-secret>',
-            'code': code,
-            'grant_type': 'authorization_code',
-            'redirect_uri': redirect_uri,
-        }
-        response = requests.post('https://id.twitch.tv/oauth2/token', data=payload)
-        access_token = response.json()['access_token']
-        # Save the access token to the user's account or session
+class SocialUserAdapter(DefaultSocialAccountAdapter):
+    def save_user(self, request, sociallogin, form=None):
+        user = super().save_user(request, sociallogin, form=None)
+        if not user.is_staff:
+            extra_data = sociallogin.account.extra_data
+            user.id = extra_data['id']
+            user.username = extra_data['login']
+            user.email = extra_data['email']
+            user.profile_image_url = extra_data['profile_image_url']
+            user.date_joined = extra_data['created_at']
+            user.save()

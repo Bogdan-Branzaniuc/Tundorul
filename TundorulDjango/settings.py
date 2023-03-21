@@ -49,8 +49,8 @@ INSTALLED_APPS = [
     'django.contrib.sites',
     'allauth',
     'allauth.account',
-    'allauth.socialaccount.providers.twitch',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.twitch',
     'cloudinary_storage',
     'django.contrib.staticfiles',
     'cloudinary',
@@ -62,20 +62,19 @@ INSTALLED_APPS = [
 
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 #
-LOGIN_REDIRECT_URL= '/http://localhost:8000/accounts/twitch/login/callback/'
-# LOGOUT_REDIRECT_URL= '/'
+LOGIN_REDIRECT_URL= '/'
+LOGOUT_REDIRECT_URL= '/'
 
 SOCIALACCOUNT_PROVIDERS = {
     'twitch': {
-        'APP':{
-            'SCOPE': ['user_read', 'user_subscriptions'],
+        'APP': {
             'client_id': 'hf3ftyp7rubp7kdu4ebr7fy0flzba8',
             'secret': 'boxcbhf9h2yhd1vqhh39xiqh7xs69c',
-            'REDIRECT_URI': 'http://localhost:8000/accounts/twitch/login/callback/',
-    }
+        },
     }
 }
-
+SOCIALACCOUNT_ADAPTER = 'Tundorul.views.SocialUserAdapter'
+AUTH_USER_MODEL = 'Tundorul.userSocial'
 # curl -X POST 'https://id.twitch.tv/oauth2/token' \
 # -H 'Content-Type: application/x-www-form-urlencoded' \
 # -d 'client_id=hf3ftyp7rubp7kdu4ebr7fy0flzba8&client_secret=boxcbhf9h2yhd1vqhh39xiqh7xs69c&grant_type=client_credentials'
