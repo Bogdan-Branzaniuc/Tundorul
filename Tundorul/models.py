@@ -19,4 +19,4 @@ class UserProfile(models.Model):
         ordering = ['-join_date']
 
     def __str__(self):
-        return self.username
+        return self.current_name
