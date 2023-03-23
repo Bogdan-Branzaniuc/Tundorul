@@ -73,8 +73,7 @@ SOCIALACCOUNT_PROVIDERS = {
         },
     }
 }
-SOCIALACCOUNT_ADAPTER = 'Tundorul.views.SocialUserAdapter'
-AUTH_USER_MODEL = 'Tundorul.userSocial'
+
 # curl -X POST 'https://id.twitch.tv/oauth2/token' \
 # -H 'Content-Type: application/x-www-form-urlencoded' \
 # -d 'client_id=hf3ftyp7rubp7kdu4ebr7fy0flzba8&client_secret=boxcbhf9h2yhd1vqhh39xiqh7xs69c&grant_type=client_credentials'
@@ -115,16 +114,17 @@ WSGI_APPLICATION = 'TundorulDjango.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': BASE_DIR / 'db.sqlite3',
-#     }
-# }
 
 DATABASES = {
-    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 }
+
+# DATABASES = {
+#     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
