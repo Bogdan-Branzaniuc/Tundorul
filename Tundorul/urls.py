@@ -1,6 +1,7 @@
-from . import views
+from Tundorul.views import home, twitch
 from django.urls import path
 
 urlpatterns = [
-    path('', views.PopulateUserProfile.as_view(), name='home'),
+    path('', home.Home.as_view(), name='home'),
+    path('accounts/twitch/login/callback/', twitch.TwitchToken.as_view(), name='twitch'),
 ]

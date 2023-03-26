@@ -8,9 +8,10 @@
 <a href="{% provider_login_url 'twitch' %}">Login with Twitch</a>
 
 {% if user.is_authenticated %}
-
     <h1>Hello {{ user }}</h1>
 {% endif %}
+
+<h2> {{ messageViewTest }}</h2>
 
 
 {% endblock %}

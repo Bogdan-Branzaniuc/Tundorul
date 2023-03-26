@@ -3,12 +3,13 @@ from django.views import generic, View
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 
-from .models import UserProfile
+from Tundorul.models import UserProfile
 from allauth.socialaccount.models import SocialAccount
 from datetime import datetime
 from allauth.socialaccount.signals import social_account_updated
 from allauth.account.signals import user_signed_up
 from django.dispatch import receiver
+from allauth.socialaccount.models import SocialAccount, SocialToken
 
 
 @receiver(user_signed_up)
@@ -40,11 +41,18 @@ def user_signed_up(sender, request, user, **kwargs):
 def signal_social_account_updated(sender, request, sociallogin, **kwargs):
     print('account updated')
     print(sociallogin.user)
+    try:
+        account = SocialAccount.objects.get(user=sociallogin.user, provider='twitch')
+        token = SocialToken.objects.get(account=account)
+        print(token.token)
+    except:
+        print('something else')
     # update the user profile.
     # here, update everything that changed in the records.
 
-class PopulateUserProfile(View):
+class Home(View):
     def get(self, request, *args, **kwargs):
+
         return render(
             request,
             'index.html',
