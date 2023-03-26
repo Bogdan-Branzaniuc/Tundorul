@@ -56,8 +56,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cloudinary',
     'Tundorul',
+    'asyncio',
     'twitchAPI',
-    "django_extensions",
+    'django_extensions',
 ]
 # python manage.py runserver_plus --cert-file cert.pem --key-file key.pem               ---for testing https login
 
