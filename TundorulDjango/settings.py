@@ -10,11 +10,12 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 from pathlib import Path
+
 import os
 import dj_database_url
 if os.path.isfile('env.py'):
     import env
-
+import sys
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -55,7 +56,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'cloudinary',
     'Tundorul',
-
+    'twitchAPI',
     "django_extensions",
 ]
 # python manage.py runserver_plus --cert-file cert.pem --key-file key.pem               ---for testing https login
@@ -73,6 +74,7 @@ SOCIALACCOUNT_PROVIDERS = {
         },
     }
 }
+
 
 # curl -X POST 'https://id.twitch.tv/oauth2/token' \
 # -H 'Content-Type: application/x-www-form-urlencoded' \
