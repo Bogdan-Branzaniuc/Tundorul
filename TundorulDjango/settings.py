@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 from pathlib import Path
 
+import logging.config
 import os
 import dj_database_url
 if os.path.isfile('env.py'):
@@ -71,15 +72,23 @@ SOCIALACCOUNT_PROVIDERS = {
     'twitch': {
         'APP': {
             'client_id': 'hf3ftyp7rubp7kdu4ebr7fy0flzba8',
-            'secret': 'boxcbhf9h2yhd1vqhh39xiqh7xs69c',
+            'secret': 'rfz6qucknjmmp5250u6bunyqcsf1o0',
         },
     }
 }
-
-
-# curl -X POST 'https://id.twitch.tv/oauth2/token' \
-# -H 'Content-Type: application/x-www-form-urlencoded' \
-# -d 'client_id=hf3ftyp7rubp7kdu4ebr7fy0flzba8&client_secret=boxcbhf9h2yhd1vqhh39xiqh7xs69c&grant_type=client_credentials'
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+}
 
 
 MIDDLEWARE = [
