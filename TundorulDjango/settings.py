@@ -35,7 +35,7 @@ ALLOWED_HOSTS = ['tundorul.herokuapp.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
-SITE_ID = 1
+SITE_ID = 4
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
@@ -49,32 +49,46 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.sites',
+    'django.contrib.staticfiles',
+    'Tundorul',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.twitch',
+    'allauth.socialaccount.providers.google',
     'cloudinary_storage',
-    'django.contrib.staticfiles',
     'cloudinary',
-    'Tundorul',
+
     'asyncio',
     'twitchAPI',
     'django_extensions',
 ]
 # python manage.py runserver_plus --cert-file cert.pem --key-file key.pem               ---for testing https login
 
+
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 #
 LOGIN_REDIRECT_URL= '/'
 LOGOUT_REDIRECT_URL= '/'
 
+
+SOCIALACCOUNT_STORE_TOKENS = True
+
 SOCIALACCOUNT_PROVIDERS = {
+    'google': {
+        'SCOPE': [
+            'profile',
+            'email',
+        ],
+        'AUTH_PARAMS': {
+            'access_type': 'online',
+        }
+    },
     'twitch': {
-        'APP': {
-            'client_id': 'hf3ftyp7rubp7kdu4ebr7fy0flzba8',
-            'secret': 'rfz6qucknjmmp5250u6bunyqcsf1o0',
-        },
-    }
+        'SCOPE': ['user_read'],
+        'AUTH_PARAMS': {'access_type': 'online'},
+        'METHOD': 'oauth2',
+    },
 }
 LOGGING = {
     'version': 1,
@@ -89,7 +103,6 @@ LOGGING = {
         'level': 'DEBUG',
     },
 }
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -176,6 +189,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_FILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
+
 STATIC_FILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 

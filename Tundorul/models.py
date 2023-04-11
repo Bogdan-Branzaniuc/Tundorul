@@ -9,14 +9,14 @@ class UserProfile(models.Model):
     uid = models.CharField(max_length=200, default='0000000')
     current_name = models.CharField(max_length=200, default='0000000')
     email = models.EmailField()
-    join_date = models.DateField()
+    following_since = models.DateField()
     time_watched = models.TimeField()
     channel_points = models.IntegerField()
     is_subscribed = models.BooleanField()
     subscribed_since = models.TimeField()
 
     class Meta:
-        ordering = ['-join_date']
+        ordering = ['-username']
 
     def __str__(self):
         return self.current_name
