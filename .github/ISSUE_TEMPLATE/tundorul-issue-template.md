@@ -7,4 +7,4 @@ assignees: ''
 
 ---
 
-As a _user_ I want to be able to _action_ so I can _result_
+As a **_user_** I want to be able to **_action_** so I can **_result_**
