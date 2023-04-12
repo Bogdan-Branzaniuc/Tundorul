@@ -39,13 +39,10 @@ import requests
 # @receiver(social_account_updated)
 # def signal_social_app_token(sender, request, **kwargs):
 #    print(request)
-
 class Home(View):
     def get(self, request, *args, **kwargs):
         return render(
             request,
             'index.html',
-            {}
         )
-
 

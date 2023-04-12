@@ -1,9 +1,18 @@
 {% extends "base.html" %}
-
 {% block content %}
-
+{% load account %}
+{% load static %}
 {% load socialaccount %}
+{% get_social_accounts user as accounts %}
+
+<link href="{% static 'css/style.css' %}" rel="stylesheet">
+
 <h1> Welcome to the stream </h1>
+
+{% if user.is_authenticated %}
+<img src="{{ accounts.twitch.0.extra_data.profile_image_url }}" alt="profile immage of the logged in user" >
+
+{% endif %}
 
 <a href="{% provider_login_url 'twitch' %}">Login with Twitch</a>
 
