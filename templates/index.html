@@ -3,13 +3,13 @@
 {% load account %}
 {% load static %}
 {% load socialaccount %}
-{% get_social_accounts user as accounts %}
 
 <link href="{% static 'css/style.css' %}" rel="stylesheet">
 
 <h1> Welcome to the stream </h1>
 
 {% if user.is_authenticated %}
+{% get_social_accounts user as accounts %}
 <img src="{{ accounts.twitch.0.extra_data.profile_image_url }}" alt="profile immage of the logged in user" >
 
 {% endif %}
