@@ -6,15 +6,27 @@
 
 <link href="{% static 'css/style.css' %}" rel="stylesheet">
 
-<h1> Welcome to the stream </h1>
+<section class="intro-section">
 
-{% if user.is_authenticated %}
-{% get_social_accounts user as accounts %}
-<img src="{{ accounts.twitch.0.extra_data.profile_image_url }}" alt="profile immage of the logged in user" >
+    <img class="home-logo-png" src="https://res.cloudinary.com/dgzv7gan8/image/upload/v1681419421/logo-red.png" alt="Tundorul Twitch Channel logo">
+    <h1> Ia un loc la caldura
+    de la lumina monitrorului </h1>
 
-{% endif %}
+    <p>Acesta va fii în mare parte un stream în care mă voi juca jocuri pe o dificultate nu tocmai ușoară - while making bad jokes and having a good time with you lot.
+    Stream containing an abundance of patience, perseverance, bad jokes and good vibes.
+    Deci, dacă ești în căutarea unui loc sigur, cu oameni faini și voie bună, ia un loc lângă noi aici la căldura de la lumina monitorului și bucură-te de niște jocuri faine jucate pe dificultate deaia nebună.
+    </p>
+</section>
+<section class="schedule-section">
+    
+</section>
+<!--{% if user.is_authenticated %}-->
+<!--{% get_social_accounts user as accounts %}-->
+<!--<img src="{{ accounts.twitch.0.extra_data.profile_image_url }}" alt="profile immage of the logged in user" >-->
 
-<a href="{% provider_login_url 'twitch' %}">Login with Twitch</a>
+<!--{% endif %}-->
+
+
 
 
 <h2> {{ messageViewTest }}</h2>

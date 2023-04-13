@@ -1,3 +1,37 @@
 h1{
-    color:red;
+    color:#993535;
+}
+
+.page-background{
+    width:100vw;
+    height:100vh;
+    position:fixed;
+    top:0;
+    z-index:-100;
+    background: rgb(210,210,207);
+    background: linear-gradient(180deg, rgba(210,210,207,1) 0%, rgba(110,111,110,1) 100%);
+}
+.navbar{
+    position:fixed;
+    top:0;
+    width:100%;
+}
+
+.home-logo-png{
+    width:200px;
+    height:200px;
+    /*background-color: #993333;*/
+}
+
+@media(min-width:992px){
+    .navbar-collapse{
+        max-width:30%;
+    }
+}
+
+body{
+    padding-top: 100px;
+}
+.row{
+    min-height:300vh;
 }

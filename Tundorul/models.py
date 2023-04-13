@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.contrib.postgres.fields import JSONField
+
 from allauth.socialaccount.models import SocialAccount
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 
@@ -20,3 +22,4 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.current_name
+
