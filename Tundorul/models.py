@@ -23,3 +23,20 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.current_name
 
+
+class StreamSchedule(models.Model):
+    id = models.AutoField(primary_key=True, editable=False)
+    day = models.CharField(default='Monday', max_length=200)
+    start_time = models.DateTimeField()
+    duration = models.IntegerField(blank=True)
+    timezone = models.CharField(max_length=200, default='UK/LONDON')
+    title = models.CharField(default='Title', max_length=200)
+    is_recuring = models.BooleanField()
+    category_id = models.CharField(max_length=200, blank=True)
+    twitch_segment_id = models.CharField(default='new', max_length=200)
+
+    class Meta:
+        ordering = ['start_time']
+
+    def __str__(self):
+        return self.title
