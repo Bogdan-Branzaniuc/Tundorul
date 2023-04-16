@@ -1,7 +1,13 @@
-h1{
+h1,h2,h3{
     color:#993535;
 }
 
+p{
+    max-width:300px;
+}
+intro-section{
+    margin-top:30vh;
+}
 .page-background{
     width:100vw;
     height:100vh;
@@ -20,6 +26,7 @@ h1{
 .home-logo-png{
     width:200px;
     height:200px;
+    margin-bottom:70px;
     /*background-color: #993333;*/
 }
 
@@ -30,8 +37,10 @@ h1{
 }
 
 body{
-    padding-top: 100px;
+    padding-top: 300px;
 }
-.row{
-    min-height:300vh;
+
+.schedule-section{
+    margin-top: 20vh;
+    min-height:50vh;
 }
