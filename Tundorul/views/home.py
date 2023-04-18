@@ -10,4 +10,3 @@ class Home(View):
             request,
             'index.html',
         )
-

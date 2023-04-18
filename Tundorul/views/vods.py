@@ -7,28 +7,38 @@ import requests
 
 import requests
 
-
 class HandleVods(View):
     def get(self, request, *args, **kwargs):
-        #retrieve vods from twitch.
-
+        """
+        this view will send a request to the api for The last VODS to be displaied in the home-page
+        """
         query_set1 = SocialAccount.objects.filter(user=request.user)
         social_user = get_object_or_404(query_set1)
         query_set2 = SocialToken.objects.filter(account=social_user)
         social_user_token = get_object_or_404(query_set2).token
         print(social_user_token)
 
-        headers = {'Authorisation': 'Bearer ' + f'social_user_token'}
-        data = {
-            'authorization': 'Bearer ' + social_user_token,
-            'client_id': 'hf3ftyp7rubp7kdu4ebr7fy0flzba8',
-            'user_id': '753993152',
+        headers = {
+                    'Authorization': 'Bearer ' + social_user_token,
+                    'Client-Id': 'hf3ftyp7rubp7kdu4ebr7fy0flzba8',
+                   }
+        params = {
+            'game_id': '499856',
+            'period': 'month',
+            'first': '100',
         }
         url = 'https://api.twitch.tv/helix/videos'
-        result = requests.get(url, data=data, headers=headers)
-        print(headers)
+
+        ############ ***This works good enough for the current state and needs to be wired with the real account and model***
+        # result = requests.get(url, headers=headers, params=params)
+        # data = result.json()
+        #
+        # for field in data['data']:
+        #     if field['user_name'] == 'tundorul':
+        #         print(field)
+        #
+        #
         return render(
             request,
-
             'vods.html',
         )
