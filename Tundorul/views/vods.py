@@ -23,9 +23,8 @@ class HandleVods(View):
                     'Client-Id': 'hf3ftyp7rubp7kdu4ebr7fy0flzba8',
                    }
         params = {
-            'game_id': '499856',
-            'period': 'month',
-            'first': '100',
+            'user_id': '453874993',
+            'first': '30',
         }
         url = 'https://api.twitch.tv/helix/videos'
 
@@ -34,10 +33,8 @@ class HandleVods(View):
         # data = result.json()
         #
         # for field in data['data']:
-        #     if field['user_name'] == 'tundorul':
-        #         print(field)
-        #
-        #
+        #     print(field)
+
         return render(
             request,
             'vods.html',

@@ -25,6 +25,7 @@ class UserProfile(models.Model):
 
 
 class StreamSchedule(models.Model):
+    segment_id = models.CharField(max_length=200, default='', blank=True)
     id = models.AutoField(primary_key=True, editable=False)
     day = models.CharField(default='Monday', max_length=200)
     start_time = models.DateTimeField()
@@ -34,9 +35,10 @@ class StreamSchedule(models.Model):
     is_recuring = models.BooleanField()
     category_id = models.CharField(max_length=200, blank=True)
     twitch_segment_id = models.CharField(default='new', max_length=200)
+    soft_deleted = models.BooleanField(default=False)
 
     class Meta:
-        ordering = ['start_time']
+        ordering = ['day']
 
     def __str__(self):
         return self.title
