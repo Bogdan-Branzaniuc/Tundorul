@@ -76,7 +76,7 @@ SOCIALACCOUNT_STORE_TOKENS = True
 
 SOCIALACCOUNT_PROVIDERS = {
     'twitch': {
-        'SCOPE': ['user_read'],
+        'SCOPE': ['user_read', 'channel:manage:schedule'],
         'AUTH_PARAMS': {'access_type': 'online'},
         'METHOD': 'oauth2',
     },

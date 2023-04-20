@@ -5,7 +5,6 @@ from django.contrib import messages
 from allauth.socialaccount.models import SocialToken, SocialAccount
 import requests
 
-import requests
 
 class HandleVods(View):
     def get(self, request, *args, **kwargs):

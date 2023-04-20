@@ -32,7 +32,7 @@ class StreamSchedule(models.Model):
     duration = models.IntegerField(blank=True)
     timezone = models.CharField(max_length=200, default='UK/LONDON')
     title = models.CharField(default='Title', max_length=200)
-    is_recuring = models.BooleanField()
+    is_recurring = models.BooleanField()
     category_id = models.CharField(max_length=200, blank=True)
     twitch_segment_id = models.CharField(default='new', max_length=200)
     soft_deleted = models.BooleanField(default=False)
