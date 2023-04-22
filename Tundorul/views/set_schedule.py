@@ -18,7 +18,6 @@ def saveSegmentsOnTwitch(sender, instance, **kwargs):
     query_set_token = SocialToken.objects.filter(account=social_user)
     social_user_admin_token = get_object_or_404(query_set_token).token
 
-
     query_set = StreamSchedule.objects.all()
     for segment_instance in query_set:
         instance_dict = {field.name: getattr(segment_instance, field.name) for field in segment_instance._meta.fields}
@@ -52,8 +51,8 @@ def saveSegmentsOnTwitch(sender, instance, **kwargs):
                 "start_time": start_time,
                 "timezone": instance_dict['timezone'],
                 "duration": str(instance_dict['duration']),
-                "is_recurring": instance_dict['is_recurring'],
-                "title": instance_dict['title'],
+                # "is_recurring": instance_dict['is_recurring'],
+                # "title": instance_dict['title'],
             }
             json_object = json.dumps(json_data)
             url = 'https://api.twitch.tv/helix/schedule/segment'

@@ -5,6 +5,7 @@
 {% load socialaccount %}
 
 <link href="{% static 'css/style.css' %}" rel="stylesheet">
+<link href="{% static 'css/home.css' %}" rel="stylesheet">
 
 <section class="intro-section">
 
@@ -18,9 +19,33 @@
     </p>
 </section>
 <section class="schedule-section">
+    <!-- if user profile.vacation of admin is true  -->
 
-         {{ schedule }}
 
+
+<div class="row g-0">
+    <!--  else  -->
+    {{ showing_dates }}
+    <div class="schedule-wrapper col-12">
+    {% for date in showing_dates %}
+        {% for segment in schedule %}
+            {% if segment.start_date == date %}
+        <!--    build segment  with classes    -->
+            <div class="segment-body">
+                {{ segment.start_date }}
+            </div>
+
+            {% else %}
+    <!--    build free day    -->
+            <div class="segment-body">
+                <p>{{date}}  XXX</p>
+            </div>
+
+            {% endif %}
+        {% endfor %}
+    {% endfor %}
+    </div>
+</div>
 </section>
 <!--{% if user.is_authenticated %}-->
 <!--{% get_social_accounts user as accounts %}-->
