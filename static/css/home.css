@@ -1,12 +1,16 @@
 .schedule-section{
     overflow-x: hidden;
 }
+.schedule-wrapper{
+    overflow: hidden;
+    max-height:30vh;
+}
 .segment-body{
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width:100%;
+
 }
 
 .schedule-segments-band{

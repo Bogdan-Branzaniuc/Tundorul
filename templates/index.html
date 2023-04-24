@@ -19,35 +19,42 @@
     </p>
 </section>
 <section class="schedule-section">
+    <div class="row g-0">
+        <div class="schedule-wrapper col-12">
     <!-- if user profile.vacation of admin is true  -->
 
 
 
-<div class="row g-0">
+
     <!--  else  -->
-
-    <div class="schedule-wrapper col-12">
-
     <div class="schedule-segments-band">
     {% for date in showing_dates %}
-        {% for segment in schedule %}
-            {% if segment.start_date == date %}
-        <!--    build segment  with classes    -->
-            <div class="segment-body">
-                <h2>{{ segment.title }}</h2>
-                <p>{{ segment.start_date }}</p>
-
-                <p>{{ segment.day }}</p>
-                <p>{{ segment.duration }}</p>
+        <div class="row g-0 date">
+            <div class="col-4">
+                <h2> {{ date.date }} </h2>
+                <h2> {{ date.day }} </h2>
             </div>
+            <div class="segment-body col-8">
+        {% for segment in schedule %}
+            {% if segment.start_date == date.date %}
+            <!--    build segment  with classes    -->
+                <h2>{{ segment.title }}</h2>
+                <p>Start Date: {{ segment.start_date }}</p>
+
+                <p>On {{ segment.day }}</p>
+
+                <p>from {{ segment.start_hour }}</p>
+
 
             {% else %}
-    <!--    build free day    -->
+            <!--    build free day    -->
             <div class="segment-body">
-                <p>{{date}}  XXX</p>
+                <p>Pause</p>
             </div>
             {% endif %}
         {% endfor %}
+                </div>
+        </div>
     {% endfor %}
     </div>
     </div>

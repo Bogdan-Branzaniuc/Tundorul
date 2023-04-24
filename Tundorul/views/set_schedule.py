@@ -46,18 +46,21 @@ def saveSegmentsOnTwitch(sender, instance, **kwargs):
             }
             params = {
                 'broadcaster_id': os.environ.get('ADMIN_USER_ID'),
-            }
-            json_data = {
                 "start_time": start_time,
                 "timezone": instance_dict['timezone'],
                 "duration": str(instance_dict['duration']),
-                # "is_recurring": instance_dict['is_recurring'],
-                # "title": instance_dict['title'],
+                "is_recurring": instance_dict['is_recurring'],
+                "title": instance_dict['title'],
             }
-            json_object = json.dumps(json_data)
             url = 'https://api.twitch.tv/helix/schedule/segment'
-            result = requests.post(url, params=params, headers=headers, json=json_object)
-            print(result)
+            response = requests.post(url, headers=headers, data=json.dumps(params))
+            content = json.loads(response.content)
+            print(content)
+            if content['data']:
+                segment_id = content['data']['segments'][0]['id']
+                segment_instance.segment_id = segment_id
+                segment_instance.save()
+
 
     "at the end delete any soft_deleted True fields."
 
