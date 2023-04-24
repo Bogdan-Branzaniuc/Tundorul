@@ -34,7 +34,6 @@ class StreamSchedule(models.Model):
     title = models.CharField(default='Title', max_length=200)
     is_recurring = models.BooleanField()
     category_id = models.CharField(max_length=200, blank=True)
-    twitch_segment_id = models.CharField(default='new', max_length=200)
     soft_deleted = models.BooleanField(default=False)
 
     class Meta:

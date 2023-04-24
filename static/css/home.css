@@ -1,11 +1,14 @@
-.schedule-wrapper{
-    display:flex;
-    position:relative;
+.schedule-section{
     overflow-x: hidden;
-    flex-direction: row;
 }
 .segment-body{
-    min-width:20%;
-    height:40px;
-    background-color:red;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+}
+
+.schedule-segments-band{
+    width:100%;
 }

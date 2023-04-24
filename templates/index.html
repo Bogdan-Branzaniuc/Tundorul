@@ -25,14 +25,20 @@
 
 <div class="row g-0">
     <!--  else  -->
-    {{ showing_dates }}
+
     <div class="schedule-wrapper col-12">
+
+    <div class="schedule-segments-band">
     {% for date in showing_dates %}
         {% for segment in schedule %}
             {% if segment.start_date == date %}
         <!--    build segment  with classes    -->
             <div class="segment-body">
-                {{ segment.start_date }}
+                <h2>{{ segment.title }}</h2>
+                <p>{{ segment.start_date }}</p>
+
+                <p>{{ segment.day }}</p>
+                <p>{{ segment.duration }}</p>
             </div>
 
             {% else %}
@@ -40,10 +46,10 @@
             <div class="segment-body">
                 <p>{{date}}  XXX</p>
             </div>
-
             {% endif %}
         {% endfor %}
     {% endfor %}
+    </div>
     </div>
 </div>
 </section>

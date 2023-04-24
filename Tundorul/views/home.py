@@ -22,7 +22,6 @@ class Home(View):
         # change this list for convenience.
         dates = pd.date_range(datetime.datetime.today().strftime('%Y-%m-%d'), periods=20).tolist()
         formnatted_dates = [d.date().strftime('%Y-%m-%d') for d in dates]
-
         # corelate the schedule with formatted_dates.
         context = {
             'schedule': schedule_array,
