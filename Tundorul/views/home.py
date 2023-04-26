@@ -1,40 +1,47 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views import generic, View
 from Tundorul.models import StreamSchedule
-from django.http import HttpResponseRedirect
+from django.contrib.staticfiles.storage import staticfiles_storage
+from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib import messages
 import requests
 import pandas as pd
 import datetime
+from icalendar import Calendar
+import icalendar
+from icalevents.icalevents import events
+import os
+from TundorulDjango import settings
 
 class Home(View):
-
     def get(self, request, *args, **kwargs):
-        admin_vacation = False #retrieve this from admin user profile instance.
-        schedule_array = []
-        query_set = StreamSchedule.objects.all()
-        for instance in query_set:
-            start_date = instance.start_time.strftime('%Y-%m-%d')
-            start_hour = instance.start_time.strftime('%H:%M')
-            instance_dict = {field.name: getattr(instance, field.name) for field in instance._meta.fields}
-            instance_dict['start_hour'] = start_hour
-            instance_dict['start_date'] = start_date
-            dateObject = datetime.datetime.strptime(instance_dict['start_date'], '%Y-%m-%d')
-            instance_dict['day'] = dateObject.strftime('%A')
-            schedule_array.append(instance_dict)
-        # change this list for convenience.
-        dates = pd.date_range(datetime.datetime.today().strftime('%Y-%m-%d'), periods=20).tolist()
-        formnatted_dates = [{'date': d.date().strftime('%Y-%m-%d'), 'day':d.date().strftime('%A')} for d in dates]
 
+        file_path = os.path.join(settings.STATICFILES_DIRS[0], 'twitchdev.ics')
+        calendar_file = open(file_path)
+        calendar = Calendar.from_ical(calendar_file.read())
+        events = []
+        for component in calendar.walk():
+            if component.name == 'VEVENT':
+                print(component)
+                component_object = {}
+                dtstart_prop = component.get('DTSTART')
+                dtstart_date = dtstart_prop.dt.strftime('%Y-%m-%d')
+                dtstart_time = dtstart_prop.dt.strftime('%H:%M')
+
+                event_summary = component['SUMMARY']
+                event_title = component['DESCRIPTION']
+                component_object['title'] = event_title
+                component_object['start_date'] = dtstart_date
+                component_object['start_time'] = dtstart_time
+                component_object['summary'] = event_summary
+                events.append(component_object)
+        calendar_file.close()
         context = {
-            'schedule': schedule_array,
-            'showing_dates': formnatted_dates,
-            'admin_vacation': admin_vacation,
+            'events': events,
         }
-        StreamSchedule
+
         return render(
             request,
             'index.html',
             context,
-
         )

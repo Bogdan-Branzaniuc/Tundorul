@@ -4,15 +4,19 @@
 .schedule-wrapper{
     overflow: hidden;
     max-height:30vh;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 .segment-body{
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-
+    align-items: start;
+    margin: 0, 30, 0, 30;
 }
 
 .schedule-segments-band{
     width:100%;
+
 }

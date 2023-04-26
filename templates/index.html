@@ -7,6 +7,7 @@
 <link href="{% static 'css/style.css' %}" rel="stylesheet">
 <link href="{% static 'css/home.css' %}" rel="stylesheet">
 
+
 <section class="intro-section">
 
     <img class="home-logo-png" src="https://res.cloudinary.com/dgzv7gan8/image/upload/v1681419421/logo-red.png" alt="Tundorul Twitch Channel logo">
@@ -21,42 +22,17 @@
 <section class="schedule-section">
     <div class="row g-0">
         <div class="schedule-wrapper col-12">
-    <!-- if user profile.vacation of admin is true  -->
-
-
-
-
-    <!--  else  -->
-    <div class="schedule-segments-band">
-    {% for date in showing_dates %}
-        <div class="row g-0 date">
-            <div class="col-4">
-                <h2> {{ date.date }} </h2>
-                <h2> {{ date.day }} </h2>
-            </div>
-            <div class="segment-body col-8">
-        {% for segment in schedule %}
-            {% if segment.start_date == date.date %}
-            <!--    build segment  with classes    -->
-                <h2>{{ segment.title }}</h2>
-                <p>Start Date: {{ segment.start_date }}</p>
-
-                <p>On {{ segment.day }}</p>
-
-                <p>from {{ segment.start_hour }}</p>
-
-
-            {% else %}
-            <!--    build free day    -->
+            {% for segment in events %}
             <div class="segment-body">
-                <p>Pause</p>
+                <h2>{{segment.title}}</h2>
+                <p>{{segment.start_date}}</p>
+                <p>{{segment.start_time}}</p>
+                <p>{{segment.summary}}</p>
             </div>
-            {% endif %}
-        {% endfor %}
-                </div>
+
+            {% endfor %}
+
         </div>
-    {% endfor %}
-    </div>
     </div>
 </div>
 </section>
