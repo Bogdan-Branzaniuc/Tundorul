@@ -1,7 +1,6 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from Tundorul.models import StreamSchedule
 from allauth.socialaccount.models import SocialToken, SocialAccount
 from django.db.models.signals import post_save
 from django.dispatch import receiver

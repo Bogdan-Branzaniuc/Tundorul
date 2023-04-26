@@ -22,21 +22,3 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.current_name
-
-
-class StreamSchedule(models.Model):
-    segment_id = models.CharField(max_length=200, default='', blank=True)
-    id = models.AutoField(primary_key=True, editable=False)
-    start_time = models.DateTimeField()
-    duration = models.IntegerField(blank=True)
-    timezone = models.CharField(max_length=200, default='Europe/Bucharest')
-    title = models.CharField(default='Title', max_length=200)
-    is_recurring = models.BooleanField()
-    category_id = models.CharField(max_length=200, blank=True)
-    soft_deleted = models.BooleanField(default=False)
-
-    class Meta:
-        ordering = ['start_time']
-
-    def __str__(self):
-        return self.title

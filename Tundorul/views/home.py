@@ -1,6 +1,5 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views import generic, View
-from Tundorul.models import StreamSchedule
 from django.contrib.staticfiles.storage import staticfiles_storage
 from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib import messages
@@ -27,17 +26,22 @@ class Home(View):
                 dtstart_prop = component.get('DTSTART')
                 dtstart_date = dtstart_prop.dt.strftime('%Y-%m-%d')
                 dtstart_time = dtstart_prop.dt.strftime('%H:%M')
+                weekday = dtstart_prop.dt.strftime('%A')
 
                 event_summary = component['SUMMARY']
                 event_title = component['DESCRIPTION']
-                component_object['title'] = event_title
+                component_object['title'] = event_title.replace('.', ' ')
                 component_object['start_date'] = dtstart_date
                 component_object['start_time'] = dtstart_time
                 component_object['summary'] = event_summary
+                component_object['day'] = weekday
+                component_object['weekday_integer'] = dtstart_prop.dt.weekday()
                 events.append(component_object)
         calendar_file.close()
+        sorted_events = sorted(events, key=lambda o: o['weekday_integer'])
+       
         context = {
-            'events': events,
+            'events': sorted_events,
         }
 
         return render(

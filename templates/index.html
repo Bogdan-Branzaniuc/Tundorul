@@ -22,16 +22,20 @@
 <section class="schedule-section">
     <div class="row g-0">
         <div class="schedule-wrapper col-12">
+
+        </div>
+    </div>
+    <div class="row g-0">
+        <div class="schedule-wrapper col-12">
             {% for segment in events %}
             <div class="segment-body">
                 <h2>{{segment.title}}</h2>
                 <p>{{segment.start_date}}</p>
                 <p>{{segment.start_time}}</p>
                 <p>{{segment.summary}}</p>
+                <p>{{segment.day}}</p>
             </div>
-
             {% endfor %}
-
         </div>
     </div>
 </div>

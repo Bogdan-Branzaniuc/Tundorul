@@ -3,7 +3,6 @@
 }
 .schedule-wrapper{
     overflow: hidden;
-    max-height:30vh;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -11,12 +10,11 @@
 .segment-body{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: top;
     align-items: start;
-    margin: 0, 30, 0, 30;
+    margin: 0px 30px 0px 30px;
 }
 
 .schedule-segments-band{
     width:100%;
-
 }
