@@ -1,5 +1,4 @@
-from Tundorul.views import home, vods, giveaway, set_schedule
-from Tundorul.views import set_schedule
+from Tundorul.views import home, vods, giveaway
 from django.urls import path, include
 from django.contrib import admin
 

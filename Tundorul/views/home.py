@@ -1,8 +1,6 @@
 from django.shortcuts import render, get_object_or_404, reverse, redirect
 from django.views import generic, View
-from django.contrib.staticfiles.storage import staticfiles_storage
 from django.http import HttpResponseRedirect, HttpResponse
-from django.contrib import messages
 import requests
 import pandas as pd
 import datetime
@@ -11,14 +9,16 @@ import icalendar
 from icalevents.icalevents import events
 import os
 from TundorulDjango import settings
+from collections import Counter
+
 
 class Home(View):
     def get(self, request, *args, **kwargs):
-
         file_path = os.path.join(settings.STATICFILES_DIRS[0], 'twitchdev.ics')
         calendar_file = open(file_path)
         calendar = Calendar.from_ical(calendar_file.read())
-        events = []
+        general_start_hour = []
+        twitch_events = []
         for component in calendar.walk():
             if component.name == 'VEVENT':
                 print(component)
@@ -36,12 +36,18 @@ class Home(View):
                 component_object['summary'] = event_summary
                 component_object['day'] = weekday
                 component_object['weekday_integer'] = dtstart_prop.dt.weekday()
-                events.append(component_object)
+                general_start_hour.append(dtstart_time)
+                twitch_events.append(component_object)
         calendar_file.close()
-        sorted_events = sorted(events, key=lambda o: o['weekday_integer'])
-       
+
+        sorted_events = sorted(twitch_events, key=lambda o: o['weekday_integer'])
+        schedule_heading = {}
+        schedule_heading['days_per_week'] = len(sorted_events)
+        schedule_heading['from_hour'] = Counter(general_start_hour).most_common(1)[0][0]
+
         context = {
             'events': sorted_events,
+            'heading': schedule_heading
         }
 
         return render(
