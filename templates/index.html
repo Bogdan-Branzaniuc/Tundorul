@@ -23,18 +23,27 @@
     <div class="row g-0">
         <div class="schedule-wrapper col-12">
             <div class="schedule-heading">
-                <h1>{{ heading.days_per_week }} days a week</h1>
-                <h2>from {{ heading.from_hour}}</h2>
+                <h1>{{ heading.days_per_week }} days a week from {{ heading.from_hour}}</h1>
+
+                <h2 class="schedule-timer"></h2>
+
             </div>
         </div>
     </div>
+
+    <script>
+        let dailyHours = []
+    </script>
     <div class="row g-0">
         <div class="schedule-wrapper col-12">
             {% for segment in events %}
-            <div class="segment-body">
-                <h2>{{segment.day}}</h2>
-                <h3>{{segment.title}}</h3>
-                <p>{{segment.start_time}}</p>
+            <script>
+                dailyHours['{{ segment.day }}'] = '{{ segment.start_time }}'
+            </script>
+            <div class="segment-body {{segment.day}}">
+                <h1>{{segment.day}}</h1>
+                <h4>{{segment.title}}</h4>
+                <h4>{{segment.start_time}}</h4>
                 <p>{{segment.summary}}</p>
             </div>
             {% endfor %}
@@ -47,7 +56,8 @@
 <!--<img src="{{ accounts.twitch.0.extra_data.profile_image_url }}" alt="profile immage of the logged in user" >-->
 <!--{% endif %}-->
 
-<h2> {{ messageViewTest }}</h2>
 
+<p> {{ daily_hours }} </p>
 
+<script src="{% static 'js/streamschedule.js' %}" rel="stylesheet"></script>
 {% endblock %}

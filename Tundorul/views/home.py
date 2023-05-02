@@ -19,6 +19,7 @@ class Home(View):
         calendar = Calendar.from_ical(calendar_file.read())
         general_start_hour = []
         twitch_events = []
+        daily_hours_array = []
         for component in calendar.walk():
             if component.name == 'VEVENT':
                 print(component)
@@ -26,6 +27,7 @@ class Home(View):
                 dtstart_prop = component.get('DTSTART')
                 dtstart_date = dtstart_prop.dt.strftime('%Y-%m-%d')
                 dtstart_time = dtstart_prop.dt.strftime('%H:%M')
+
                 weekday = dtstart_prop.dt.strftime('%A')
 
                 event_summary = component['SUMMARY']
@@ -36,18 +38,19 @@ class Home(View):
                 component_object['summary'] = event_summary
                 component_object['day'] = weekday
                 component_object['weekday_integer'] = dtstart_prop.dt.weekday()
+
                 general_start_hour.append(dtstart_time)
                 twitch_events.append(component_object)
         calendar_file.close()
-
         sorted_events = sorted(twitch_events, key=lambda o: o['weekday_integer'])
-        schedule_heading = {}
-        schedule_heading['days_per_week'] = len(sorted_events)
-        schedule_heading['from_hour'] = Counter(general_start_hour).most_common(1)[0][0]
+        schedule_heading = {
+            'days_per_week': len(sorted_events),
+            'from_hour': Counter(general_start_hour).most_common(1)[0][0],
+        }
 
         context = {
             'events': sorted_events,
-            'heading': schedule_heading
+            'heading': schedule_heading,
         }
 
         return render(
