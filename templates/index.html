@@ -20,7 +20,7 @@
     </p>
 </section>
 <section class="schedule-section">
-    <div class="row g-0">
+    <div class="row g-0 schedule-wrapper">
         <div class="schedule-wrapper col-12">
             <div class="schedule-heading">
                 <h1>{{ heading.days_per_week }} days a week from {{ heading.from_hour}}</h1>
@@ -35,29 +35,24 @@
         let dailyHours = []
     </script>
     <div class="row g-0">
-        <div class="schedule-wrapper col-12">
-            {% for segment in events %}
-            <script>
-                dailyHours['{{ segment.day }}'] = '{{ segment.start_time }}'
-            </script>
-            <div class="segment-body {{segment.day}}">
-                <h1>{{segment.day}}</h1>
-                <h4>{{segment.title}}</h4>
-                <h4>{{segment.start_time}}</h4>
-                <p>{{segment.summary}}</p>
-            </div>
-            {% endfor %}
+        {% for segment in events %}
+        <script>
+            dailyHours['{{ segment.day }}'] = '{{ segment.start_time }}'
+        </script>
+        <div class="col-12 col-sm-6 col-lg-4 segment-body {{segment.day}}">
+            <h1>{{segment.day}}</h1>
+            <h4>{{segment.title}}</h4>
+            <h4>{{segment.start_time}}</h4>
+
         </div>
+        {% endfor %}
     </div>
-</div>
+
 </section>
 <!--{% if user.is_authenticated %}-->
 <!--{% get_social_accounts user as accounts %}-->
 <!--<img src="{{ accounts.twitch.0.extra_data.profile_image_url }}" alt="profile immage of the logged in user" >-->
 <!--{% endif %}-->
-
-
-<p> {{ daily_hours }} </p>
 
 <script src="{% static 'js/streamschedule.js' %}" rel="stylesheet"></script>
 {% endblock %}
