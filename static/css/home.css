@@ -1,11 +1,9 @@
 .schedule-section{
-    overflow-x: hidden;
+   min-height: 60vh;
 }
 .schedule-wrapper{
-    overflow: hidden;
     display: flex;
     flex-direction: row;
-    /*flex-wrap: wrap;*/
 }
 .segment-body{
     display: flex;

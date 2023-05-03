@@ -66,7 +66,6 @@ function main(){
     countdownState.liveClock()
     countdownState.renderClock()
     setTimeout(main, 1000)
-
 }
 
 main()
