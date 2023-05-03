@@ -30,6 +30,13 @@ intro-section{
     /*background-color: #993333;*/
 }
 
+footer a{
+    text-decoration: none;
+    color:white;
+    min-width:60px;
+    min-height:60px;
+}
+
 @media(min-width:992px){
     .navbar-collapse{
         max-width:30%;
