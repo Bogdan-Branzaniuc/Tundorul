@@ -1,69 +1,64 @@
-
-let weekdays=new Array(7);
-weekdays[0]="Sunday";
-weekdays[1]="Monday";
-weekdays[2]="Tuesday";
-weekdays[3]="Wednesday";
-weekdays[4]="Thursday";
-weekdays[5]="Friday";
-weekdays[6]="Saturday";
-
-
 class LiveCountDown{
     constructor(){
+
+        this.callendar = {}
+        for (let [day, time] of Object.entries(dailyHours)){
+            this.callendar[day] = {
+                h: time.split(':')[0],
+                m: time.split(':')[1],
+                secStamp: time.split(':')[0]*3600 + time.split(':')[1]* 60
+            }
+        }
+        for (let i = 0; i < 7; i++){
+           if(!this.callendar[i]) this.callendar[i] = 'restDay'
+        }
+
         this.now = Date.now()
         this.currentWeekDay = new Date(this.now).getDay() // integer
-        this.todayString = weekdays[this.currentWeekDay]
-        this.tomorrowString = this.currentWeekDay < 7 ? weekdays[this.currentWeekDay+1] : weekdays[0]
 
-        this.todayStream = dailyHours[this.todayString]
-        this.tomorrowStream = dailyHours[this.tomorrowString]
 
-        this.streamStartHour =  Number(this.todayStream.split(':')[0])
-        this.streamStartMin =   Number(this.todayStream.split(':')[1])
-        this.tomorrowStreamStartH = Number(this.tomorrowStream.split(':')[0])
-        this.tomorrowStreamStartM = Number(this.tomorrowStream.split(':')[1])
-
+        this.leftOfDaySecStamp = 0
         this.nowH = new Date(this.now).getHours()
         this.nowMin = new Date(this.now).getMinutes()
         this.nowSec = new Date(this.now).getSeconds()
+        this.nowSecStamp = this.nowSec + this.nowMin * 60 + this.nowH * 3600
 
-        this.countdown = {
-            H : this.streamStartHour - this.nowH,
-            M : this.streamStartMin - this.nowMin,
-            S : this.nowSec,
-        }
         this.clockDiv = document.querySelector('.schedule-timer') // timer container
     }
 
-    liveClock(){
-        if (this.countdown['S'] <= 0){
-            this.countdown['S'] += 60
-            this.countdown['M'] -= 1
-        }
-        if (this.countdown['M'] <= 0){
-            this.countdown['M'] += 60
-            this.countdown['H'] -= 1
-        }
-        if (this.countdown['H'] < 0){
-            this.countdown['H'] = 24 - this.nowH + this.tomorrowStreamStartH
-            this.countdown['M'] = this.tomorrowStreamStartM - this.nowMin
-            this.liveClock()
-        }
-        this.countdown['S'] -= 1
-    }
 
     renderClock(){
-        let localeH = this.countdown.H.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
-        let localeM = this.countdown.M.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
-        let localeS = this.countdown.S.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
+        let totalSecStamp =  this.leftOfDaySecStamp
+        let seconds = totalSecStamp%60 % 60
+        let minutes = Math.floor(totalSecStamp/60 % 60)
+        let hours = Math.floor(totalSecStamp/60/60)
+
+        let localeH = hours.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
+        let localeM = minutes.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
+        let localeS = seconds.toLocaleString('en-US', {minimumIntegerDigits: 2, useGrouping:false})
         this.clockDiv.textContent = `${localeH}: ${localeM}: ${localeS}`
     }
+
+    findNextStream() {
+        let searchDay = this.currentWeekDay
+        for (let i = 0; i < 7; i++) {
+            let calSearch = this.callendar[searchDay]
+            if (calSearch == 'restDay' || this.nowSecStamp > calSearch.secStamp) {
+                searchDay = searchDay+1>6? 0 : searchDay+1
+                this.leftOfDaySecStamp += 24*3600 - this.nowH*3600 - this.nowMin * 60 - this.nowSec
+            }else{
+                this.streamStartHour = calSearch.h
+                this.streamStartMin = calSearch.m
+                this.leftOfDaySecStamp += calSearch.secStamp - this.nowSecStamp
+                break
+            }
+        }
+    }
 }
-let countdownState = new LiveCountDown()
 
 function main(){
-    countdownState.liveClock()
+    let countdownState = new LiveCountDown()
+    countdownState.findNextStream()
     countdownState.renderClock()
     setTimeout(main, 1000)
 }

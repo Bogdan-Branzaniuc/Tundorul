@@ -37,13 +37,12 @@
     <div class="row g-0">
         {% for segment in events %}
         <script>
-            dailyHours['{{ segment.day }}'] = '{{ segment.start_time }}'
+            dailyHours['{{ segment.weekday_integer }}'] = '{{ segment.start_time }}'
         </script>
         <div class="col-12 col-sm-6 col-lg-4 segment-body {{segment.day}}">
             <h1>{{segment.day}}</h1>
             <h4>{{segment.title}}</h4>
             <h4>{{segment.start_time}}</h4>
-
         </div>
         {% endfor %}
     </div>

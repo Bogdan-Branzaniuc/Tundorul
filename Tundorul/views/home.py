@@ -19,7 +19,7 @@ class Home(View):
         calendar = Calendar.from_ical(calendar_file.read())
         general_start_hour = []
         twitch_events = []
-        daily_hours_array = []
+
         for component in calendar.walk():
             if component.name == 'VEVENT':
                 print(component)
@@ -37,7 +37,7 @@ class Home(View):
                 component_object['start_time'] = dtstart_time
                 component_object['summary'] = event_summary
                 component_object['day'] = weekday
-                component_object['weekday_integer'] = dtstart_prop.dt.weekday()
+                component_object['weekday_integer'] = dtstart_prop.dt.weekday() + 1 % 7 #makes the week start on Sunday instead of monday, needed for JS compatibility in the template
 
                 general_start_hour.append(dtstart_time)
                 twitch_events.append(component_object)
