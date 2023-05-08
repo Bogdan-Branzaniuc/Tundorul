@@ -26,10 +26,13 @@ VI Libraries
 1. Gsap
 2. Allauth
 
-VII Testing
+
+VII Mechanics
+1. homepage countdown till the next stream
+2. 
+VIII Testing
+
+IXDeployment
 
 
-VIII Deployment
-
-
-IX End
+X End

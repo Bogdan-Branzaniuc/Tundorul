@@ -13,7 +13,6 @@ class LiveCountDown{
     }
 
     buildCalendarStamps(){
-
         for (let segment of this.importedTimes){
             let stamp =  segment.day * 24 * 3600 + segment.time.split(':')[0] * 3600 + segment.time.split(':')[1] * 60
             this.calendar.push(stamp)
@@ -30,7 +29,6 @@ class LiveCountDown{
          if (this.weekNowSecStamp >= this.calendar[this.calendar.length-1]  ){
             this.nextStreamStamp = this.calendar[0] + 24*7*3600 - this.weekNowSecStamp
         }
-
     }
 
     renderClock(){

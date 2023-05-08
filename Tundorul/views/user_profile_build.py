@@ -15,23 +15,22 @@ def update_or_create_user_profile(request, sociallogin, **kwargs):
 
     if UserProfile.objects.filter(username=sociallogin.user).exists():
         pass
-    # else:
-    #     print("SOCIAL ACCOUNT missing!!!!!!!!!!!!!!")
-    #     print("SOCIAL ACCOUNT ADDED!!!!!!!!!!!!!!")
-    #     print(social_usser.__dir__)
-    #     print(social_usser.extra_data)
-    #     user_profile = UserProfile.objects.create(
-    #         username=social_usser.user,
-    #         uid=social_usser.extra_data['id'],
-    #         current_name=social_usser.extra_data['display_name'],
-    #         email=user.email,
-    #         join_date=datetime.strptime('2000/10/06', '%Y/%m/%d'),
-    #         time_watched=datetime(2000, 10, 20),
-    #         channel_points=150,
-    #         is_subscribed=True,
-    #         subscribed_since=datetime(2000, 10, 20),
-    #     )
-    #     user_profile.save()
+    else:
+        print(sociallogin.__dir__())
+
+        extra_data = sociallogin.account.extra_data
+        token = sociallogin.token
+
+        user_profile = UserProfile.objects.create(
+         username=sociallogin.user,
+         uid=extra_data['id'],
+         current_name=extra_data['display_name'],
+         email=extra_data['email'],
+         # channel_points=150,
+         is_subscribed=True,
+         # subscribed_since=datetime(2000, 10, 20),
+        )
+        user_profile.save()
 
 
 # @receiver(social_account_signed_up)
