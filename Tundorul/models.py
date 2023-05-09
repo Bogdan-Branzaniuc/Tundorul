@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib.postgres.fields import JSONField
 from allauth.socialaccount.models import SocialAccount
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
+from datetime import datetime
 
 
 class UserProfile(models.Model):
@@ -10,8 +11,11 @@ class UserProfile(models.Model):
     uid = models.CharField(max_length=200, default='')
     current_name = models.CharField(max_length=200, default='')
     email = models.EmailField(max_length=200, default='')
-    channel_points = models.IntegerField(default=0)
-    is_subscribed = models.BooleanField()
+
+    is_subscribed = models.BooleanField(default=False)
+    is_banned = models.BooleanField(default=False)
+    join_date = models.DateField(default=datetime.now, blank=True)
+
 
     class Meta:
         ordering = ['-username']
@@ -21,6 +25,42 @@ class UserProfile(models.Model):
 
 
 #class Game(models.Model):
+    
 
 
 #class Giveaway(models.Model):
+    #title =
+    #description =
+    #start_date_time =
+    #duration =
+    #winner =
+    #prize =
+
+    # class Meta:
+    #     ordering = ['-start_time']
+    #
+    # def __str__(self):
+    #     return self.title
+
+#class Item(models.Model):
+    # title =
+    # description =
+    # provenience =
+    # creation_date =
+    # class Meta:
+    #     ordering = ['-creation_date']
+    #
+    # def __str__(self):
+    #     return self.title
+
+#class UserInventory(models.Model):
+    # owner =
+    # item =
+    # quantity =
+    # aquired_on =
+
+    # class Meta:
+    #     ordering = ['-aquired_on']
+    #
+    # def __str__(self):
+    #     return self.item

@@ -28,11 +28,6 @@ def update_or_create_user_profile(request, sociallogin, **kwargs):
          email=extra_data['email'],
          # channel_points=150,
          is_subscribed=True,
-         # subscribed_since=datetime(2000, 10, 20),
+
         )
         user_profile.save()
-
-
-# @receiver(social_account_signed_up)
-# def user_signed_up(sender, request, user, **kwargs):
-#     print('signedUp')
