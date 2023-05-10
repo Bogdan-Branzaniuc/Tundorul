@@ -30,19 +30,19 @@
                 <div class="collapse navbar-collapse" id="navbarText">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="{% url 'home' %}">HOME</a>
+                            <a class="nav-link" aria-current="page" href="{% url 'home' %}">HOME</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'vods' %}">VODS</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">HISTORY</a>
+                            <a class="nav-link" href="{% url 'history' %}">HISTORY</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{% url 'giveaway' %}">GIVEAWAY</a>
+                            <a class="nav-link" href="{% url 'user_profile' %}">PROFILE</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">PROFILE</a>
+                            <a class="nav-link" href="{% url 'suggestions' %}">SUGGESTIONS</a>
                         </li>
                     </ul>
                 </div>
@@ -74,16 +74,6 @@
 </div>
     <!-- Footer -->
     <footer class="footer mt-auto py-3 dark-bg">
-        <div class="row g-0">
-            <div class="col-1 col-sm-2 col-lg-3"></div> <!--spacing-->
-            <div class="col-10 col-sm-8 col-lg-6">
-                <h2> Rules </h2>
-                <p>I.</p>
-                <p>II.</p>
-                <p>III.</p>
-            </div>
-            <div class="col-1 col-sm-2 col-lg-3"></div> <!--spacing-->
-        </div>
         <div class="row g-0">
             <div class="col-1 col-sm-2 col-lg-3"></div> <!--spacing-->
             <div class="col-3 col-sm-3 col-lg-2">

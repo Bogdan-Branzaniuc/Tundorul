@@ -5,9 +5,9 @@ from django.contrib import messages
 import requests
 
 
-class Giveaway(View):
+class Suggestions(View):
     def get(self, request, *args, **kwargs):
         return render(
             request,
-            'giveaway.html',
+            'suggestions.html',
         )

@@ -8,11 +8,12 @@ from icalendar import Calendar
 import icalendar
 from icalevents.icalevents import events
 import os
-from TundorulDjango import settings
+from tundorul_django import settings
 from collections import Counter
 
 
 class Home(View):
+
     def get(self, request, *args, **kwargs):
         file_path = os.path.join(settings.STATICFILES_DIRS[0], 'twitchdev.ics')
         calendar_file = open(file_path)
@@ -22,14 +23,11 @@ class Home(View):
 
         for component in calendar.walk():
             if component.name == 'VEVENT':
-                print(component)
                 component_object = {}
                 dtstart_prop = component.get('DTSTART')
                 dtstart_date = dtstart_prop.dt.strftime('%Y-%m-%d')
                 dtstart_time = dtstart_prop.dt.strftime('%H:%M')
-
                 weekday = dtstart_prop.dt.strftime('%A')
-
                 event_summary = component['SUMMARY']
                 event_title = component['DESCRIPTION']
                 component_object['title'] = event_title.replace('.', ' ')

@@ -13,9 +13,9 @@ class UserProfile(models.Model):
     email = models.EmailField(max_length=200, default='')
 
     is_subscribed = models.BooleanField(default=False)
+    is_follower = models.BooleanField(default=False)
     is_banned = models.BooleanField(default=False)
-    join_date = models.DateField(default=datetime.now, blank=True)
-
+    join_date = models.DateField(auto_now_add=True, blank=True)
 
     class Meta:
         ordering = ['-username']
@@ -25,16 +25,11 @@ class UserProfile(models.Model):
 
 
 #class Game(models.Model):
-    
-
-
-#class Giveaway(models.Model):
+    #crono_id =
     #title =
+    #period =
     #description =
-    #start_date_time =
-    #duration =
-    #winner =
-    #prize =
+    #events =
 
     # class Meta:
     #     ordering = ['-start_time']
@@ -42,25 +37,4 @@ class UserProfile(models.Model):
     # def __str__(self):
     #     return self.title
 
-#class Item(models.Model):
-    # title =
-    # description =
-    # provenience =
-    # creation_date =
-    # class Meta:
-    #     ordering = ['-creation_date']
-    #
-    # def __str__(self):
-    #     return self.title
-
-#class UserInventory(models.Model):
-    # owner =
-    # item =
-    # quantity =
-    # aquired_on =
-
-    # class Meta:
-    #     ordering = ['-aquired_on']
-    #
-    # def __str__(self):
-    #     return self.item
+#class Vods.
