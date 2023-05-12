@@ -11,3 +11,9 @@ class History(View):
             request,
             'history.html',
         )
+
+    def post(self, request, *args, **kwargs):
+        return render(
+            request,
+            'history.html',
+        )
