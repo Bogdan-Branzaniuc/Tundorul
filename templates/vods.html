@@ -11,9 +11,21 @@
     <div class="col-6"><h1>Vods Page</h1></div>
     <div class="col-3"></div>
 
-
+<script src= "https://player.twitch.tv/js/embed/v1.js"></script>
 </div>
     {% for vod in vods %}
-        <p>vod</p>
+        <a href="{{ vod.url }}" target="_blank"> {{ vod.title }} </a>
+<!--  <p>{{ vod }}</p>-->
+<!--  pass the vod list to a js file and display everything in js -->
+        <div id="{{vod.id}}"></div>
+        <script>
+          let options = {
+            width: 500,
+            height: 260,
+            video: "{{vod.id}}",
+          };
+          let player = new Twitch.Player("{{vod.id}}", options);
+          player.setVolume(0.5);
+        </script>
     {% endfor %}
 {% endblock %}
