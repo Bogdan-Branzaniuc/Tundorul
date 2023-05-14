@@ -1,0 +1,11 @@
+.vods-wrapper{
+    display:flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.vod-div{
+    height: 20rem;
+    border-radius: 15px;
+    overflow: hidden;
+    margin: 15px 0;
+}

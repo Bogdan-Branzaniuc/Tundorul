@@ -57,7 +57,7 @@ def twitch_get_vods():
     }
     params = {
         'user_id': os.environ.get('ADMIN_USER_ID'),
-        'first': '30',
+        'first': '10',
     }
     url = 'https://api.twitch.tv/helix/videos'
 
