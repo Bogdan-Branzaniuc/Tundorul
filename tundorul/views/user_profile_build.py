@@ -1,9 +1,8 @@
 from tundorul.models import UserProfile
-from allauth.socialaccount.models import SocialAccount
+
 from datetime import datetime
 from allauth.socialaccount.signals import pre_social_login
 from allauth.account.signals import user_logged_in
-from allauth.account.signals import user_signed_up
 from django.dispatch import receiver
 from allauth.socialaccount.models import SocialAccount, SocialToken
 import requests
@@ -46,6 +45,7 @@ def update_user_profile(request, user, **kwargs):
         instance.uid = extra_data['id']
         instance.current_name = extra_data['display_name']
         instance.email = extra_data['email']
+        instance.profile_picture_url = extra_data['profile_image_url']
         instance.is_follower = is_following
         # is_subscribed = request
         instance.save()
@@ -57,7 +57,8 @@ def update_user_profile(request, user, **kwargs):
             uid=extra_data['id'],
             current_name=extra_data['display_name'],
             email=extra_data['email'],
-            is_follower=is_following
+            is_follower=is_following,
+            profile_picture_url=extra_data['profile_image_url'],
         )
         user_profile.save()
 

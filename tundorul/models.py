@@ -10,11 +10,11 @@ class UserProfile(models.Model):
     uid = models.CharField(max_length=200, default='')
     current_name = models.CharField(max_length=200, default='')
     email = models.EmailField(max_length=200, default='')
-
     is_subscribed = models.BooleanField(default=False)
     is_follower = models.BooleanField(default=False)
     is_banned = models.BooleanField(default=False)
     join_date = models.DateField(auto_now_add=True, blank=True)
+    profile_picture_url = models.TextField(blank=True)
 
     class Meta:
         ordering = ['-username']
@@ -44,7 +44,7 @@ class Vods(models.Model):
     thumbnail_url = models.TextField(blank=True)
     published_at = models.DateTimeField()
     view_count = models.IntegerField(default=0)
-    stream_id = models.CharField(max_length=255, default=0)
+    stream_id = models.CharField(max_length=255, default=0, unique=True)
 
     class Meta:
         ordering = ['-published_at']

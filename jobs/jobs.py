@@ -2,6 +2,7 @@ from django.conf import settings
 from allauth.socialaccount.models import SocialToken, SocialAccount
 from django.shortcuts import get_object_or_404
 from tundorul.models import Vods
+from django.db import IntegrityError
 
 import requests
 import os
@@ -16,19 +17,14 @@ def twitch_app_token():
         'grant_type': 'client_credentials',
     }
     app_access_token = requests.post(app_token_url, params=params)
-    attempt = 0
     try:
         if app_access_token.status_code == 200:
             token = json.loads(app_access_token.content.decode("utf-8"))
             os.environ["APP_TOKEN"] = token['access_token']
             return token['expires_in']
-            attempt += 1
         else:
-            if attempt > 3:
-                app_access_token.raise_for_status()
-            else:
-                time.sleep(attempt)
-                return twitch_app_token()
+            app_access_token.raise_for_status()
+
     except requests.exceptions.HTTPError as e:
         print(f"Failed to retrieve app_token: {e}")
 
@@ -79,7 +75,10 @@ def twitch_get_vods():
                     view_count=field['view_count'],
                     stream_id=field['id'],
                 )
-                vod.save()
+                try:
+                    vod.save()
+                except IntegrityError:
+                    continue
         else:
             if attempt > 3:
                 vods.raise_for_status()

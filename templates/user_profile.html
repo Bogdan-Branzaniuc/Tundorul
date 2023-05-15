@@ -2,7 +2,6 @@
 {% block content %}
 {% load account %}
 {% load static %}
-{% load socialaccount %}
 
 
 <!-- create a grid and for each Vod render and paginate the template-->
@@ -12,4 +11,26 @@
     <div class="col-3"></div>
 </div>
 
+{% if user.is_authenticated %}
+    <div class="row g-0">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <img src={{ user_profile.profile_picture_url }} alt="123"><img>
+            <h3>display_name: {{ user_profile.current_name }}</h3>
+            <h3>username: {{ user_profile.username }}</h3>
+            <h3> email: {{ user_profile.email }} </h3>
+            <h3> Joined on: {{ user_profile.join_date }} </h3>
+            {% if  user_profile.is_follower == True  %}
+            <h3> You are following Tundorul at the moment </h3>
+            {% endif %}
+        </div>
+        <div class="col-3"></div>
+    </div>
+{% else %}
+    <div class="row g-0">
+        <div class="col-3"></div>
+        <div class="col-6"><h1> You Have To Log In with your Twitch Account to see your profile info here</h1></div>
+        <div class="col-3"></div>
+    </div>
+{% endif %}
 {% endblock %}
