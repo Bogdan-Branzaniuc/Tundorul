@@ -41,7 +41,6 @@ def update_user_profile(request, user, **kwargs):
     is_following = is_follower(extra_data, token)
 
     if UserProfile.objects.filter(username=sociallogin.user).exists():
-
         instance = get_object_or_404(UserProfile.objects.filter(username=sociallogin.user))
         instance.username = sociallogin.user
         instance.uid = extra_data['id']

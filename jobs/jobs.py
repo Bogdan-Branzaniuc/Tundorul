@@ -1,6 +1,8 @@
 from django.conf import settings
 from allauth.socialaccount.models import SocialToken, SocialAccount
 from django.shortcuts import get_object_or_404
+from tundorul.models import Vods
+
 import requests
 import os
 import json
@@ -65,15 +67,25 @@ def twitch_get_vods():
     attempt = 0
     try:
         if vods.status_code == 200:
+            Vods.objects.all().delete()
             data = vods.json()
             for field in data['data']:
                 print(field)
+                vod = Vods.objects.create(
+                    title=field['title'],
+                    url=field['url'],
+                    thumbnail_url=field['thumbnail_url'],
+                    published_at=field['published_at'],
+                    view_count=field['view_count'],
+                    stream_id=field['id'],
+                )
+                vod.save()
         else:
             if attempt > 3:
                 vods.raise_for_status()
             else:
                 attempt += 1
-                return twitch_get_vods()
+                twitch_get_vods()
 
     except requests.exceptions.HTTPError as e:
         print(f"Failed to retrieve Vods {e}")

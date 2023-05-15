@@ -5,7 +5,19 @@
 }
 .vod-div{
     height: 20rem;
-    border-radius: 15px;
     overflow: hidden;
     margin: 15px 0;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.iframe-vod{
+    width:90%;
+    height:90%;
+    border-radius: 15px;
+    overflow:hidden;
+}
+
+.vods-title{
+    text-align: center;
 }

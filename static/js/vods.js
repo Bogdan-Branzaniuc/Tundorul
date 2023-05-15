@@ -1,4 +1,5 @@
 
+
 for (let vod of vodsArray){
     console.log(vod)
     let options = {
