@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 from pathlib import Path
 
-import logging.config
 import os
 import dj_database_url
 if os.path.isfile('env.py'):
@@ -68,18 +67,17 @@ INSTALLED_APPS = [
 
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 #
-LOGIN_REDIRECT_URL= '/'
-LOGOUT_REDIRECT_URL= '/'
-
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
 
 SOCIALACCOUNT_STORE_TOKENS = True
 
 SOCIALACCOUNT_PROVIDERS = {
-    'twitch': {
+     'twitch': {
         'SCOPE': ['user_read', 'user:read:follows'],
         'AUTH_PARAMS': {'access_type': 'online'},
         'METHOD': 'oauth2',
-    },
+     },
 }
 
 LOGGING = {

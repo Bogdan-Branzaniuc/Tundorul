@@ -27,7 +27,10 @@ def is_follower(extra_data, token):
         for followed in following_streams:
             if followed['broadcaster_login'] == 'tundorul':
                 return True
-
+            else:
+                return False
+    else:
+        return False
 
 @receiver(user_logged_in)
 def update_user_profile(request, user, **kwargs):
@@ -47,7 +50,6 @@ def update_user_profile(request, user, **kwargs):
         instance.email = extra_data['email']
         instance.profile_picture_url = extra_data['profile_image_url']
         instance.is_follower = is_following
-        # is_subscribed = request
         instance.save()
 
     else:

@@ -11,3 +11,10 @@ class Suggestions(View):
             request,
             'suggestions.html',
         )
+
+    def post(self, request, *args, **kwargs):
+        return render(
+            request,
+            'suggestions.html',
+        )
+
