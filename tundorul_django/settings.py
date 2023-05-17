@@ -26,12 +26,11 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY')
 CLOUDINARY_URL = os.environ.get('CLOUDINARY_URL')
-
+MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
 ALLOWED_HOSTS = ['tundorul.herokuapp.com', '127.0.0.1', 'localhost']
-
 
 # Application definition
 SITE_ID = 4
@@ -57,12 +56,11 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.twitch',
     'cloudinary_storage',
     'cloudinary',
-
     'asyncio',
     'twitchAPI',
     'django_extensions',
 ]
-# python manage.py runserver_plus --cert-file cert.pem --key-file key.pem               ---for testing https login
+# python manage.py runserver_plus --cert-file cert.pem --key-file key.pem       ---for testing https login
 
 
 ACCOUNT_EMAIL_VERIFICATION = 'none'

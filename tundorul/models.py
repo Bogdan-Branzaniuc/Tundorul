@@ -41,10 +41,15 @@ class Vods(models.Model):
 
 
 class Suggestions(models.Model):
-    title = models.TextField(blank=True)
+    title = models.TextField(unique=True)
+    body = models.TextField(blank=True)
     author = models.TextField()
-    author_profile_img = models.TextField(blank=True)
-    published_at = models.DateTimeField()
+    user_profile = models.ForeignKey(
+        UserProfile,
+        on_delete=models.CASCADE,
+        related_name='suggestion'
+    )
+    published_at = models.DateTimeField(auto_now_add=True)
     votes = models.IntegerField(default=0)
     approved = models.BooleanField(default=False)
 

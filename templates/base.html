@@ -47,6 +47,9 @@
                     <div>
                         <a class="nav-link" href="/admin">adminPanel</a>
                     </div>
+                    <div>
+                        <a class="nav-link" href="{% url 'pending_approval'%}">Pending Approval Items</a>
+                    </div>
                 {% endif %}
                 {% if user.is_authenticated %}
                     <div>

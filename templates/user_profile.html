@@ -3,8 +3,7 @@
 {% load account %}
 {% load static %}
 
-
-<!-- create a grid and for each Vod render and paginate the template-->
+<!-- create a grid and for each Vod render and paginate the template -->
 <div class="row g-0">
     <div class="col-3"></div>
     <div class="col-6"><h1>User Profile Page</h1></div>
@@ -15,7 +14,7 @@
     <div class="row g-0">
         <div class="col-3"></div>
         <div class="col-6">
-            <img src={{ user_profile.profile_picture_url }} alt="123"><img>
+            <img src={{ user_profile.profile_picture_url }} alt="profile immage of the logged in user from twitch"><img>
             <h3>display_name: {{ user_profile.current_name }}</h3>
             <h3>username: {{ user_profile.username }}</h3>
             <h3> email: {{ user_profile.email }} </h3>

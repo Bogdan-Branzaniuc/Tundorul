@@ -10,6 +10,7 @@ from django.shortcuts import render, get_object_or_404, reverse
 import os
 import json
 
+
 def is_follower(extra_data, token):
     headers = {
         'Authorization': 'Bearer ' + f'{token}',
@@ -32,6 +33,7 @@ def is_follower(extra_data, token):
     else:
         return False
 
+
 @receiver(user_logged_in)
 def update_user_profile(request, user, **kwargs):
     query_set_social = SocialAccount.objects.filter(user=request.user)
@@ -51,7 +53,6 @@ def update_user_profile(request, user, **kwargs):
         instance.profile_picture_url = extra_data['profile_image_url']
         instance.is_follower = is_following
         instance.save()
-
     else:
         print('added')
         user_profile = UserProfile.objects.create(

@@ -10,7 +10,9 @@ III Models
 UserProfile
 Vods
 Suggestions
-
+   - red-cases: 1 unique title + message.
+                2 required fields.
+                3 suggestion body too short  field min char. 
 
 IV Views
 

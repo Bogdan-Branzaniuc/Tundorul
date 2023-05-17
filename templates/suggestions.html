@@ -10,5 +10,39 @@
     <div class="col-6"><h1>Suggestions Page</h1></div>
     <div class="col-3"></div>
 </div>
+<div class="row g-0">
+    <div class="col-3"></div>
+    <div class="col-6">
+        <form action="{% url 'suggestions' %}"  method="POST">
+            <label for name="title">title</label>
+            <input type="text" name="title" required>
+            <label for name="body">suggestion</label>
+            <input type="textarea" name="body" required>
+            {% csrf_token %}
+            <input type="submit" value="send">
+        </form>
+
+    </div>
+    <div class="col-3"></div>
+</div>
+{% if suggestions %}
+    {% for suggestion in suggestions %}
+        {% if suggestion.approved %}
+            <img src={{ suggestion.user_profile.profile_picture_url }} alt="profile immage of the logged in user from twitch"><img>
+            <p> {{ suggestion.title }} </p>
+            <p> {{ suggestion.author }} </p>
+            <p> {{ suggestion.body }} </p>
+            <p> {{ suggestion.approved }} </p>
+            <p> Approved by Tundorul </p>
+        {% endif %}
+    {% endfor %}
+{% endif %}
+
+{% if messages %}
+    {% for message in messages %}
+        <p><strong>Thanks {{user}}! </strong></p>
+        <p> {{ message }} </p>
+    {% endfor %}
+{% endif %}
 
 {% endblock %}
