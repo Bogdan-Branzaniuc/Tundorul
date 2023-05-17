@@ -3,13 +3,19 @@
 {% load account %}
 {% load static %}
 
-
+<link href="{% static 'css/suggestions.css' %}" rel="stylesheet">
 <!-- create a grid and for each Vod render and paginate the template-->
 <div class="row g-0">
     <div class="col-3"></div>
     <div class="col-6"><h1>Suggestions Page</h1></div>
     <div class="col-3"></div>
 </div>
+{% if messages %}
+    {% for message in messages %}
+        <p><strong>Thanks {{user}}! </strong></p>
+        <p> {{ message }} </p>
+    {% endfor %}
+{% endif %}
 <div class="row g-0">
     <div class="col-3"></div>
     <div class="col-6">
@@ -25,24 +31,20 @@
     </div>
     <div class="col-3"></div>
 </div>
-{% if suggestions %}
-    {% for suggestion in suggestions %}
-        {% if suggestion.approved %}
-            <img src={{ suggestion.user_profile.profile_picture_url }} alt="profile immage of the logged in user from twitch"><img>
-            <p> {{ suggestion.title }} </p>
-            <p> {{ suggestion.author }} </p>
-            <p> {{ suggestion.body }} </p>
-            <p> {{ suggestion.approved }} </p>
-            <p> Approved by Tundorul </p>
+<div class="row g-0 suggestions-section">
+        {% if suggestions %}
+            {% for suggestion in suggestions %}
+                {% if suggestion.approved %}
+                    <div id="{{suggestion.title}}" class="col-12 suggestion-body">
+                        <p> {{ suggestion.author }} </p>
+                        <img src={{ suggestion.user_profile.profile_picture_url }} alt="profile immage of the logged in user from twitch" class="author_profile_img"><img>
+                        <p> {{ suggestion.title }} </p>
+                        <p> {{ suggestion.body }} </p>
+                        <p> wrote on: {{ suggestion.published_at }} </p>
+                        <p> Approved by Tundorul </p>
+                {% endif %}
+            {% endfor %}
         {% endif %}
-    {% endfor %}
-{% endif %}
-
-{% if messages %}
-    {% for message in messages %}
-        <p><strong>Thanks {{user}}! </strong></p>
-        <p> {{ message }} </p>
-    {% endfor %}
-{% endif %}
+</div>
 
 {% endblock %}

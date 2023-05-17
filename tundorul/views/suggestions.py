@@ -48,4 +48,5 @@ class SuggestionsView(View):
         return render(
             request,
             'suggestions.html',
+            context,
         )
