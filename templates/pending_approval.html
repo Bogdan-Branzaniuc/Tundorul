@@ -11,21 +11,27 @@
 <div class="row g-0">
     <div class="col-3"></div>
     <div class="col-6">
+        {% if suggestions %}
         <form action="{% url 'pending_approval'%}"  method="POST">
             {% for suggestion in suggestions %}
                 {% if not suggestion.approved %}
+                <div>
                     <img src={{ suggestion.user_profile.profile_picture_url }} alt="profile immage of the logged in user from twitch"><img>
-                    <input type="text" name='title' value="{{suggestion.title}}"/>
-                    <label for name="approve">approve</label>
-                    <input type="checkbox" name="approve">
                     <p> {{ suggestion.title }} </p>
                     <p> {{ suggestion.body }} </p>
                     <p> {{ suggestion.author }} </p>
+                </div>
+                <div>
+                    <input type="text" name='title' value="{{suggestion.title}}" style="display:none"/>
+                    <label for name="{{suggestion.title}}">approve</label>
+                    <input type="checkbox" name="{{suggestion.title}}">
+                </div>
                 {% endif %}
             {% endfor %}
             {% csrf_token %}
             <input type="submit" name="save" value="Save">
         </form>
+        {% endif %}
     </div>
     <div class="col-3"></div>
 </div>
