@@ -13,7 +13,7 @@ class UserProfile(models.Model):
     is_subscribed = models.BooleanField(default=False)
     is_follower = models.BooleanField(default=False)
     is_banned = models.BooleanField(default=False)
-    join_date = models.DateField(auto_now_add=True, blank=True)
+    join_date = models.DateField(blank=True)
     profile_picture_url = models.TextField(blank=True)
 
     class Meta:
@@ -43,8 +43,7 @@ class Vods(models.Model):
 class Suggestions(models.Model):
     title = models.TextField(unique=True)
     body = models.TextField(blank=True)
-    author = models.TextField()
-    user_profile = models.ForeignKey(
+    author = models.ForeignKey(
         UserProfile,
         on_delete=models.CASCADE,
         related_name='suggestion'
@@ -52,6 +51,7 @@ class Suggestions(models.Model):
     published_at = models.DateTimeField(auto_now_add=True)
     votes = models.IntegerField(default=0)
     approved = models.BooleanField(default=False)
+    upvotes = models.ManyToManyField(UserProfile, related_name='upvoted_suggestions', blank=True)
 
     class Meta:
         ordering = ['-published_at']

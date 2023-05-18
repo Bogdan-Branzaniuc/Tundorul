@@ -16,10 +16,9 @@
             {% for suggestion in suggestions %}
                 {% if not suggestion.approved %}
                 <div>
-                    <img src={{ suggestion.user_profile.profile_picture_url }} alt="profile immage of the logged in user from twitch"><img>
-                    <p> {{ suggestion.title }} </p>
+                    <img src={{ suggestion.author.profile_picture_url }} alt="profile immage of the logged in user from twitch"><img>
+                    <p> <strong> {{ suggestion.title }} </strong></p>
                     <p> {{ suggestion.body }} </p>
-                    <p> {{ suggestion.author }} </p>
                 </div>
                 <div>
                     <input type="text" name='title' value="{{suggestion.title}}" style="display:none"/>
