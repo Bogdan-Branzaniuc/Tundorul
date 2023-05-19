@@ -21,3 +21,5 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('', include('tundorul.urls'), name='tundorul.urls'),
 ]
+
+urlpatterns.append(path('', include("django_unicorn.urls")))

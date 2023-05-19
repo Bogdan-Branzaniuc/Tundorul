@@ -6,20 +6,22 @@ import requests
 from tundorul.models import Suggestions, UserProfile
 from django.db import IntegrityError
 from ..forms import SuggestionForm, UpvoteForm
+from django.http import HttpResponse
 
 
 
 class SuggestionsView(View):
-
     def get(self, request, *args, **kwargs):
+        user_profile = UserProfile.objects.get(current_name=request.user.username)
         suggestions = Suggestions.objects.filter(approved=True)
         suggestion_form = SuggestionForm()
         upvote_form = UpvoteForm()
-        # Suggestions.objects.all().delete()
+        voted_suggestions = suggestions.filter(upvotes=user_profile).values_list('title', flat=True)
         context = {
             'suggestion_form': suggestion_form,
             'upvote_form': upvote_form,
             'suggestions': suggestions,
+            'voted_suggestions': voted_suggestions,
         }
         return render(
             request,
@@ -28,9 +30,10 @@ class SuggestionsView(View):
         )
 
     def post(self, request, *args, **kwargs):
-
         user_profile = UserProfile.objects.get(current_name=request.user.username)
+        print(request.POST)
         if 'submit_suggestion' in request.POST:
+
             suggestion_form = SuggestionForm(request.POST)
             if suggestion_form.is_valid():
                 print(request.POST)
@@ -55,7 +58,8 @@ class SuggestionsView(View):
 
         elif 'submit_upvote' in request.POST:
             upvote_form = UpvoteForm(request.POST)
-
+            print(123)
+            print(request.POST)
             if upvote_form.is_valid():
                 title = request.POST['submit_upvote']
                 suggestion = get_object_or_404(Suggestions, title=title)
@@ -69,17 +73,12 @@ class SuggestionsView(View):
                     suggestion.save()
 
         suggestions = Suggestions.objects.filter(approved=True)
-        voted_suggestions = suggestions.filter(upvotes=user_profile).values_list('title', flat=True)
         suggestion_form = SuggestionForm()
         upvote_form = UpvoteForm()
-        context = {
-            'suggestion_form': suggestion_form,
-            'upvote_form': upvote_form,
-            'suggestions': suggestions,
-            'voted_suggestions': voted_suggestions,
-        }
+        voted_suggestions = suggestions.filter(upvotes=user_profile).values_list('title', flat=True)
+
+        response = {'message': '11233'}
         return render(
             request,
             'suggestions.html',
-            context,
         )

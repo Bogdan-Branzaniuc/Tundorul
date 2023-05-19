@@ -3,6 +3,7 @@
 {% load account %}
 {% load static %}
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <link href="{% static 'css/suggestions.css' %}" rel="stylesheet">
 <!-- create a grid and for each Vod render and paginate the template-->
 <div class="row g-0">
@@ -19,12 +20,11 @@
 <div class="row g-0">
     <div class="col-3"></div>
     <div class="col-6">
-        <form action="{% url 'suggestions' %}"  method="POST">
+        <form id="create-suggestion-form" action="{% url 'suggestions' %}"  method="POST">
             {% csrf_token %}
             {{ suggestion_form.as_p }}
             <input type="submit" value="send" name="submit_suggestion">
         </form>
-
     </div>
     <div class="col-3"></div>
 </div>
@@ -38,8 +38,8 @@
                     <p> {{ suggestion.body }} </p>
                     <p> wrote on: {{ suggestion.published_at }} </p>
                     <p> Approved by Tundorul </p>
-                    <p> votes: {{ suggestion.votes }} </p>
-                    <form action="{% url 'suggestions' %}"  method="POST">
+                    <p id="{{ suggestion.title }}"> votes: {{ suggestion.votes }} </p>
+                    <form  class="upvote-suggestion-form" action="{% url 'suggestions' %}"  method="POST">
                         {% csrf_token %}
                         {{ upvote_form.as_p }}
                         {% if suggestion.title in voted_suggestions%}
@@ -51,5 +51,59 @@
             {% endfor %}
         {% endif %}
 </div>
+<script>
+  $(document).ready(function() {
+    $('#create-suggestion-form').submit(function(event) {
+      // Prevent the form from being submitted traditionally
+      event.preventDefault();
+      // Collect the form data
+      let formData = $(this).serializeArray();
+      let inputValue = $('input[name="submit_suggestion"]').val();
+      formData.push({ name: 'submit_suggestion', value: inputValue });
+      console.log(formData)
+      // Send an AJAX request
+      $.ajax({
+          type: 'POST',
+          url: $(this).attr('action'),
+          type: $(this).attr('method'),
+          data: formData,
+        success: function(response) {
+          // Handle the success response
+          console.log(response);
+          console.log('123')
+        },
+        error: function(xhr, errmsg, err) {
+          // Handle the error response
+          console.log(xhr.status + ": " + xhr.responseText);
+        }
+      });
+    });
+  });
 
+  $(document).ready(function() {
+    $('.upvote-suggestion-form').submit(function(event) {
+      // Prevent the form from being submitted traditionally
+      event.preventDefault();
+      // Collect the form data
+      let button = $(this).children().filter('button')
+      let formData = $(this).serializeArray();
+      formData.push({name: button.attr('name'), value: button.val() });
+
+      $.ajax({
+          type: 'POST',
+          url: $(this).attr('action'),
+          type: $(this).attr('method'),
+          data: formData,
+        success: function(response) {
+          document.documentElement.innerHTML=response
+          console.log(response);
+        },
+        error: function(xhr, errmsg, err) {
+          // Handle the error response
+          console.log(xhr.status + ": " + xhr.responseText);
+        }
+      });
+    });
+  });
+</script>
 {% endblock %}

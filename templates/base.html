@@ -1,5 +1,7 @@
 {% load static %}
 {% load socialaccount %}
+{% load unicorn %}
+
 <!DOCTYPE html>
 <html class="h-100">
 <head>
@@ -14,9 +16,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous">
     </script>
+    {% unicorn_scripts %}
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
 </head>
 <body class="d-flex flex-column h-100 main-bg">
+    {% csrg_token %}
 <div class="page-background" ></div>
  <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-light bg-white">
