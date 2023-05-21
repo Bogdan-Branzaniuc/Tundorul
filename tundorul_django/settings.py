@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'apscheduler',
     'tundorul',
+    'suggestion',
     'django_unicorn',
     'allauth',
     'allauth.account',

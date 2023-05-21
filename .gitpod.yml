@@ -6,6 +6,7 @@ tasks:
     command: /home/gitpod/.pg_ctl/bin/pg_start > /dev/null
   - command: . ${GITPOD_REPO_ROOT}/.vscode/uptime.sh &
   - command: echo 'export PIP_USER=no' >> ~/.bashrc && export PIP_USER=no
+
 vscode:
   extensions:
     - ms-python.python

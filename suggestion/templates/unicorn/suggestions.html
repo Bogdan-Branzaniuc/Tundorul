@@ -1,0 +1,43 @@
+<div>
+    {% if messages %}
+        {% for message in messages %}
+            <p><strong>Thanks {{user}}! </strong></p>
+            <p> {{ message }} </p>
+        {% endfor %}
+    {% endif %}
+    <div class="row g-0">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <form id="create-suggestion-form" action="{% url 'suggestions' %}"  method="POST">
+                {% csrf_token %}
+                {{ suggestion_form.as_p }}
+                <input type="submit" value="send" name="submit_suggestion">
+            </form>
+        </div>
+        <div class="col-3"></div>
+    </div>
+    <div class="row g-0 suggestions-section">
+            {{voted_suggestions}}
+            {% if suggestions %}
+                {% for suggestion in suggestions %}
+                    <div id="{{suggestion.title}}" class="col-12 suggestion-body">
+                        <img src={{ suggestion.author.profile_picture_url }} alt="profile immage of the logged in user from twitch" class="author_profile_img"><img>
+                        <p> <strong> {{ suggestion.title }} </strong></p>
+                        <p> {{ suggestion.body }} </p>
+                        <p> wrote on: {{ suggestion.published_at }} </p>
+                        <p> Approved by Tundorul </p>
+                        <p id="{{ suggestion.title }}"> votes: {{ suggestion.votes }} </p>
+                        <form  class="upvote-suggestion-form" action="{% url 'suggestions' %}"  method="POST">
+                            {% csrf_token %}
+                            {{ upvote_form.as_p }}
+                            {% if suggestion.title in voted_suggestions%}
+                                <button class="btn-success" type="submit" name="submit_upvote" value="{{ suggestion.title }}">Voted!</button>
+                            {% else %}
+                                <button class="btn-primary" type="submit" name="submit_upvote" value="{{ suggestion.title }}">Upvote</button>
+                            {% endif %}
+                        </form>
+                    </div>
+                {% endfor %}
+            {% endif %}
+    </div>
+</div>

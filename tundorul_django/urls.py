@@ -20,6 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
     path('', include('tundorul.urls'), name='tundorul.urls'),
+    path('', include("django_unicorn.urls"))
 ]
-
-urlpatterns.append(path('', include("django_unicorn.urls")))
