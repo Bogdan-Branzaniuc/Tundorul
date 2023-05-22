@@ -50,6 +50,7 @@
                     <p> votes: {{ suggestion.votes}} </p>
                     <p> Approved by Tundorul </p>
                     <!--    Display Upvote button color            -->
+                    {{voted_suggestions}}
                     {% if suggestion.title in voted_suggestions %}
                         <button u:click="submit_upvote({{ suggestion.id }})" class="btn-success"  name="submit_upvote">Voted! </button>
                     {% else %}

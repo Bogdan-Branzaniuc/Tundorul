@@ -19,7 +19,7 @@ class SuggestionsView(UnicornView):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        self.filter = None
+        self.filter = self.show_all
 
     def mount(self, *args, **kwargs):
         self.user_profile = UserProfile.objects.get(current_name=self.request.user.username)
@@ -45,7 +45,7 @@ class SuggestionsView(UnicornView):
                 messages.error(self.request, "There is one suggestion with this title Already, you can change the title or upvote the current one if it's content is the same")
                 pass
 
-        self.suggestions = self.filter()
+        self.filter()
         self.voted_suggestions = list(self.suggestions.filter(upvotes=self.user_profile).values_list('title', flat=True))
         self.personal_suggestions = Suggestions.objects.filter(author=self.user_profile)
 
@@ -59,7 +59,7 @@ class SuggestionsView(UnicornView):
             suggestion.upvotes.add(self.user_profile)
             suggestion.votes += 1
             suggestion.save()
-        self.suggestions = self.filter()
+        self.filter()
 
     def approve(self, id):
         pass
@@ -72,34 +72,37 @@ class SuggestionsView(UnicornView):
 
     def delete_suggestion(self, id):
         suggestion = Suggestions.objects.filter(id=id)
-        print(suggestion)
-
         suggestion.delete()
-        self.suggestions = Suggestions.objects.filter(approved=True)
-        self.voted_suggestions = list(
-        self.suggestions.filter(upvotes=self.user_profile).values_list('title', flat=True))
+        self.filter()
+        self.voted_suggestions = list(self.suggestions.filter(upvotes=self.user_profile).values_list('title', flat=True))
         self.personal_suggestions = Suggestions.objects.filter(author=self.user_profile)
 
     def awaiting_approval(self):
         self.filter = self.awaiting_approval
         self.suggestions = Suggestions.objects.filter(approved=False)
-        return self.suggestions
+        self.voted_suggestions = list(
+            self.suggestions.filter(upvotes=self.user_profile).values_list('title', flat=True))
 
     def show_mine(self):
         self.filter = self.show_mine
         self.suggestions = Suggestions.objects.filter(author=self.user_profile)
-        return self.suggestions
+        self.voted_suggestions = list(
+            self.suggestions.filter(upvotes=self.user_profile).values_list('title', flat=True))
 
     def show_all(self):
         self.filter = self.show_all
         self.suggestions = Suggestions.objects.all()
-        return self.suggestions
+        self.voted_suggestions = list(
+            self.suggestions.filter(upvotes=self.user_profile).values_list('title', flat=True))
 
     def by_date(self):
         self.filter = self.by_date
         self.suggestions = Suggestions.objects.all().order_by('-published_at')
+        self.voted_suggestions = list(
+            self.suggestions.filter(upvotes=self.user_profile).values_list('title', flat=True))
 
     def by_votes(self):
         self.filter = self.by_votes
         self.suggestions = Suggestions.objects.all().order_by('-votes')
-        return self.suggestions
+        self.voted_suggestions = list(
+            self.suggestions.filter(upvotes=self.user_profile).values_list('title', flat=True))
