@@ -11,12 +11,30 @@
     <div class="row g-0">
         <div class="col-3"></div>
         <div class="col-6">
-            <lbable for="title">Title:</lbable>
-            <input u:model.lazy="submit_suggestion_title" type="text" name="title" required>
-            <textarea u:model.lazy="submit_suggestion_content"></textarea>
-            <button u:click="submit_suggestion"  name="submit_suggestion">Send</button>
+            {% unicorn_errors %}
+            <div>
+                <label for="title">Title:</label>
+                <textarea u:model="title" id="title"> </textarea>
+            </div>
+            <div>
+                <label for="content">Suggestion:</label>
+                <textarea u:model="content" id="content"></textarea>
+            </div>
+            <button u:click="submit_suggestion" name="submit_suggestion">Send</button>
+             <!-- updated-event.html -->
         </div>
+
         <div class="col-3"></div>
+    </div>
+    <div class="col-12">
+        <h2>Filters:</h2>
+        {% if user.is_staff  %}
+             <button u:click="awaiting_approval" name="submit_suggestion">Awaiting Approval</button>
+        {% endif %}
+        <button u:click="show_mine" name="submit_suggestion">show mine</button>
+        <button u:click="show_all" name="show_all">show All</button>
+        <button u:click="by_date" name="by_date">by date</button>
+        <button u:click="by_votes" name="by_votes">by votes</button>
     </div>
     <div class="row g-0 suggestions-section">
 
@@ -26,14 +44,36 @@
                 <p> <strong> {{ suggestion.title }} </strong></p>
                 <p> {{ suggestion.body }} </p>
                 <p> wrote on: {{ suggestion.published_at }} </p>
-                <p> Approved by Tundorul </p>
-                <p> votes: {{ suggestion.votes}} </p>
+                <p> by: {{ suggestion.author.username }}</p>
 
-                {% if suggestion.title in voted_suggestions %}
-                    <button u:click="submit_upvote({{ suggestion.id }})" class="btn-success"  name="submit_upvote">Voted! </button>
+                {% if suggestion.approved %}
+                    <p> votes: {{ suggestion.votes}} </p>
+                    <p> Approved by Tundorul </p>
+                    <!--    Display Upvote button color            -->
+                    {% if suggestion.title in voted_suggestions %}
+                        <button u:click="submit_upvote({{ suggestion.id }})" class="btn-success"  name="submit_upvote">Voted! </button>
+                    {% else %}
+                        <button u:click="submit_upvote({{ suggestion.id }})" class="btn-primary"  name="submit_upvote">Upvote </button>
+                    {% endif %}
                 {% else %}
-                    <button u:click="submit_upvote({{ suggestion.id }})" class="btn-primary"  name="submit_upvote">Upvote </button>
+                    <p> Awaiting Approval </p>
                 {% endif %}
+                <!--      Display Edit Delete buttons          -->
+                {% if suggestion in personal_suggestions %}
+                    <button u:click="edit_suggestion({{ suggestion.id }})" name="submit_suggestion"> Edit </button>
+                    <button  name="submit_suggestion" id="show_confirm{{suggestion.id}}"> Delete </button>
+                    <button u:click="delete_suggestion({{ suggestion.id }})" id="deletion_confirmed{{suggestion.id}}" style="display:none"></button>
+                    <script type="text/javascript">
+                        document.getElementById('show_confirm{{suggestion.id}}').addEventListener('click',(function(e) {
+                            let result = confirm("Want to delete?");
+                            if (result) {
+                                document.getElementById("deletion_confirmed{{suggestion.id}}").click();
+                                console.log('triggerd')
+                            }
+                        }))
+                    </script>
+                {% endif %}
+
             </div>
         {% endfor %}
 
