@@ -2,6 +2,8 @@
     {% load account %}
     {% load static %}
     {% load unicorn %}
+    {%unicorn_scripts %}
+
     {% if messages %}
         {% for message in messages %}
             <p><strong>Thanks {{user}}! </strong></p>
@@ -28,23 +30,32 @@
     </div>
     <div class="col-12">
         <h2>Filters:</h2>
-        {% if filter_ownership_mine is True %}
-            <button u:click="show_mine" name="submit_suggestion" class="btn-success">show all</button>
+        {% if filter_ownership_mine is False and filter_unapproved is False %}
+            <button u:click="show_mine"  class="btn-success">All Suggestions</button>
+            <button u:click="show_mine"  class="btn-primary">My Suggestions</button><br>
+            <button u:click="awaiting_approval" class="btn-success">Approved</button>
+            <button u:click="awaiting_approval" class="btn-primary">Awaiting Approval</button>
+        {% elif filter_ownership_mine is True and filter_unapproved is False %}
+            <button u:click="show_mine"  class="btn-primary">All Suggestions</button>
+            <button u:click="show_mine"  class="btn-success">My Suggestions</button><br>
+            <button u:click="awaiting_approval" class="btn-success">Approved</button>
+            <button u:click="awaiting_approval" class="btn-primary">Awaiting Approval</button>
         {% else %}
-            <button u:click="show_mine" name="submit_suggestion" class="btn-primary">show mine</button>
+            
+            <button u:click="show_mine"  class="btn-success">My Suggestions</button><br>
+            <button u:click="awaiting_approval" class="btn-primary">Approved</button>
+            <button u:click="awaiting_approval" class="btn-success">Awaiting Approval</button>
         {% endif %}
 
         {% if filter_by_votes is True %}
-            <button u:click="by_votes" name="submit_suggestion" class="btn-success">By votes</button>
+            <button u:click="by_votes"  class="btn-success">By votes</button>
+            <button u:click="by_votes"  class="btn-primary">By date</button>
         {% else %}
-            <button u:click="by_votes" name="submit_suggestion" class="btn-primary">By date</button>
+            <button u:click="by_votes"  class="btn-primary">By votes</button>
+            <button u:click="by_votes"  class="btn-success">By date</button>
         {% endif %}
 
-        {% if filter_unapproved is True %}
-            <button u:click="awaiting_approval" name="submit_suggestion" class="btn-success">show Approved</button>
-        {% else %}
-            <button u:click="awaiting_approval" name="submit_suggestion" class="btn-primary">show All</button>
-        {% endif %}
+
     </div>
     <div class="row g-0 suggestions-section">
 
@@ -73,13 +84,13 @@
                 {% if suggestion in personal_suggestions %}
                     <button u:click="edit_suggestion({{ suggestion.id }})"> Edit </button>
                     <button  id="show_confirm{{suggestion.id}}"> Delete </button>
-                    <button u:click="delete_suggestion({{ suggestion.id }})" id="deletion_confirmed{{suggestion.id}}" style="display:none"></button>
+                    <button u:click.prevent="delete_suggestion({{ suggestion.id }})" class="deletion_confirmed{{suggestion.id}}" style="display:none"></button>
                     <script type="text/javascript">
                         document.getElementById('show_confirm{{suggestion.id}}').addEventListener('click', function(e) {
-                            let result = confirm("Want to delete?");
                             console.log('clicked')
+                            let result = confirm("Want to delete?");
                             if (result) {
-                                document.getElementById("deletion_confirmed{{suggestion.id}}").click();
+                                document.getElementsByClassName("deletion_confirmed{{suggestion.id}}").click();
                                 console.log('triggerd')
                             }
                         })

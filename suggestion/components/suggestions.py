@@ -75,20 +75,18 @@ class SuggestionsView(UnicornView):
         self.filter_suggestions()
 
     def filter_suggestions(self):
-        if self.filter_ownership_mine is False:
-            if self.filter_unapproved is False:
-                if self.request.user.is_staff:
-                    self.suggestions = Suggestions.objects.filter(approved=False)
-                else:
-                    self.suggestions = Suggestions.objects.filter(author=self.user_profile, approved=False)
-            else:
-                self.suggestions = Suggestions.objects.filter(approved=True)
-        elif self.filter_ownership_mine is True:
-            self.suggestions = Suggestions.objects.filter(author=self.user_profile)
-        if self.filter_by_votes is True:
-            self.suggestions.order_by('-votes')
+        if self.filter_ownership_mine is False and self.filter_unapproved is False:
+            self.suggestions = Suggestions.objects.filter(approved=True)
+        elif self.filter_ownership_mine is True and self.filter_unapproved is False:
+            self.suggestions = Suggestions.objects.filter(author=self.user_profile, approved=True)
         else:
-            self.suggestions.order_by('-published_at')
+            self.suggestions = Suggestions.objects.filter(author=self.user_profile, approved=False)
+
+        # order by votes or date
+        if self.filter_by_votes is True:
+            self.suggestions = self.suggestions.order_by('-votes')
+        else:
+            self.suggestions = self.suggestions.order_by('-published_at')
 
         self.voted_suggestions = list(
             self.suggestions.filter(upvotes=self.user_profile).values_list('title', flat=True))
@@ -96,10 +94,13 @@ class SuggestionsView(UnicornView):
 
     def awaiting_approval(self):
         self.filter_unapproved = False if self.filter_unapproved is True else True
+        if self.filter_unapproved is True:
+            self.filter_ownership_mine = True
         self.filter_suggestions()
 
     def show_mine(self):
         self.filter_ownership_mine = False if self.filter_ownership_mine is True else True
+
         print(self.filter_ownership_mine)
         self.filter_suggestions()
 
