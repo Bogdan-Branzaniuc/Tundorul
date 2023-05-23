@@ -6,24 +6,25 @@
 
     {% if messages %}
         {% for message in messages %}
+        <div class="django-messages">
             <p><strong>Thanks {{user}}! </strong></p>
             <p> {{ message }} </p>
+        </div>
         {% endfor %}
     {% endif %}
     <div class="row g-0">
         <div class="col-3"></div>
         <div class="col-6">
-            {% unicorn_errors %}
-            <div>
-                <label for="title">Title:</label>
-                <textarea u:model="title" id="title"> </textarea>
-            </div>
-            <div>
-                <label for="content">Suggestion:</label>
-                <textarea u:model="content" id="content"></textarea>
-            </div>
-            <button u:click="submit_suggestion" name="submit_suggestion">Send</button>
-             <!-- updated-event.html -->
+            {% if confirm_edit_popup < 0 %}
+                {% unicorn_errors %}
+            {% endif %}
+            <form u:submit.prevent="submit_suggestion">
+                <label for="suggestion_title">Title:</label>
+                <textarea u:model="suggestion_title" id="suggestion_title"></textarea>
+                <label for="suggestion_content">Suggestion:</label>
+                <textarea u:model="suggestion_content" id="suggestion_content"></textarea>
+                <button type="submit" >Send</button>
+            </form>
         </div>
 
         <div class="col-3"></div>
@@ -41,12 +42,10 @@
             <button u:click="awaiting_approval" class="btn-success">Approved</button>
             <button u:click="awaiting_approval" class="btn-primary">Awaiting Approval</button>
         {% else %}
-            
             <button u:click="show_mine"  class="btn-success">My Suggestions</button><br>
             <button u:click="awaiting_approval" class="btn-primary">Approved</button>
             <button u:click="awaiting_approval" class="btn-success">Awaiting Approval</button>
         {% endif %}
-
         {% if filter_by_votes is True %}
             <button u:click="by_votes"  class="btn-success">By votes</button>
             <button u:click="by_votes"  class="btn-primary">By date</button>
@@ -55,23 +54,35 @@
             <button u:click="by_votes"  class="btn-success">By date</button>
         {% endif %}
 
-
     </div>
     <div class="row g-0 suggestions-section">
 
         {% for suggestion in suggestions %}
             <div id="{{suggestion.title}}" class="col-12 suggestion-body">
                 <img src={{ suggestion.author.profile_picture_url }} alt="profile immage of the logged in user from twitch" class="author_profile_img"><img>
-                <p> <strong> {{ suggestion.title }} </strong></p>
-                <p> {{ suggestion.body }} </p>
+
+                {% if confirm_edit_popup == suggestion.id %}
+                    {% unicorn_errors %}
+                    <form u:submit.prevent="submit_edit_suggestion({{suggestion.id}}, False)">
+                        <label for="edit_suggestion_title">Title:</label>
+                        <textarea type="text" u:model="edit_suggestion_title" id="edit_suggestion_title"></textarea>
+                        <label for="edit_suggestion_content">Suggestion:</label>
+                        <textarea u:model="edit_suggestion_content" id="edit_suggestion_content"></textarea>
+                        <button type="submit" >Send</button>
+                        <button u:click="submit_edit_suggestion({{suggestion.id}}, True)">Cancel</button>
+                    </form>
+                {% else %}
+                    <p> <strong> {{ suggestion.title }} </strong></p>
+                    <p> {{ suggestion.body }} </p>
+                {% endif %}
                 <p> wrote on: {{ suggestion.published_at }} </p>
                 <p> by: {{ suggestion.author.username }}</p>
 
                 {% if suggestion.approved %}
-                    <p> votes: {{ suggestion.votes}} </p>
+                    <p> votes: {{ suggestion.votes }} </p>
                     <p> Approved by Tundorul </p>
+                
                     <!--    Display Upvote button color            -->
-                    {{voted_suggestions}}
                     {% if suggestion.title in voted_suggestions %}
                         <button u:click="submit_upvote({{ suggestion.id }})" class="btn-success"  name="submit_upvote">Voted! </button>
                     {% else %}
@@ -83,22 +94,13 @@
                 <!--      Display Edit Delete buttons          -->
                 {% if suggestion in personal_suggestions %}
                     <button u:click="edit_suggestion({{ suggestion.id }})"> Edit </button>
-                    <button  id="show_confirm{{suggestion.id}}"> Delete </button>
-                    <button u:click.prevent="delete_suggestion({{ suggestion.id }})" class="deletion_confirmed{{suggestion.id}}" style="display:none"></button>
-                    <script type="text/javascript">
-                        document.getElementById('show_confirm{{suggestion.id}}').addEventListener('click', function(e) {
-                            console.log('clicked')
-                            let result = confirm("Want to delete?");
-                            if (result) {
-                                document.getElementsByClassName("deletion_confirmed{{suggestion.id}}").click();
-                                console.log('triggerd')
-                            }
-                        })
-                    </script>
+                    <button u:click="show_confirm_deletion({{ suggestion.id }})"> Delete </button>
+                    {% if confirm_delete_popup ==  suggestion.id %}
+                        <button u:click="delete_suggestion({{ suggestion.id }}, False)" class="btn-danger">confirm</button>
+                        <button u:click="delete_suggestion({{ suggestion.id }}, True)" class="btn-success">cancel</button>
+                    {% endif %}
                 {% endif %}
-
             </div>
         {% endfor %}
-
     </div>
 </section>
