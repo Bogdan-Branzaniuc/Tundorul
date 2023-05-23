@@ -9,17 +9,18 @@ from datetime import datetime
 
 class UserProfileView(View):
     def get(self, request, *args, **kwargs):
+        user_profile = get_object_or_404(UserProfile, username=request.user)
         if(request.user.is_authenticated):
-            user_data = UserProfile.objects.filter(username=request.user)[0]
-            print(user_data)
+            if user_profile.is_banned is True:
+                return redirect('banned_user')
             user_data = {
-                'username': user_data.username,
-                'current_name': user_data.current_name,
-                'email': user_data.email,
-                'join_date': user_data.join_date.strftime("%d - %m - %Y"),
-                'profile_picture_url': user_data.profile_picture_url,
-                'is_follower': user_data.is_follower,
-                'is_banned': user_data.is_banned,
+                'username': user_profile.username,
+                'current_name': user_profile.current_name,
+                'email': user_profile.email,
+                'join_date': user_profile.join_date.strftime("%d - %m - %Y"),
+                'profile_picture_url': user_profile.profile_picture_url,
+                'is_follower': user_profile.is_follower,
+                'is_banned': user_profile.is_banned,
             }
             context = {
                 'user_profile': user_data,

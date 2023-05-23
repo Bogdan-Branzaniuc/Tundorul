@@ -28,3 +28,18 @@
     justify-content: center;
     align-items: center;
 }
+
+.home-logo-png{
+    width:10em;
+    height:10em;
+    margin-bottom:70px;
+    /*background-color: #993333;*/
+}
+
+.live-embed-wrapper{
+
+}
+
+#TundorulLive{
+    height: 70%;
+}

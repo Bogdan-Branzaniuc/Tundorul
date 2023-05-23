@@ -10,6 +10,7 @@ from icalevents.icalevents import events
 import os
 from tundorul_django import settings
 from collections import Counter
+from tundorul.models import UserProfile
 
 
 class Home(View):
@@ -20,6 +21,11 @@ class Home(View):
         calendar = Calendar.from_ical(calendar_file.read())
         general_start_hour = []
         twitch_events = []
+
+        user_profile = get_object_or_404(UserProfile, username=request.user)
+        if request.user.is_authenticated:
+            if user_profile.is_banned is True:
+                return redirect('banned_user')
 
         for component in calendar.walk():
             if component.name == 'VEVENT':
