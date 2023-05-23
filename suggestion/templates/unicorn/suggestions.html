@@ -20,9 +20,9 @@
             {% endif %}
             <form u:submit.prevent="submit_suggestion">
                 <label for="suggestion_title">Title:</label>
-                <textarea u:model="suggestion_title" id="suggestion_title"></textarea>
+                <textarea u:model="suggestion_title" id="suggestion_title">{{suggestion.title}}</textarea>
                 <label for="suggestion_content">Suggestion:</label>
-                <textarea u:model="suggestion_content" id="suggestion_content"></textarea>
+                <textarea u:model="suggestion_content" id="suggestion_content">{{suggestion.body}}</textarea>
                 <button type="submit" >Send</button>
             </form>
         </div>
@@ -60,28 +60,27 @@
         {% for suggestion in suggestions %}
             <div id="{{suggestion.title}}" class="col-12 suggestion-body">
                 <img src={{ suggestion.author.profile_picture_url }} alt="profile immage of the logged in user from twitch" class="author_profile_img"><img>
-
                 {% if confirm_edit_popup == suggestion.id %}
                     {% unicorn_errors %}
                     <form u:submit.prevent="submit_edit_suggestion({{suggestion.id}}, False)">
-                        <label for="edit_suggestion_title">Title:</label>
+                        <label for="edit_suggestion_title">Edit Title:</label>
                         <textarea type="text" u:model="edit_suggestion_title" id="edit_suggestion_title"></textarea>
-                        <label for="edit_suggestion_content">Suggestion:</label>
+                        <label for="edit_suggestion_content">Edit Suggestion:</label>
                         <textarea u:model="edit_suggestion_content" id="edit_suggestion_content"></textarea>
                         <button type="submit" >Send</button>
                         <button u:click="submit_edit_suggestion({{suggestion.id}}, True)">Cancel</button>
                     </form>
                 {% else %}
-                    <p> <strong> {{ suggestion.title }} </strong></p>
-                    <p> {{ suggestion.body }} </p>
+                    <p> Title: <strong> {{ suggestion.title }} </strong></p>
+                    <p> Suggestion: {{ suggestion.body }} </p>
+                    <p> wrote on: {{ suggestion.published_at }} </p>
+                    <p> by: {{ suggestion.author.username }}</p>
                 {% endif %}
-                <p> wrote on: {{ suggestion.published_at }} </p>
-                <p> by: {{ suggestion.author.username }}</p>
-
+                
                 {% if suggestion.approved %}
                     <p> votes: {{ suggestion.votes }} </p>
                     <p> Approved by Tundorul </p>
-                
+
                     <!--    Display Upvote button color            -->
                     {% if suggestion.title in voted_suggestions %}
                         <button u:click="submit_upvote({{ suggestion.id }})" class="btn-success"  name="submit_upvote">Voted! </button>

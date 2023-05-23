@@ -67,19 +67,22 @@ class SuggestionsView(UnicornView):
         self.filter_suggestions()
 
     def edit_suggestion(self, suggestion_id):
+        suggestion = get_object_or_404(Suggestions, id=suggestion_id)
+        self.edit_suggestion_title = suggestion.title
+        self.edit_suggestion_content = suggestion.body
         self.confirm_edit_popup = suggestion_id
         self.form_class = EditSuggestionForm
         self.filter_suggestions()
 
     def submit_edit_suggestion(self, suggestion_id, cancel):
-        if cancel:
+        if cancel is True:
             pass
         else:
             if self.is_valid():
                 try:
                     suggestion = get_object_or_404(Suggestions, id=suggestion_id)
-                    suggestion.title = self.suggestion_title
-                    suggestion.body = self.suggestion_content
+                    suggestion.title = self.edit_suggestion_title
+                    suggestion.body = self.edit_suggestion_content
                     suggestion.approved = False
                     suggestion.save()
                     messages.success(self.request, 'Your edit is awaiting approval.')
