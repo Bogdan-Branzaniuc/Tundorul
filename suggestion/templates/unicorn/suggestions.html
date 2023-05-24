@@ -5,13 +5,21 @@
     {%unicorn_scripts %}
 
     {% if messages %}
-        {% for message in messages %}
-        <div class="django-messages">
-            <p><strong>Thanks {{user}}! </strong></p>
-            <p> {{ message }} </p>
+    <div class="container">
+        <div class="row">
+            <div class="col-10 offset-1">
+                {% for message in messages %}
+                    <div class="alert {{ message.tags }} alert-dismissible fade show"
+                                    id="msg" role="alert">
+                                    {{ message | safe}}
+                        <button class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            </div>
         </div>
-        {% endfor %}
+    </div>
     {% endif %}
+
     <div class="row g-0">
         <div class="col-12">
             {% if confirm_edit_popup < 0 %}
@@ -25,7 +33,6 @@
                 <button type="submit" >Send</button>
             </form>
         </div>
-
     </div>
     <div class="col-12 filters-container">
         {% if filter_ownership_mine is False and filter_unapproved is False %}
@@ -105,3 +112,10 @@
         {% endfor %}
     </div>
 </section>
+<script>
+    setTimeout(function(){
+        let messages = document.getElementById('msg');
+        let alert = new bootstrap.Alert(messages);
+        alert.close();
+    }, 3000);
+</script>

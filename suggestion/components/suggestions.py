@@ -50,9 +50,12 @@ class SuggestionsView(UnicornView):
                 )
                 suggestion.save()
                 messages.success(self.request, 'Your suggestion is awaiting approval.')
+                self.suggestion_title = ''
+                self.suggestion_content = ''
             except IntegrityError:
                 messages.error(self.request, "There is one suggestion with this title Already, you can change the title or upvote the current one if it's content is the same")
                 pass
+
         self.filter_suggestions()
 
     def submit_upvote(self, suggestion_id):
