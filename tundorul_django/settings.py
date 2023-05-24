@@ -38,8 +38,8 @@ MESSAGE_TAGS = {
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-# ALLOWED_HOSTS = ['tundorul.herokuapp.com', '127.0.0.1', 'localhost']
-ALLOWED_HOSTS = ['https://tundorul.herokuapp.com/']
+ALLOWED_HOSTS = ['tundorul.herokuapp.com', '127.0.0.1', 'localhost']
+
 # Application definition
 SITE_ID = 1
 
