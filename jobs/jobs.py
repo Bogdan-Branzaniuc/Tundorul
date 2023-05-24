@@ -21,7 +21,7 @@ def twitch_app_token():
         if app_access_token.status_code == 200:
             token = json.loads(app_access_token.content.decode("utf-8"))
             os.environ["APP_TOKEN"] = token['access_token']
-            return token['expires_in']
+            os.environ["TIME_VODS"] = token['expires_in']
         else:
             app_access_token.raise_for_status()
 

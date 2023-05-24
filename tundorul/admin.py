@@ -3,4 +3,3 @@ from .models import UserProfile, Vods
 
 admin.site.register(UserProfile)
 admin.site.register(Vods)
-
