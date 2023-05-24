@@ -6,10 +6,10 @@
 
 <link href="{% static 'css/suggestions.css' %}" rel="stylesheet">
 <!-- create a grid and for each Vod render and paginate the template-->
-<div class="row g-0">
-    <div class="col-3"></div>
-    <div class="col-6"><h1>Suggestions Page</h1></div>
-    <div class="col-3"></div>
+
+<div class="row g-0 suggestions-page-header">
+    <div class="col-6"><h1> Suggestions Page</h1></div>
+    <div class="col-6"></div>
 </div>
 
 {% unicorn 'suggestions' %}

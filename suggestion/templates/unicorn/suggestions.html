@@ -13,92 +13,94 @@
         {% endfor %}
     {% endif %}
     <div class="row g-0">
-        <div class="col-3"></div>
-        <div class="col-6">
+        <div class="col-12">
             {% if confirm_edit_popup < 0 %}
                 {% unicorn_errors %}
             {% endif %}
             <form u:submit.prevent="submit_suggestion">
-                <label for="suggestion_title">Title:</label>
+                <label for="suggestion_title"><p>Title:</p></label>
                 <textarea u:model="suggestion_title" id="suggestion_title">{{suggestion.title}}</textarea>
-                <label for="suggestion_content">Suggestion:</label>
+                <label for="suggestion_content"><p>Suggestion:</p></label>
                 <textarea u:model="suggestion_content" id="suggestion_content">{{suggestion.body}}</textarea>
                 <button type="submit" >Send</button>
             </form>
         </div>
 
-        <div class="col-3"></div>
     </div>
-    <div class="col-12">
-        <h2>Filters:</h2>
+    <div class="col-12 filters-container">
         {% if filter_ownership_mine is False and filter_unapproved is False %}
             <button u:click="show_mine"  class="btn-success">All Suggestions</button>
-            <button u:click="show_mine"  class="btn-primary">My Suggestions</button><br>
+            <button u:click="show_mine"  class="btn-secondary">My Suggestions</button><br>
             <button u:click="awaiting_approval" class="btn-success">Approved</button>
-            <button u:click="awaiting_approval" class="btn-primary">Awaiting Approval</button>
+            <button u:click="awaiting_approval" class="btn-secondary">Awaiting Approval</button>
         {% elif filter_ownership_mine is True and filter_unapproved is False %}
-            <button u:click="show_mine"  class="btn-primary">All Suggestions</button>
+            <button u:click="show_mine"  class="btn-secondary">All Suggestions</button>
             <button u:click="show_mine"  class="btn-success">My Suggestions</button><br>
             <button u:click="awaiting_approval" class="btn-success">Approved</button>
-            <button u:click="awaiting_approval" class="btn-primary">Awaiting Approval</button>
+            <button u:click="awaiting_approval" class="btn-secondary">Awaiting Approval</button>
         {% else %}
             <button u:click="show_mine"  class="btn-success">My Suggestions</button><br>
-            <button u:click="awaiting_approval" class="btn-primary">Approved</button>
+            <button u:click="awaiting_approval" class="btn-secondary">Approved</button>
             <button u:click="awaiting_approval" class="btn-success">Awaiting Approval</button>
         {% endif %}
         {% if filter_by_votes is True %}
             <button u:click="by_votes"  class="btn-success">By votes</button>
-            <button u:click="by_votes"  class="btn-primary">By date</button>
+            <button u:click="by_votes"  class="btn-secondary">By date</button>
         {% else %}
-            <button u:click="by_votes"  class="btn-primary">By votes</button>
+            <button u:click="by_votes"  class="btn-secondary">By votes</button>
             <button u:click="by_votes"  class="btn-success">By date</button>
         {% endif %}
-
     </div>
     <div class="row g-0 suggestions-section">
-
         {% for suggestion in suggestions %}
             <div id="{{suggestion.title}}" class="col-12 suggestion-body">
-                <img src={{ suggestion.author.profile_picture_url }} alt="profile immage of the logged in user from twitch" class="author_profile_img"><img>
-                {% if confirm_edit_popup == suggestion.id %}
-                    {% unicorn_errors %}
-                    <form u:submit.prevent="submit_edit_suggestion({{suggestion.id}}, False)">
-                        <label for="edit_suggestion_title">Edit Title:</label>
-                        <textarea type="text" u:model="edit_suggestion_title" id="edit_suggestion_title"></textarea>
-                        <label for="edit_suggestion_content">Edit Suggestion:</label>
-                        <textarea u:model="edit_suggestion_content" id="edit_suggestion_content"></textarea>
-                        <button type="submit" >Send</button>
-                        <button u:click="submit_edit_suggestion({{suggestion.id}}, True)">Cancel</button>
-                    </form>
-                {% else %}
-                    <p> Title: <strong> {{ suggestion.title }} </strong></p>
-                    <p> Suggestion: {{ suggestion.body }} </p>
-                    <p> wrote on: {{ suggestion.published_at }} </p>
-                    <p> by: {{ suggestion.author.username }}</p>
-                {% endif %}
+                <div class="row g-0">
+                    <div class="col-4">
+                        <img src={{ suggestion.author.profile_picture_url }} alt="profile immage of the logged in user from twitch" class="author_profile_img"><img>
+                    </div>
 
-                {% if suggestion.approved %}
-                    <p> votes: {{ suggestion.votes }} </p>
-                    <p> Approved by Tundorul </p>
+                    <div class="col-8">
+                        {% if confirm_edit_popup == suggestion.id %}
+                        {% unicorn_errors %}
+                        <form u:submit.prevent="submit_edit_suggestion({{suggestion.id}}, False)">
+                            <label for="edit_suggestion_title"><p>Edit Title:</p></label>
+                            <textarea type="text" u:model="edit_suggestion_title" id="edit_suggestion_title"></textarea>
+                            <label for="edit_suggestion_content"><p>Edit Suggestion:</p></label>
+                            <textarea u:model="edit_suggestion_content" id="edit_suggestion_content"></textarea>
+                            <button type="submit" ><i class="fa-solid fa-check"></i></button>
+                            <button u:click="submit_edit_suggestion({{suggestion.id}}, True)"><i class="fa-solid fa-xmark"></i></button>
+                        </form>
+                        {% else %}
+                            <p> Title: <strong> {{ suggestion.title }} </strong></p>
+                            <p> Suggestion: {{ suggestion.body }} </p>
+                            <p> wrote on: {{ suggestion.published_at }} </p>
+                            <p> by: {{ suggestion.author.username }}</p>
+                        {% endif %}
 
-                    <!--    Display Upvote button color            -->
-                    {% if suggestion.title in voted_suggestions %}
-                        <button u:click="submit_upvote({{ suggestion.id }})" class="btn-success"  name="submit_upvote">Voted! </button>
-                    {% else %}
-                        <button u:click="submit_upvote({{ suggestion.id }})" class="btn-primary"  name="submit_upvote">Upvote </button>
-                    {% endif %}
-                {% else %}
-                    <p> Awaiting Approval </p>
-                {% endif %}
-                <!--      Display Edit Delete buttons          -->
-                {% if suggestion in personal_suggestions %}
-                    <button u:click="edit_suggestion({{ suggestion.id }})"> Edit </button>
-                    <button u:click="show_confirm_deletion({{ suggestion.id }})"> Delete </button>
-                    {% if confirm_delete_popup ==  suggestion.id %}
-                        <button u:click="delete_suggestion({{ suggestion.id }}, False)" class="btn-danger">confirm</button>
-                        <button u:click="delete_suggestion({{ suggestion.id }}, True)" class="btn-success">cancel</button>
-                    {% endif %}
-                {% endif %}
+                        {% if suggestion.approved %}
+                            <p> votes: {{ suggestion.votes }} </p>
+                            <p> Approved by Tundorul </p>
+
+                            <!--    Display Upvote button color            -->
+                            {% if suggestion.title in voted_suggestions %}
+                                <button u:click="submit_upvote({{ suggestion.id }})" class="btn-success"  name="submit_upvote"><i class="fa-solid fa-arrow-up"></i> </button>
+                            {% else %}
+                                <button u:click="submit_upvote({{ suggestion.id }})" class="btn-dark"  name="submit_upvote"><i class="fa-solid fa-arrow-up"></i> </button>
+                            {% endif %}
+                        {% else %}
+                            <p> Awaiting Approval </p>
+                        {% endif %}
+                        <!--      Display Edit Delete buttons          -->
+                        {% if suggestion in personal_suggestions %}
+                            <button u:click="edit_suggestion({{ suggestion.id }})" class="btn-dark"> <i class="fa-solid fa-pen"></i> </button>
+                            <button u:click="show_confirm_deletion({{ suggestion.id }})" class="btn-danger"> <i class="fa-solid fa-trash"></i> </button>
+                            {% if confirm_delete_popup ==  suggestion.id %}
+                                <button u:click="delete_suggestion({{ suggestion.id }}, True)" class="btn-primary"><i class="fa-solid fa-xmark"></i></button>
+                                <button u:click="delete_suggestion({{ suggestion.id }}, False)" class="btn-primary"><i class="fa-solid fa-check"></i></button>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                </div>
             </div>
         {% endfor %}
     </div>

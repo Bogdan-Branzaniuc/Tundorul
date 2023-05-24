@@ -8,11 +8,15 @@
 
 <div class="row g-0">
     <div class="col-3"></div> <!--  spacer  -->
-    <div class="col-6 vods-title"><h1>Vods Page</h1></div>
+    <div class="col-6 vods-title">
+        <h1> In case you missed it, </h1>
+        <h2>latest streams can be found here: </h2>
+    </div>
     <div class="col-3"></div> <!--  spacer  -->
 </div>
 
 <div class="col-12">
+    <div class="col-1 col-xxl-0"> </div>
     <script> let vodsArray=[]</script>
     <div class="row g-0 vods-wrapper">
     {% for vod in vods %}
@@ -23,15 +27,14 @@
                 url: '{{vod.url}}',
                 thumnail: '{{ vod.thumbnail_url }}'
             })
-
         </script>
-        <div class="col-6 vod-div">
+        <div class="col-12  col-xxl-6 vod-div">
             <div class="iframe-vod" id="{{vod.stream_id}}">
 
             </div>
         </div>
-
     {% endfor %}
+        <div class="col-1  col-xxl-0"> </div>
     </div>
 </div>
 

@@ -2,34 +2,33 @@
 {% block content %}
 {% load account %}
 {% load static %}
+<link href="{% static 'css/user-profile.css' %}" rel="stylesheet">
+<script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
 
-<!-- create a grid and for each Vod render and paginate the template -->
 <div class="row g-0">
     <div class="col-3"></div>
-    <div class="col-6"><h1>User Profile Page</h1></div>
+    <div class="col-6"><h1>YOUR PROFILE</h1></div>
     <div class="col-3"></div>
 </div>
-
-{% if user.is_authenticated %}
-    <div class="row g-0">
-        <div class="col-3"></div>
-        <div class="col-6">
-            <img src={{ user_profile.profile_picture_url }} alt="profile immage of the logged in user from twitch"><img>
-            <h3>display_name: {{ user_profile.current_name }}</h3>
-            <h3>username: {{ user_profile.username }}</h3>
-            <h3> email: {{ user_profile.email }} </h3>
-            <h3> Joined on: {{ user_profile.join_date }} </h3>
+<div class="row g-0 profile-detail-row">
+    <div class="col-12 col-lg-5 profile-immage-collumn">
+        <img class="user-profile-immage" src={{ user_profile.profile_picture_url }} alt="profile immage of the logged in user from twitch"><img>
+    </div>
+    <div class="col-12 col-lg-7">
+        <div class="user-detail-text">
+            <p><strong>chat name: </strong> {{ user_profile.current_name }}</p>
+            <p><strong>username: </strong> {{ user_profile.username }}</p>
+            <p><strong>email: </strong> {{ user_profile.email }}</p>
             {% if  user_profile.is_follower == True  %}
-            <h3> You are following Tundorul at the moment </h3>
+            <p><strong>follower since: </strong> {{ user_profile.join_date }}</p>
             {% endif %}
         </div>
-        <div class="col-3"></div>
     </div>
-{% else %}
-    <div class="row g-0">
-        <div class="col-3"></div>
-        <div class="col-6"><h1> You Have To Log In with your Twitch Account to see your profile info here</h1></div>
-        <div class="col-3"></div>
+<div>
+<div class="row g-0">
+    <div class="col-12 more-to-follow">
+        <h3>MORE TO FOLLOW</h3>
+        <lottie-player src="https://assets3.lottiefiles.com/packages/lf20_gj47fo9f.json"  background="transparent"  speed="1"  style="width: 100%; height: 30em"  loop autoplay></lottie-player>
     </div>
-{% endif %}
+</div>
 {% endblock %}

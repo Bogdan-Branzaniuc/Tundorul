@@ -14,7 +14,6 @@ from tundorul.models import UserProfile
 
 
 class Home(View):
-
     def get(self, request, *args, **kwargs):
         file_path = os.path.join(settings.STATICFILES_DIRS[0], 'twitchdev.ics')
         calendar_file = open(file_path)
@@ -22,8 +21,9 @@ class Home(View):
         general_start_hour = []
         twitch_events = []
 
-        user_profile = get_object_or_404(UserProfile, username=request.user)
+        user_profile =[]
         if request.user.is_authenticated:
+            user_profile = get_object_or_404(UserProfile, username=request.user)
             if user_profile.is_banned is True:
                 return redirect('banned_user')
 
