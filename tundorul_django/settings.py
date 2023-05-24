@@ -39,7 +39,7 @@ MESSAGE_TAGS = {
 DEBUG = False
 
 # ALLOWED_HOSTS = ['tundorul.herokuapp.com', '127.0.0.1', 'localhost']
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['https://tundorul.herokuapp.com/']
 # Application definition
 SITE_ID = 1
 
