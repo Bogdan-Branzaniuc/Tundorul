@@ -25,6 +25,7 @@ class SuggestionsView(UnicornView):
     filter_unapproved = False
     confirm_delete_popup = None
     confirm_edit_popup = None
+    paginate_by = 6
 
     def mount(self, *args, **kwargs):
         self.user_profile = UserProfile.objects.get(current_name=self.request.user.username)

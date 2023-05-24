@@ -25,16 +25,17 @@
       crossorigin="anonymous"></script>
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
 </head>
-
 <body>
+    <!--Django Unicorn csrf token-->
+    {% csrf_token %}
+    <div class="page-background" ></div>
     {% if messages %}
     <div class="container">
         <div class="row">
             <div class="col-md-8 offset-md-2">
                 {% for message in messages %}
-                    <div class="alert {{ message.tags }} alert-dismissible fade show"
-                                    id="msg" role="alert">
-                                    {{ message | safe}}
+                    <div class="alert {{ message.tags }} alert-dismissible fade show" id="msg" role="alert">
+                        {{ message | safe}}
                         <button class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 {% endfor %}
@@ -42,9 +43,7 @@
         </div>
     </div>
     {% endif %}
-    {% csrf_token %}
-<div class="page-background" ></div>
- <!-- Navigation -->
+     <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-light bg-white">
             <div class="container-fluid">
                 <div class="logo-wrapper">
@@ -53,7 +52,6 @@
                     </div>
                     <div class="logo-text"><h3>TUNDORUL</h3></div>
                 </div>
-
 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
                     aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -81,66 +79,76 @@
                                 <a class="nav-link" id="/accountstwitch/login/" href="{% provider_login_url 'twitch' %}">LOG IN</a>
                             {% endif %}
                         </li>
+                        {% if user.is_staff %}
+                            <li class="nav-item">
+                                <a class="nav-link" href="/admin">adminPanel</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{% url 'pending_approval'%}">Pending Approval Items</a>
+                            </li>
+                        {% endif %}
                     </ul>
                 </div>
-                {% if user.is_staff %}
-                    <div>
-                        <a class="nav-link" href="/admin">adminPanel</a>
-                    </div>
-                    <div>
-                        <a class="nav-link" href="{% url 'pending_approval'%}">Pending Approval Items</a>
-                    </div>
-                {% endif %}
 
             </div>
         </nav>
-
-<div class="row g-0">
-    <div class="col-1 col-lg-3"> </div>
-    <div class="col-10 col-lg-6">
-    <main class="flex-shrink-0 main-bg">
-        {% block content %}
-        <!-- Content Goes here -->
-        {% endblock content %}
-    </main>
+    <!--  Nav end -->
+    <!--  page templates -->
+    <div class="row g-0 page-template">
+        <div class="col-1 col-lg-3"> </div>
+        <div class="col-10 col-lg-6">
+        <main class="flex-shrink-0 main-bg">
+            {% block content %}
+            <!-- Content Goes here -->
+            {% endblock content %}
+        </main>
+        </div>
+        <div class="col-1 col-lg-3"> </div>
     </div>
-    <div class="col-1 col-lg-3"> </div>
-</div>
-    <!-- Footer -->
-    <footer class="footer mt-auto py-3 dark-bg">
-        <script>
-            let current_page_path = '{{ request.path }}'
-            current_page_path = current_page_path == '/'? '/home' : current_page_path
-
-            for (let navlink of $('.nav-link')){
-
-                if ( navlink.id == current_page_path){
-                    navlink.style.color = '#993535'
-                    navlink.style.fontWeight = 500;
-                }
+    <!--  page templates end-->
+    <!--   sets the current page navlink to a red color and fades django messages     -->
+    <script>
+        let current_page_path = '{{ request.path }}'
+        current_page_path = current_page_path == '/'? '/home' : current_page_path
+        for (let navlink of $('.nav-link')){
+            if ( navlink.id == current_page_path){
+                navlink.style.color = '#993535'
+                navlink.style.fontWeight = 500;
             }
+        }
+        setTimeout(function(){
+        let messages = document.getElementById('msg');
+        let alert = new bootstrap.Alert(messages);
+        alert.close();
+    }, 3000);
+    </script>
 
-            setTimeout(function(){
-            let messages = document.getElementById('msg');
-            let alert = new bootstrap.Alert(messages);
-            alert.close();
-        }, 3000);
-        </script>
-        <div class="row g-0">
+    <!-- Footer -->
+    <footer class="bg-white">
+        <div class="row g-0 footer-row">
+
             <div class="col-1 col-sm-2 col-lg-3"></div> <!--spacing-->
-            <div class="col-3 col-sm-3 col-lg-2">
-                <a href="https://www.instagram.com/tundorul/" target="_blank"><i class="fa-brands fa-instagram"></i></i></a>
+            <div class="col-10 col-sm-8 col-lg-6 links-divs-col">
+                <div class="row g-0 links-divs-row">
+                    <div class="col-4 social-link-div">
+                        <a href="https://www.instagram.com/tundorul/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    </div>
+                    <div class="col-4 social-link-div">
+                        <a href="https://www.youtube.com/channel/UCqiUbOAW5Ofv2foYe7NlXFg" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+                    </div>
+                    <div class="col-4 social-link-div">
+                        <a href="https://www.tiktok.com/@tundorul" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+                    </div>
+                </div>
             </div>
-            <div class="col-4 col-sm-4 col-lg-2">
-                <a href="https://www.youtube.com/channel/UCqiUbOAW5Ofv2foYe7NlXFg" target="_blank"><i class="fa-brands fa-youtube"></i></a>
-            </div>
-            <div class="col-3 col-sm-3 col-lg-2">
-                <a href="https://www.tiktok.com/@tundorul" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+            <div class="col-1 col-sm-2 col-lg-3"></div> <!--spacing-->
+            <div class="col-1 col-sm-2 col-lg-3"></div> <!--spacing-->
+            <div class="col-10 col-sm-8 col-lg-6 made-by-col">
+                <p>Made by Bogdan Branzaniuc</p>
             </div>
             <div class="col-1 col-sm-2 col-lg-3"></div> <!--spacing-->
         </div>
+
     </footer>
-
 </body>
-
 </html>

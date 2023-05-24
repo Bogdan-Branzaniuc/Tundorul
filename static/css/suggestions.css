@@ -2,12 +2,22 @@
     margin-bottom: 50px;
 }
 
+.profile-immage-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
 .author_profile_img{
     border-radius:50%;
     width:10em;
     height:10em;
 }
-
+.suggestion-text-wrapper p{
+    line-height: 120%;
+}
+.suggestion-text-wrapper {
+    padding: 20px;
+}
 button, textarea{
     border-radius: 10px;
     margin:5px;
@@ -32,6 +42,13 @@ p{
     border-radius: 5px;
     border: solid 1px #993535;
     padding:30px;
+}
+
+@media screen and (max-width: 800px){
+    .author_profile_img{
+        width:5em;
+        height:5em;
+    }
 }
 /*[unicorn\:error\:invalid] {*/
 /*          border: 1px solid red !important;*/
