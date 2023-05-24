@@ -1,1 +1,1 @@
-web: gunicorn TundorulDjango.wsgi
+web: gunicorn tundorul_django.wsgi
