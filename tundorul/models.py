@@ -25,7 +25,7 @@ class Vods(models.Model):
     title = models.TextField(blank=True)
     url = models.CharField(max_length=255)
     thumbnail_url = models.TextField(blank=True)
-    published_at = models.DateTimeField()
+    published_at = models.DateTimeField(blank=True)
     view_count = models.IntegerField(default=0)
     stream_id = models.CharField(max_length=255, default=0, unique=True)
 

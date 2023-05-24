@@ -21,7 +21,7 @@ def twitch_app_token():
         if app_access_token.status_code == 200:
             token = json.loads(app_access_token.content.decode("utf-8"))
             os.environ["APP_TOKEN"] = token['access_token']
-            os.environ["TIME_VODS"] = token['expires_in']
+            print(token['expires_in'])
         else:
             app_access_token.raise_for_status()
 
@@ -60,31 +60,21 @@ def twitch_get_vods():
     url = 'https://api.twitch.tv/helix/videos'
 
     vods = requests.get(url, headers=headers, params=params)
-    attempt = 0
-    try:
-        if vods.status_code == 200:
-            Vods.objects.all().delete()
-            data = vods.json()
-            for field in data['data']:
-                print(field)
-                vod = Vods.objects.create(
-                    title=field['title'],
-                    url=field['url'],
-                    thumbnail_url=field['thumbnail_url'],
-                    published_at=field['published_at'],
-                    view_count=field['view_count'],
-                    stream_id=field['id'],
-                )
-                try:
-                    vod.save()
-                except IntegrityError:
-                    continue
-        else:
-            if attempt > 3:
-                vods.raise_for_status()
-            else:
-                attempt += 1
-                twitch_get_vods()
-
-    except requests.exceptions.HTTPError as e:
-        print(f"Failed to retrieve Vods {e}")
+    if vods.status_code == 200:
+        Vods.objects.all().delete()
+        data = vods.json()
+        for field in data['data']:
+            print(field)
+            vod = Vods.objects.create(
+                id=field['id'],
+                title=field['title'],
+                url=field['url'],
+                thumbnail_url=field['thumbnail_url'],
+                published_at=field['published_at'],
+                view_count=field['view_count'],
+                stream_id=field['id'],
+            )
+            try:
+                vod.save()
+            except IntegrityError:
+                continue
