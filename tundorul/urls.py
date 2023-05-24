@@ -1,5 +1,4 @@
 from tundorul.views import home, vods, user_profile, pending_approval, banned_user
-from django.views.generic import TemplateView
 from django.urls import path, include
 
 urlpatterns = [
@@ -10,3 +9,4 @@ urlpatterns = [
     path('pending_approval', pending_approval.PendingApproval.as_view(), name='pending_approval'),
     path('banned_user', banned_user.BannedUser.as_view(), name='banned_user'),
 ]
+

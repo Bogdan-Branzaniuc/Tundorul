@@ -1,9 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.contrib.postgres.fields import JSONField
-from allauth.socialaccount.models import SocialAccount
-from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
-from datetime import datetime
 
 class UserProfile(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE, related_name='%(class)s_related')
@@ -32,26 +28,6 @@ class Vods(models.Model):
     published_at = models.DateTimeField()
     view_count = models.IntegerField(default=0)
     stream_id = models.CharField(max_length=255, default=0, unique=True)
-
-    class Meta:
-        ordering = ['-published_at']
-
-    def __str__(self):
-        return self.title
-
-
-class Suggestions(models.Model):
-    title = models.TextField(unique=True)
-    body = models.TextField(blank=True)
-    author = models.ForeignKey(
-        UserProfile,
-        on_delete=models.CASCADE,
-        related_name='suggestion'
-    )
-    published_at = models.DateTimeField(auto_now_add=True)
-    votes = models.IntegerField(default=0)
-    approved = models.BooleanField(default=False)
-    upvotes = models.ManyToManyField(UserProfile, related_name='upvoted_suggestions', blank=True)
 
     class Meta:
         ordering = ['-published_at']

@@ -30,8 +30,8 @@ MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['tundorul.herokuapp.com', '127.0.0.1', 'localhost']
-
+# ALLOWED_HOSTS = ['tundorul.herokuapp.com', '127.0.0.1', 'localhost']
+ALLOWED_HOSTS = ['*']
 # Application definition
 SITE_ID = 4
 

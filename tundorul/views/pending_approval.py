@@ -3,7 +3,9 @@ from django.views import generic, View
 from django.http import HttpResponseRedirect
 from django.contrib import messages
 import requests
-from tundorul.models import Suggestions, UserProfile
+from tundorul.models import UserProfile
+from suggestion.models import Suggestions
+
 
 class PendingApproval(View):
     def get(self, request, *args, **kwargs):

@@ -21,5 +21,7 @@ urlpatterns = [
     path('accounts/', include('allauth.urls')),
     path('', include('tundorul.urls'), name='tundorul.urls'),
     path('', include('suggestion.urls'), name='suggestion.urls'),
-    path('', include("django_unicorn.urls"))
+    path('', include('django_unicorn.urls')),
 ]
+
+handler404 = 'tundorul.views.handler_404.handler404'

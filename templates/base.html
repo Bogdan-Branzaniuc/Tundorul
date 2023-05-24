@@ -5,6 +5,7 @@
 <html class="h-100">
 <head>
     <html lang="en">
+    <meta name="keywords" content="Tundorul, Twitch, Stramming" />
     <title>Tundorul </title>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
@@ -24,13 +25,21 @@
       crossorigin="anonymous"></script>
     <link href="{% static 'css/style.css' %}" rel="stylesheet">
 </head>
+
 <body class="d-flex flex-column h-100 main-bg">
     {% csrf_token %}
 <div class="page-background" ></div>
  <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-light bg-white">
             <div class="container-fluid">
-                <a class="navbar-brand" href="{% url 'home' %}">TUNDORUL</a>
+                <div class="logo-wrapper">
+                    <div class="nav-logo-div">
+                        <a class="navbar-brand" href="{% url 'home' %}"><img class="tundorul-logo-png" src="https://res.cloudinary.com/djnxh7xga/image/upload/v1684923696/logo_default_ibawlh.svg" alt="Tundorul Twitch Channel logo"></a>
+                    </div>
+                    <div class="logo-text"><h3>TUNDORUL</h3></div>
+                </div>
+
+
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText"
                     aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -50,6 +59,13 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'suggestions' %}">SUGGESTIONS</a>
                         </li>
+                        <li class="nav-item">
+                            {% if user.is_authenticated %}
+                                <a class="nav-link" href="accounts/logout">LOG OUT</a>
+                            {% else %}
+                                <a class="nav-link" href="{% provider_login_url 'twitch' %}">LOG IN</a>
+                            {% endif %}
+                        </li>
                     </ul>
                 </div>
                 {% if user.is_staff %}
@@ -60,26 +76,20 @@
                         <a class="nav-link" href="{% url 'pending_approval'%}">Pending Approval Items</a>
                     </div>
                 {% endif %}
-                {% if user.is_authenticated %}
-                    <div>
-                        <a class="nav-link" href="accounts/logout">LOG OUT</a>
-                 {% else %}
-                        <a class="nav-link" href="{% provider_login_url 'twitch' %}">LOG IN</a>
-                 {% endif %}
-                    </div>
+
             </div>
         </nav>
 
 <div class="row g-0">
-    <div class="col-1 col-sm-2 col-lg-3"> </div>
-    <div class="col-10 col-sm-8 col-lg-6">
+    <div class="col-1 col-lg-3"> </div>
+    <div class="col-10 col-lg-6">
     <main class="flex-shrink-0 main-bg">
         {% block content %}
         <!-- Content Goes here -->
         {% endblock content %}
     </main>
     </div>
-    <div class="col-1 col-sm-2 col-lg-3"> </div>
+    <div class="col-1 col-lg-3"> </div>
 </div>
     <!-- Footer -->
     <footer class="footer mt-auto py-3 dark-bg">

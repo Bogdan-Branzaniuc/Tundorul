@@ -1,7 +1,8 @@
 from django_unicorn.components import UnicornView
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
-from tundorul.models import Suggestions, UserProfile
+from tundorul.models import UserProfile
+from suggestion.models import Suggestions
 from django.db import IntegrityError
 from suggestion.forms import CreateSuggestionForm, EditSuggestionForm
 

@@ -1,5 +1,34 @@
+
+intro-section{
+    margin-top:30vh;
+}
+
+.intro-text-wrapper{
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.intro-text-wrapper p{
+    max-width: 600px;
+}
+.live-embed-wrapper{
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+    width:100%;
+    height:28em;
+}
+#TundorulLive{
+    border-radius: 10px;
+    height: 100%;
+    width:100%;
+    max-width: 600px;
+    overflow: hidden;
+}
 .schedule-section{
-   min-height: 60vh;
+    margin-top: 20vh;
+    min-height:50vh;
 }
 .schedule-wrapper{
     display: flex;
@@ -29,17 +58,17 @@
     align-items: center;
 }
 
-.home-logo-png{
-    width:10em;
-    height:10em;
-    margin-bottom:70px;
-    /*background-color: #993333;*/
+
+
+@media screen and (max-width:1800px) {
+        .live-embed-wrapper{
+        height:25em;
+    }
 }
 
-.live-embed-wrapper{
-
-}
-
-#TundorulLive{
-    height: 70%;
+@media screen and (max-width:500px) {
+        .live-embed-wrapper{
+        padding-left:0;
+        height:20em;
+    }
 }
