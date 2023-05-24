@@ -36,7 +36,7 @@ MESSAGE_TAGS = {
         messages.ERROR: 'alert-danger',
     }
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['tundorul.herokuapp.com', '127.0.0.1', 'localhost']
 
@@ -69,7 +69,6 @@ INSTALLED_APPS = [
     'asyncio',
     'twitchAPI',
     'django_extensions',
-    'django_summernote',
 ]
 # python manage.py runserver_plus --cert-file cert.pem --key-file key.pem       ---for testing https login
 
@@ -185,9 +184,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
-X_FRAME_OPTIONS = "SAMEORIGIN"
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
 
 STATIC_URL = '/static/'
