@@ -25,6 +25,3 @@ urlpatterns = [
     path('', include('suggestion.urls'), name='suggestion.urls'),
     path('', include('django_unicorn.urls')),
 ]
-
-
-handler404 = 'tundorul.views.handler_404.handler404'
