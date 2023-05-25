@@ -1,4 +1,8 @@
 class LiveCountDown{
+    /**
+     Creates and renders the time left untill the next stream in real time, based on data passed from
+     the static file twitchdev.ics by home.py view.
+     */
     constructor(){
         this.nextStreamStamp = 0
         this.importedTimes = dailyHours

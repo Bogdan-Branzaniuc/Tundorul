@@ -1,15 +1,14 @@
-from django.conf import settings
-from allauth.socialaccount.models import SocialToken, SocialAccount
-from django.shortcuts import get_object_or_404
 from tundorul.models import Vods
 from django.db import IntegrityError
-
 import requests
 import os
 import json
-import time
+
 
 def twitch_app_token():
+    """
+    Will make a request to retrieve an app access token from twitch
+    """
     app_token_url = ' https://id.twitch.tv/oauth2/token'
     params = {
         'client_id': os.environ.get('CLIENT_ID'),
@@ -21,15 +20,16 @@ def twitch_app_token():
         if app_access_token.status_code == 200:
             token = json.loads(app_access_token.content.decode("utf-8"))
             os.environ["APP_TOKEN"] = token['access_token']
-            print(token['expires_in'])
         else:
             app_access_token.raise_for_status()
-
     except requests.exceptions.HTTPError as e:
-        print(f"Failed to retrieve app_token: {e}")
+        pass
 
 
 def twitch_schedule_callendar():
+    """
+    Updates the static file twitchdev.ics, that renders the streammer's schedule in the home.py view
+    """
     url = 'https://api.twitch.tv/helix/schedule/icalendar?'
     data ={
         'broadcaster_id': os.environ.get('ADMIN_USER_ID'),
@@ -44,10 +44,14 @@ def twitch_schedule_callendar():
         else:
             response.raise_for_status()  # raise HTTPError exception if status code is not 200
     except requests.exceptions.HTTPError as e:
-        print(f"Failed to download schedule: {e}")
+        pass
+        # following updates
 
 
 def twitch_get_vods():
+    """
+    retrieves the last 10 vods from twitch and updates the Vods model
+    """
     app_access_token = os.environ.get("APP_TOKEN")
     headers = {
         'Authorization': 'Bearer ' + app_access_token,
@@ -64,7 +68,6 @@ def twitch_get_vods():
         Vods.objects.all().delete()
         data = vods.json()
         for field in data['data']:
-            print(field)
             vod = Vods.objects.create(
                 id=field['id'],
                 title=field['title'],

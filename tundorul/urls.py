@@ -1,6 +1,6 @@
 from tundorul.views import home, vods, user_profile, pending_approval, banned_user
 from django.urls import path, include
-from tundorul.views.handler_error_page import handler403,  handler404, handler405, handler500
+
 
 urlpatterns = [
     path("accounts", include("allauth.urls")),

@@ -1,12 +1,11 @@
 from tundorul.models import UserProfile
 
 from datetime import datetime
-from allauth.socialaccount.signals import pre_social_login
 from allauth.account.signals import user_logged_in
 from django.dispatch import receiver
 from allauth.socialaccount.models import SocialAccount, SocialToken
 import requests
-from django.shortcuts import render, get_object_or_404, reverse
+from django.shortcuts import get_object_or_404
 import os
 import json
 
@@ -74,6 +73,3 @@ def update_user_profile(request, user, **kwargs):
             join_date=is_following['followed_at'],
         )
         user_profile.save()
-
-
-

@@ -1,7 +1,4 @@
-
-
 for (let vod of vodsArray){
-    console.log(vod)
     let options = {
         width: '100%',
         height: '100%',

@@ -113,6 +113,10 @@ class SuggestionsView(UnicornView):
         self.filter_suggestions()
 
     def filter_suggestions(self):
+        '''
+        it is called every time the unicorn template renders to overwrite the
+        self.mount() method with the last filters
+        '''
         if self.filter_ownership_mine is False and self.filter_unapproved is False:
             self.suggestions = Suggestions.objects.filter(approved=True)
         elif self.filter_ownership_mine is True and self.filter_unapproved is False:

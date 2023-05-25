@@ -1,12 +1,6 @@
-from django.shortcuts import render, get_object_or_404, reverse, redirect
-from django.views import generic, View
-from django.http import HttpResponseRedirect, HttpResponse
-import requests
-import pandas as pd
-import datetime
+from django.shortcuts import render, get_object_or_404, redirect
+from django.views import View
 from icalendar import Calendar
-import icalendar
-from icalevents.icalevents import events
 import os
 from tundorul_django import settings
 from collections import Counter
@@ -21,7 +15,6 @@ class Home(View):
         general_start_hour = []
         twitch_events = []
 
-        user_profile =[]
         if request.user.is_authenticated:
             user_profile = get_object_or_404(UserProfile, username=request.user)
             if user_profile.is_banned is True:
