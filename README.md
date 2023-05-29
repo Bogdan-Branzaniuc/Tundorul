@@ -134,20 +134,19 @@ A delete button will be displayed along with any suggestion
 ### Footer
 ![footer](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685368482/footer_knmedl.png)
 * Social Media Links
+
 ### Left to implement
+* Giveaway Page
+* Spending Channel Points on the website
+* Gsap Library For front end user Experience [see my CV as example](https://bogdan-branzaniuc.github.io/CV/)
+* Sorting Vods by View-count or by date (as default) 
+* Suggestions Pagination
 
 
 III Models
-
-
+wireframe mocup
 UserProfile
 Vods
-Suggestions
-   - red-cases: 1 unique title + message.
-                2 required fields.
-                3 suggestion body too short  field min char. 
-
-IV Views
 
 
 V APIS
@@ -161,10 +160,6 @@ VI Libraries
 1. Gsap
 2. Allauth
 3. Django_Unicorn
-
-
-VII Mechanics
-1. homepage countdown till the next stream
 
 
 VIII Testing
