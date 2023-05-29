@@ -100,20 +100,20 @@ there are 3 states :
 
 
 ### Suggestions Page
-![suggestions page](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685365906/suggestions_page_nyrzlt.png)
-![suggestions mechanism](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685365804/suggestions_clwz4y.png)
+![suggestions page image](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685365906/suggestions_page_nyrzlt.png)
+![suggestions mechanism image](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685365804/suggestions_clwz4y.png)
 * On This Page Django Unicorn was used to send Ajax requests to the backend, meaning everything that happens on this page is instantly rendered without full page reloading 
 * users can only write or see suggestions if they are logged in, otherwise they will be showed a message telling them to Log in with their twitch account
 * Once a suggestion's form is submitted, the suggestion goes into awaiting approval mode, The user can still edit or delete it at this point
 * Once a suggestion is approved it can be up voted by it's author or any other user
 * At this point the user can still edit or delete the suggestion, after submitting the edit form, if valid, the suggestion will go into approval mode again
-![filters](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685366887/filters_ldkiza.png)
+![filters image](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685366887/filters_ldkiza.png)
 * There are 3 sets of filters:
   - All / Mine  
   * renders the list with all Approved Suggestions or just the current logged in User's suggestions.
   - Approved / Awaiting Approval   
   * If awaiting approval is on the All/Mine filter will get set on Mine automatically.
-  ![filters-wireframe](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685369630/filters-miniwireframe_pfyzrc.png)
+  ![filters-wireframe image](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685369630/filters-miniwireframe_pfyzrc.png)
   - By votes / by date 
   * this filter works the same at all times
 
@@ -123,20 +123,23 @@ there are 3 states :
 A user will be allowed a limit of suggestions per week for future spam preventions
 
 ### Log in 
-![sing in](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685367865/sign_in_gmsrex.png)
+![sing in image](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685367865/sign_in_gmsrex.png)
 
 ### Log out
-![sign out](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685367866/sign_out_q6gdpv.png)
+![sign out image](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685367866/sign_out_q6gdpv.png)
 
 ### Awaiting Approval
-![awaiting approval page](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685367866/awaiting_approval_page_lmwv0r.png)
+![awaiting approval page image](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685367866/awaiting_approval_page_lmwv0r.png)
 * here the admin will approve sugestions that are either newly created or edited by the users 
 ### /// Important Feature left outside this version /// ###
 A delete button will be displayed along with any suggestion
 
 ### Footer
-![footer](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685368482/footer_knmedl.png)
+![footer_image](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685368482/footer_knmedl.png)
 * Social Media Links
+
+### Django Messages
+![django_messages_image](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685369870/django-messages_rmckiv.png)
 
 ### Left to implement
 * Giveaway Page
