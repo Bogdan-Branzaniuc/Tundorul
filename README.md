@@ -51,7 +51,7 @@ or a "you have to log in" page for suggestions and profile pages
 
 
 ## Display and Layout across devices:
-![image with displays](https://res-console.cloudinary.com/dgzv7gan8/thumbnails/v1/image/upload/v1685357777/ZGlzcGxheXNfcHJqc2Zx/preview)
+<img src="https://res-console.cloudinary.com/dgzv7gan8/thumbnails/v1/image/upload/v1685357777/ZGlzcGxheXNfcHJqc2Zx/preview" alt="image with Layouts across devices">
 * web large
 * web medium
 * web small
