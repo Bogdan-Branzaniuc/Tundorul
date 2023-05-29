@@ -113,8 +113,11 @@ there are 3 states :
   * renders the list with all Approved Suggestions or just the current logged in User's suggestions.
   - Approved / Awaiting Approval   
   * If awaiting approval is on the All/Mine filter will get set on Mine automatically.
+  ![filters-wireframe](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685369630/filters-miniwireframe_pfyzrc.png)
   - By votes / by date 
   * this filter works the same at all times
+
+
 
 ### /// Important Feature left outside this version /// ###
 A user will be allowed a limit of suggestions per week for future spam preventions
