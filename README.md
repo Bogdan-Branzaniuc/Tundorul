@@ -1,5 +1,5 @@
 # Tundorul
-
+![Tundorul Logo](https://res.cloudinary.com/djnxh7xga/image/upload/v1684923696/logo_default_ibawlh.svg)
 ## Game Streamer  
 
 * [view Live Site Here](https://tundorul.herokuapp.com/suggestions)
@@ -51,7 +51,7 @@ or a "you have to log in" page for suggestions and profile pages
 
 
 ## Display and Layout across devices:
-* ![image with Layouts across devices](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685357777/displays_prjsfq.png)
+![image with Layouts across devices](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685357777/displays_prjsfq.png)
 * web large
 * web medium
 * web small
@@ -60,11 +60,41 @@ or a "you have to log in" page for suggestions and profile pages
 * Iphone 12 Portrait
 * Iphone 12 landscape
 
-
 ## Features
 
+### Nav Bar
+![navbar versions immage](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685360930/navbar_vqche2.png)
+there are 3 states :
+* if Logged in as a normal User,
+* if Logged out,
+* if Logged in as an Admin,
+* all three states respect the collapsible feature from Bootstrap.
 
-## Left to implement
+### Home Page
+*
+*
+
+### Vods Page
+*
+
+
+### Profile
+*
+*
+
+### Suggestions Page
+*
+*
+
+### Profile
+*
+*
+*
+
+
+### Footer
+
+### Left to implement
 
 
 
