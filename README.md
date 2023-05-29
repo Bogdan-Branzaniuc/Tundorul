@@ -1,4 +1,5 @@
 # Tundorul
+<img src="https://res.cloudinary.com/djnxh7xga/image/upload/v1684923696/logo_default_ibawlh.svg" alt="Tundorul Logo" style="width: 100px; height: 100px;">
 ![Tundorul Logo](https://res.cloudinary.com/djnxh7xga/image/upload/v1684923696/logo_default_ibawlh.svg)
 ## Game Streamer  
 
