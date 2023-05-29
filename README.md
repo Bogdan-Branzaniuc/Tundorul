@@ -2,8 +2,8 @@
 
 ## Game Streamer  
 
-[view Live Site Here](https://tundorul.herokuapp.com/suggestions)
-[view Twitch Channel Here](https://www.twitch.tv/tundorul)
+* [view Live Site Here](https://tundorul.herokuapp.com/suggestions)
+* [view Twitch Channel Here](https://www.twitch.tv/tundorul)
 
 A website designed to enhance the streaming gaming and viewing experience for Tundorul.tv.
 A romanian Streamer that plays games on "ungodly levels of difficulty".
@@ -50,10 +50,7 @@ In for a penny, in for a pound."
 or a "you have to log in" page for suggestions and profile pages
 
 
-
-# UX & UI
-
-## Display across devices:
+## Display and Layout across devices:
 ![image with displays](https://res-console.cloudinary.com/dgzv7gan8/thumbnails/v1/image/upload/v1685357777/ZGlzcGxheXNfcHJqc2Zx/preview)
 * web large
 * web medium
