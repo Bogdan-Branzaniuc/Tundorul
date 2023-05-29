@@ -110,12 +110,12 @@ there are 3 states :
 ![filters image](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685366887/filters_ldkiza.png)
 * There are 3 sets of filters:
   - All / Mine  
-  * renders the list with all Approved Suggestions or just the current logged in User's suggestions.
+    * renders the list with all Approved Suggestions or just the current logged in User's suggestions.
   - Approved / Awaiting Approval   
-  * If awaiting approval is on the All/Mine filter will get set on Mine automatically.
-  ![filters-wireframe image](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685369630/filters-miniwireframe_pfyzrc.png)
+    * If awaiting approval is on the All/Mine filter will get set on Mine automatically.
+    ![filters-wireframe image](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685369630/filters-miniwireframe_pfyzrc.png)
   - By votes / by date 
-  * this filter works the same at all times
+    * this filter works the same at all times
 
 
 
