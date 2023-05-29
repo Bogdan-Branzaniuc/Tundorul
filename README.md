@@ -72,10 +72,10 @@ there are 3 states :
 * all three states respect the collapsible feature from Bootstrap.
 
 ### Home Page
-* #### Welcome section
+* ### Welcome section
 ![welcome-section image](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685363582/home-welcome_sphhjg.png)
 * A welcome message and an Iframe that is linked to Tundorul's live on Twitch showing Offline while there's no live stream
-* #### Schedule section
+* ### Schedule section
 ![schedule-section image](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685363521/home-schedule_yaaemt.png)
 * This schedule is retrieved from Twitch and stored in an .ics file which then is rendered in html
 * there is a JS file that builds the countdown timer and updates the clock every second
@@ -83,30 +83,31 @@ there are 3 states :
 * ** /// BUG ALERT //// ** 
 * The Js file is not yet configured to take into acount the user's current time if they are in a different timezone than the App's server. 
 * There also seems to be a little counting issue in the code since there is 60 minutes and 23 seconds left, instead of 4 hours and 23 seconds. 
-* #### Rules section
+* ### Rules section
 ![rules-section image](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685363521/home-rules_lxwx2g.png)
-* Comunity Rules
+
 
 ### Vods Page
-![Vods Page image](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685363739/vods_Page_czswao.png)
+![vods Page image](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685363739/vods_Page_czswao.png)
 * The last 10 Vods are getting updated every 6 hours in the website Database
 
 
 ### Profile Page 
-![Profile Page image](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685364752/profile_ltkkcj.png)
+![profile Page image](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685364752/profile_ltkkcj.png)
 * If the user is logged in with his twitch account, he can see his profile image on twitch along with his twitch data
 * If the user isn't logged in yet, a message is rendered telling the user the page is available only when logged in with a twitch account
 * In the end of the page there is an animation and a message saying "more to follow", since this page is currently static, in the future it will hold Crud Functionality for the UserProfile Model as well as other related models. 
 
 
 ### Suggestions Page
-![Suggestions page](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685365906/suggestions_page_nyrzlt.png)
-![Suggestions mechanism](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685365804/suggestions_clwz4y.png)
+![suggestions page](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685365906/suggestions_page_nyrzlt.png)
+![suggestions mechanism](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685365804/suggestions_clwz4y.png)
 * On This Page Django Unicorn was used to send Ajax requests to the backend, meaning everything that happens on this page is instantly rendered without full page reloading 
 * users can only write or see suggestions if they are logged in, otherwise they will be showed a message telling them to Log in with their twitch account
 * Once a suggestion's form is submitted, the suggestion goes into awaiting approval mode, The user can still edit or delete it at this point
 * Once a suggestion is approved it can be up voted by it's author or any other user
 * At this point the user can still edit or delete the suggestion, after submitting the edit form, if valid, the suggestion will go into approval mode again
+![filters](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685366887/filters_ldkiza.png)
 * There are 3 sets of filters:
   - All / Mine  
   * renders the list with all Approved Suggestions or just the current logged in User's suggestions.
@@ -115,16 +116,25 @@ there are 3 states :
   - By votes / by date 
   * this filter works the same at all times
 
-
-
+### /// Important Feature left outside this version /// ###
+A user will be allowed a limit of suggestions per week for future spam preventions
 
 ### Log in 
+![sing in](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685367865/sign_in_gmsrex.png)
+
 ### Log out
+![sign out](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685367866/sign_out_q6gdpv.png)
+
+### Awaiting Approval
+![awaiting approval page](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685367866/awaiting_approval_page_lmwv0r.png)
+* here the admin will approve sugestions that are either newly created or edited by the users 
+### /// Important Feature left outside this version /// ###
+A delete button will be displayed along with any suggestion
 
 ### Footer
-
+![footer](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685368482/footer_knmedl.png)
+* Social Media Links
 ### Left to implement
-
 
 
 III Models
