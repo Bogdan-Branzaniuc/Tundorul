@@ -1,6 +1,6 @@
 # Tundorul
 <img src="https://res.cloudinary.com/djnxh7xga/image/upload/v1684923696/logo_default_ibawlh.svg" alt="Tundorul Logo" style="width: 100px; height: 100px;">
-![Tundorul Logo](https://res.cloudinary.com/djnxh7xga/image/upload/v1684923696/logo_default_ibawlh.svg)
+
 ## Game Streamer  
 
 * [view Live Site Here](https://tundorul.herokuapp.com/suggestions)
@@ -64,7 +64,7 @@ or a "you have to log in" page for suggestions and profile pages
 ## Features
 
 ### Nav Bar
-![navbar versions immage](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685360930/navbar_vqche2.png)
+![navbar versions image](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685360930/navbar_vqche2.png)
 there are 3 states :
 * if Logged in as a normal User,
 * if Logged out,
@@ -72,11 +72,21 @@ there are 3 states :
 * all three states respect the collapsible feature from Bootstrap.
 
 ### Home Page
-*
-*
+* #### Welcome section
+![welcome-section image](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685363582/home-welcome_sphhjg.png)
+* A welcome message and an Iframe that is linked to Tundorul's live on Twitch showing Offline while there's no live streams
+* #### Schedule section
+![schedule-section image](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685363521/home-schedule_yaaemt.png)
+* This schedule is retrieved from Twitch and stored in an .ics file which then is rendered in html
+* there is a JS file that builds the countdown timer and updates the clock every second
+* The website updates the Schedule every 6 hours to determine if any changes were made in the Original Schedule on Twitch
+* #### Rules section
+![rules-section image](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685363521/home-rules_lxwx2g.png)
+* Comunity Rules
 
 ### Vods Page
-*
+![Vods Page image](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685363739/vods_Page_czswao.png)
+* The last 10 Vods are getting updated every 6 hours in the website Database
 
 
 ### Profile
