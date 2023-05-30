@@ -23,10 +23,7 @@ class PendingApproval(View):
 
     def post(self, request, *args, **kwargs):
         titles = request.POST.getlist('title')
-        print(request.POST)
-        print(titles)
         for title in titles:
-            print(title)
             approved = request.POST.get(title)
             if approved == 'on':
                 suggestion = Suggestions.objects.get(title=title)

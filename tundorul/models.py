@@ -16,7 +16,6 @@ class UserProfile(models.Model):
         ordering = ['-username']
 
     def __str__(self):
-
         return self.current_name
 
 

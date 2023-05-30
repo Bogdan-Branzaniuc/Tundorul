@@ -142,25 +142,32 @@ A delete button will be displayed along with any suggestion
 ![django_messages_image](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685369870/django-messages_rmckiv.png)
 
 ### Left to implement
-* Giveaway Page
+* Giveaway Application
 * Spending Channel Points on the website
-* Gsap Library For front end user Experience [see my CV as example](https://bogdan-branzaniuc.github.io/CV/)
+* Gsap Library for front end user experience [see my CV as example](https://bogdan-branzaniuc.github.io/CV/)
 * Sorting Vods by View-count or by date (as default) 
 * Suggestions Pagination
 
 
-III Models
+# Models
 wireframe mocup
 UserProfile
 Vods
 
 
-V APIS
-1. Twitch API
-    - /// 
-2. Appscheduler
-    - the appscheduller makes a call to twitch API every 6 hours to retrieve the last version of the Icalendar then updates the static file twitchdev.ics.
-    - BUG: it runs twice every time, fixed the vods by filtering for duplicates in vods.py view
+# Twitch API
+## Endpoints:
+
+
+## Scheduled Requests
+* Appscheduler requests to twitch API
+  - every 6 hours to retrieve the last version of the Icalendar then updates the static file twitchdev.ics.
+  - every 6 hours to retrieve the last 10 vods and updates the Vods model
+  - every 4704769 seconds to store the Application Token needed for twitch Api requests.
+  ### ***Important Detail*** ###
+    The Application. b Token is stored in the environment variable "APP_TOKEN" and refreshed after a given interval. The Twitch Response is also providing this 
+    interval, but a hardcoded interval was used due to insufficient time to figure out how to store the interval without calling the API twice.
+    This will be addressed in following versions. 
 
 VI Libraries
 1. Gsap
