@@ -28,7 +28,7 @@ class SuggestionsView(UnicornView):
     paginate_by = 6
 
     def mount(self, *args, **kwargs):
-        self.user_profile = UserProfile.objects.get(current_name=self.request.user.username)
+        self.user_profile = get_object_or_404(UserProfile, username=self.request.user)
         self.suggestions = Suggestions.objects.filter(approved=True)
         self.voted_suggestions = list(self.suggestions.filter(upvotes=self.user_profile).values_list('title', flat=True))
         self.personal_suggestions = Suggestions.objects.filter(author=self.user_profile)

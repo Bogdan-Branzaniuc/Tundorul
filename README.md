@@ -169,7 +169,43 @@ VI Libraries
 
 
 VIII Testing
-   
+   Name                                                          Stmts   Miss  Cover
+---------------------------------------------------------------------------------
+tundorul/__init__.py                                              0      0   100%
+tundorul/admin.py                                                 4      0   100%
+tundorul/apps.py                                                  7      0   100%
+tundorul/migrations/0001_initial.py                               7      0   100%
+tundorul/migrations/0002_auto_20230515_1449.py                    6      0   100%
+tundorul/migrations/0003_userprofile_profile_picture_url.py       4      0   100%
+tundorul/migrations/0004_alter_vods_stream_id.py                  4      0   100%
+tundorul/migrations/0005_suggestions.py                           4      0   100%
+tundorul/migrations/0006_alter_vods_published_at.py               4      0   100%
+tundorul/migrations/0007_auto_20230516_1721.py                    4      0   100%
+tundorul/migrations/0008_suggestions_slug.py                      4      0   100%
+tundorul/migrations/0009_alter_suggestions_slug.py                4      0   100%
+tundorul/migrations/0010_auto_20230517_0207.py                    4      0   100%
+tundorul/migrations/0011_suggestions_body.py                      4      0   100%
+tundorul/migrations/0012_auto_20230517_0331.py                    4      0   100%
+tundorul/migrations/0013_auto_20230518_1229.py                    5      0   100%
+tundorul/migrations/0014_auto_20230518_1230.py                    4      0   100%
+tundorul/migrations/0015_alter_userprofile_join_date.py           4      0   100%
+tundorul/migrations/0016_delete_suggestions.py                    4      0   100%
+tundorul/migrations/0017_alter_vods_published_at.py               4      0   100%
+tundorul/migrations/__init__.py                                   0      0   100%
+tundorul/models.py                                               28      2    93%
+tundorul/tests.py                                                72      7    90%
+tundorul/urls.py                                                  7      0   100%
+tundorul/views/__init__.py                                        3      0   100%
+tundorul/views/banned_user.py                                     3      0   100%
+tundorul/views/handler_error_page.py                              9      4    56%
+tundorul/views/home.py                                           40      3    92%
+tundorul/views/pending_approval.py                               24     18    25%
+tundorul/views/user_profile.py                                   14      1    93%
+tundorul/views/user_profile_build.py                             47     35    26%
+tundorul/views/vods.py                                           11      3    73%
+---------------------------------------------------------------------------------
+TOTAL                                                           343     73    79%
+
 
 
 IXDeployment

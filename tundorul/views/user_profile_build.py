@@ -50,7 +50,6 @@ def update_user_profile(request, user, **kwargs):
     extra_data = sociallogin.extra_data
 
     is_following = is_follower(extra_data, token)
-    print(is_following)
     if UserProfile.objects.filter(username=sociallogin.user).exists():
         instance = get_object_or_404(UserProfile.objects.filter(username=sociallogin.user))
         instance.username = sociallogin.user
@@ -62,7 +61,6 @@ def update_user_profile(request, user, **kwargs):
         instance.is_follower = is_following['is_following']
         instance.save()
     else:
-        print('added')
         user_profile = UserProfile.objects.create(
             username=sociallogin.user,
             uid=extra_data['id'],

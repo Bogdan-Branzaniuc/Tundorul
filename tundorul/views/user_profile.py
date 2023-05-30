@@ -3,7 +3,6 @@ from django.views import View
 from tundorul.models import UserProfile
 
 
-
 class UserProfileView(View):
     def get(self, request, *args, **kwargs):
         user_profile = []
