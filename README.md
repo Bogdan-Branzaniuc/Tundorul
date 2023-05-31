@@ -378,6 +378,13 @@ Procfile
 ## Voilla! if everything went well the app is up and running.
 </br></br></br>
 
+# Notes file deleted:
+![deleted notes file](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685572071/deleted_notes_xr8bhp.png)
+
+* this are two Twitch Accounts, 
+  * the first one was deleted from twitch,
+  * the second one has only a refference instead of it's true password. It's password was changed and the account testBogdan123 will be provided to the test Commision in my submission details. since it has both a SocialAccount linked to it and superuser and staff status on the website.   
+
 
 # Testing
 ## UX & UI
@@ -390,7 +397,7 @@ Procfile
 
 ## Manual Testing
 * all the features were manualy tested by me during development and by me, friends and family after development
-* I waited for all the time intervals for 5 times consecutively and checked the application's logs on heroku, everything was running smoothly. 
+ 
 
 ## Database Testing
 * The web app was developed with a Django default database
@@ -421,6 +428,7 @@ python manage.py test
  # //// Important /////
   * the ```suggestion app```, ```Appscheduler``` and ```other Twitch Api Calls``` were manually and carefully tested 
   * They were left outside the ```unitests``` Since the first is using Django Unicorn Library with Ajax calls and the later could end with a ban from twitch on my Twitch Application, which in fact happened once due to an error loop in Jobs directory that makes use of ```Appscheduler```.  
+  * I waited for all the time intervals up to 5 times consecutively and checked the application's logs on heroku and everything was running smoothly.
 
 # Validators
 
@@ -429,9 +437,26 @@ python manage.py test
 </br></br></br>
 
 # Credits
+
+## Django Developers 
+## Django Allauth Library Developers
+## Django Unicorn Library Developers
+## Twitch Api Developers
+## Bootstrap Developers
+## Python, Js, Jquery creators
+  * Without this people, my project's current state would have been far from reality in this amount of time.
+
+## My Brother Tudor
+  * He brought his own input to the project as the Website was designed for his work.
+
+## Media 
+  * The videos used on this website represent the intelectual property of Tundorul.
+  * The Logo was made by ```Andrei Muresan``` 
+    * [linkedin](https://www.linkedin.com/in/andrei-muresan-5328a8220/?originalSubdomain=fr) 
+    * [website](https://andrei-muresan-portfolio.webnode.fr/) 
+  
 ## Stack Overflow
   * I managed to overcome a lot of issues by just going on this amazing resource with a copy paste of my errors.
-
 
 ## Twitch Developers Discord
   * At one point I was encoutering a problem with Allauth library, specifficly with it's sociallogin configuration.
@@ -443,7 +468,18 @@ python manage.py test
   * I learned to use this tool mainly for general and consistent concepts and documentations rather than specific libraries, since it's training consists of lying and deceiving about it's actual knowledge. 
   * Lesson I learned from Chat GPT : ```If you have to change your question, go elsewere for the most acurate response```
  
+## Code Institute
+  * For enforcing high standards of good practices on my project
+  * For compacting and providing valuable information and know-how in their course
+
+## Me
+  * For designing the architecture of the website 
+  * For creating a decent product that meets the requirements of both Code Institute and Tundorul's Business
+
+# Acknowledgements
 ## My two mentors Reuben Ferante and Brian Macharia 
-  * Reuben Helped me at the beggining with great examples and general directions as well as the best practices
+  * Reuben Helped me at the beggining with great examples, directions and best practices
   * Towards the end of the project Reuben stepped down from Code Institute. On this regard I am thanking him for the previous help and his work as a mentor in this time.   
   * Brian Helped me a lot towards the end of the project, knowing how to press the Turbo Button 
+
+## My brother for trusting me with his brand and immage 
