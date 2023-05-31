@@ -152,6 +152,7 @@ A delete button will be displayed along with any suggestion
 # Models
 [See the models wireframe](https://www.figma.com/community/file/1245677960849513360/Bogdan-Branzaniuc)
 <iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FHhIMKlJfVKrVmcr996Rcfa%2FUntitled%3Ftype%3Dwhiteboard%26node-id%3D0%253A1%26t%3DN877HhRN5DFHiUEq-1" allowfullscreen></iframe>
+
 # Twitch API
 ## Scheduled Requests
 * Appscheduler requests to twitch API
