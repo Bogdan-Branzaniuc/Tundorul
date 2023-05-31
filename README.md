@@ -1,7 +1,7 @@
 # Tundorul
 <img src="https://res.cloudinary.com/djnxh7xga/image/upload/v1684923696/logo_default_ibawlh.svg" alt="Tundorul Logo" style="width: 100px; height: 100px;">
 
-## Game Streamer  
+# Game Streamer  
 
 * [view Live Site Here](https://tundorul.herokuapp.com/suggestions)
 * [view Twitch Channel Here](https://www.twitch.tv/tundorul)
@@ -14,33 +14,33 @@ meaning we don't skip any cinematic /lore /loot /collectible /trophy /achievemen
 In for a penny, in for a pound."
 
 
-#### The business goals for this website are:
+### The business goals for this website are:
 * Keeping in touch with the community
 * Setting grounds for future projects
 * Providing a space where feedback could be voted by the community
 
-#### The customer goals of this website are:
+### The customer goals of this website are:
 * The Ability to keep in touch and follow the streamer's next steps
 * The Possibility to see livestreams directly from this website
 * The ability to see the past 10 streams in chronological order
 * The ability to write suggestions that once approved can be up voted by community members
 
 
-#### The Ideal Client
+### The Ideal Client
 * Is already a Tundorul channel follower on twitch.
 * Loves a good vibe and games.
 * Acts within the community Rules.
 * Possibly subscribed to the Channel, but not mandatory
 * Treats every game with respect to the developers
 
-#### User Stories
+### User Stories
 * As a User I want to be able to create a suggestion so I can help the comunity with my input
 * As a USER I want to be able to **SEE my non-approved suggestions** so I can **edit or delete them without waiting for them to be approved first**
 * As a USER I want to be able to Edit a suggestion if I want to add something to it or fix typo's
 * As a USER I want to be able to delete my suggestion so I can remove it if I changed my mind
 * As a USER I want to be able to Upvote Another user suggestion if I like it and want it implemented in future streams or website Architecture
 
-#### Moderator Stories
+### Moderator Stories
 * As an **Admin** I want to be able to see and filter suggestions like a user, but including the non-approved suggestions
 * As an **Admin** I want to have a live-countdown in the home page to the next stream so my users can clearly see the time left to the closest stream
 * As and **Admin** I want to be able to retrieve my Stream Schedule from Twitch so I can display it into the Home Page
@@ -50,8 +50,9 @@ In for a penny, in for a pound."
 * As an **Admin** I want to be able to Display the user an error page when reaching a wrong url or display a Banned Page if the user was banned 
 or a "you have to log in" page for suggestions and profile pages
 
+</br></br></br></br>
 
-## Display and Layout across devices:
+# Display and Layout across devices:
 ![image with Layouts across devices](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685357777/displays_prjsfq.png)
 * web large
 * web medium
@@ -61,7 +62,9 @@ or a "you have to log in" page for suggestions and profile pages
 * Iphone 12 Portrait
 * Iphone 12 landscape
 
-## Features
+</br></br></br>
+
+# Features
 
 ### Nav Bar
 ![navbar versions image](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685360930/navbar_vqche2.png)
@@ -74,8 +77,8 @@ there are 3 states :
 ### Home Page
 * ### Welcome section
 ![welcome-section image](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685363582/home-welcome_sphhjg.png)
-* A welcome message and an Iframe that is linked to Tundorul's live on Twitch showing Offline while there's no live stream
-* ### Schedule section
+* A welcome message an an Iframe that is linked to Tundorul's live on Twitch showing Offline while there's no live stream
+* ### Schedule section   
 ![schedule-section image](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685363521/home-schedule_yaaemt.png)
 * This schedule is retrieved from Twitch and stored in an .ics file which then is rendered in html
 * there is a JS file that builds the countdown timer and updates the clock every second
@@ -148,9 +151,33 @@ A delete button will be displayed along with any suggestion
 * Sorting Vods by View-count or by date (as default) 
 * Suggestions Pagination
 
+</br></br></br>
 
 # Models
 [See the models wireframe](https://www.figma.com/community/file/1245677960849513360/Bogdan-Branzaniuc)
+
+<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FY7ApTbvdX7BeXb6masucSt%2FBogdan-Branzaniuc-(Community)%3Ftype%3Dwhiteboard%26node-id%3D0%253A1%26t%3DVT5cc1z2lmxiGwI9-1" allowfullscreen></iframe>
+</br></br></br>
+
+# Parts And Applications
+## tundorul App
+- is responsible for all the views of the Website aside of suggestions view
+- log in
+- log out
+- home.py
+- user_profile.py
+- user_profile_build.py
+- vods.py
+- banned_user.py
+- handler_error_page.py
+- models: UserProfile, Vods
+## suggestion App
+- in order to render suggestions page with Django Unicorn, suggestion app was created
+- it is responsible for suggestion/components/suggestions.py view 
+- model: Suggestions
+## jobs Appscheduler Directory
+- responsible for tasks that have to run once every n time [see Twitch Api](#twitch-api)
+</br></br></br>
 # Twitch API
 ## Scheduled Requests
 * Appscheduler requests to twitch API
@@ -158,7 +185,7 @@ A delete button will be displayed along with any suggestion
   - every 6 hours to retrieve the last 10 vods and updates the Vods model
   - every 4704769 seconds to store the Application Token needed for twitch Api requests.
   ### ***Important Detail*** ###
-    The Application. b Token is stored in the environment variable "APP_TOKEN" and refreshed after a given interval. The Twitch Response is also providing this 
+    The Application Token is stored in the environment variable "APP_TOKEN" and refreshed after a given interval. The Twitch Response is also providing this 
     interval, but a hardcoded interval was used due to insufficient time to figure out how to store the interval without calling the API twice.
     This will be addressed in following versions. 
 * Appscheduler is runed from jobs directory in root directory.
@@ -169,20 +196,120 @@ A delete button will be displayed along with any suggestion
   - This helps keeping user data updated every time they change something to their account, like, the name, email, profile immage
 
 ## Endpoints Used:
-[Get Followed Channels](https://dev.twitch.tv/docs/api/reference/#get-followed-channels)
-[Get Channel iCalendar](https://dev.twitch.tv/docs/api/reference/#get-channel-icalendar)
-[Get Videos](https://dev.twitch.tv/docs/api/reference/#get-videos)
-[App Access Token](https://dev.twitch.tv/docs/authentication/#app-access-tokens)
 
-VI Libraries
-2. Allauth social login
-3. Django_Unicorn
-
-
+* [Get Followed Channels](https://dev.twitch.tv/docs/api/reference/#get-followed-channels)
+* [Get Channel iCalendar](https://dev.twitch.tv/docs/api/reference/#get-channel-icalendar)
+* [Get Videos](https://dev.twitch.tv/docs/api/reference/#get-videos)
+* [App Access Token](https://dev.twitch.tv/docs/authentication/#app-access-tokens)
+</br></br></br></br>
+# Technologies
+* Python and [pycharm](https://www.jetbrains.com/pycharm/) IDE
+* [Twitch Api](https://dev.twitch.tv/docs/api/)
+* [Django framework](https://www.djangoproject.com/)
+* Django Libraries:
+  * Django Allauth
+  * Django Unicorn
+  * Appscheduler
+* Postgres [Elephant SQL]()  
+* Heroku 
+</br></br></br></br>
 # Deployment
+* If you are using Gitpod with Pycharm, run this command in order to be able to install requirements to Django
+```
+echo 'export PIP_USER=no' >> ~/.bashrc && export PIP_USER=no
+```
+
+* [Create a virtual env and install requirements.txt (stack overflow)](https://stackoverflow.com/questions/41427500/creating-a-virtualenv-with-preinstalled-packages-as-in-requirements-txt) 
+```
+pip install virtualenv          //(if you don't already have virtualenv installed)
+virtualenv venv to create       //your new environment (called 'venv' here)
+source venv/bin/activate        //to enter the virtual environment
+pip install -r requirements.txt //to install the requirements in the current environment
+```
+
+  ## Create a Cloudinary account or log into an existing one
+  create env.py file in your root directory </br></br>
+
+  env.py
+  ```
+  import os
+
+  os.environ["CLOUDINARY_URL"] = "your cloudinary url"
+  ```
+  </br>
+
+  settings.py 
+  ```
+  STATIC_URL = '/static/'
+  STATICFILES_STORAGE = 'cloudinary_storage.storage.StaticHashedCloudinaryStorage'
+  STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'), ]
+  STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+  ```
+
+  ## Create ElephantSql Database
+  env.py
+  ```
+  os.environ["DATABASE_URL"] = "Elephant Sql Database Url"
+  ``` 
+  </br>
+
+  settings.py
+  ```
+  DATABASES = {
+    'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
+  }
+  ```
+
+  ## Create a Twitch Application
+  * go on [https://dev.twitch.tv/console](https://dev.twitch.tv/console) and create or log into your twitch account
+  * Click on *Register Your Application*
+  * Set Category to *Website Integration* and then click *create*
+
+  * Go to your developer console and click *manage* on your newly created App
+  * Set *OAuth Redirect URLs* to ```your_heroku_app_domain/accountstwitch/login/callback/``` or ```http://localhost:8000//accountstwitch/login/callback/``` 
+  
+  env.py
+  ```
+    os.environ["CLIENT_ID"] = "owh7ttfh3085i7jg6jzl04tcg64u54"  
+  ```
+  the client Id from twitch is public info </br>
+  click on get secret in your Twitch manage-app dashboard
+  ``` 
+    os.environ["SECRET_KEY"] = "twitch app secret"
+    os.environ["APP_TOKEN"] = ""    
+  ```
+  APP_TOKEN remains empty, Appscheduler will populate it  after 6 hours from deploiment
+
+  * run your django Project
 
 
+* ## Create Heroku Application
+
+
+* ## Settings.py
+
+
+* ## create a procfile
+
+
+</br></br></br>
 # Testing
+## UX & UI
+
+* I used [BrowserStack](https://live.browserstack.com/dashboard#os=iOS&os_version=14.0&device_browser=safari&zoom_to_fit=true&full_screen=true&url=https%3A%2F%2F8000-bogdanbranzaniuc-cv-xsqhgnyysr5.ws-eu87.gitpod.io%2F%23about-me&speed=1) for testing the application across multiple browsers and devices within the limit of a free trial.
+
+* Also Tested directly on my devices: 
+* One+ 9 Pro Android Chrome
+* Windows Desktop Brave, Chrome, Mozila, Opera
+
+## Manual Testing
+
+## Database Testing
+* The web app was developed with a Django default database
+* Tested with the default database, migrate to a production Database, and tested again with the production Database
+* 
+
+## Unit Tests
 ![coverage tests report](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685522855/coverage_report_hosh5h.png)
 In order to run the tests you need to go in settings.py and use Django default database. 
 ```
