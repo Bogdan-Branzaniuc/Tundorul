@@ -156,7 +156,6 @@ A delete button will be displayed along with any suggestion
 # Models
 [See the models wireframe](https://www.figma.com/community/file/1245677960849513360/Bogdan-Branzaniuc)
 
-<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FY7ApTbvdX7BeXb6masucSt%2FBogdan-Branzaniuc-(Community)%3Ftype%3Dwhiteboard%26node-id%3D0%253A1%26t%3DVT5cc1z2lmxiGwI9-1" allowfullscreen></iframe>
 </br></br></br>
 
 # Parts And Applications
@@ -227,7 +226,7 @@ source venv/bin/activate        //to enter the virtual environment
 pip install -r requirements.txt //to install the requirements in the current environment
 ```
 
-  ## Create a Cloudinary account or log into an existing one
+  ## Log into your Cloudinary account
   create env.py file in your root directory </br></br>
 
   env.py
@@ -246,7 +245,12 @@ pip install -r requirements.txt //to install the requirements in the current env
   STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
   ```
 
-  ## Create ElephantSql Database
+  ## Create an ElephantSql Database
+  * Log into your elephant Sql account 
+  * click on ```Create New Instance``` 
+  * Sellect ```Tiny Turtle(Free)``` 
+  * from the main dashboard sellect your new instance</br></br>
+
   env.py
   ```
   os.environ["DATABASE_URL"] = "Elephant Sql Database Url"
@@ -259,14 +263,19 @@ pip install -r requirements.txt //to install the requirements in the current env
     'default': dj_database_url.parse(os.environ.get("DATABASE_URL"))
   }
   ```
+  </br> </br>
+  ## Create a Heroku Application
+  * Log into your Heroku account
+  * press ```New``` and ```create new app```
+   </br> </br>
 
-  ## Create a Twitch Application
+  ## Create your Twitch Application
   * go on [https://dev.twitch.tv/console](https://dev.twitch.tv/console) and create or log into your twitch account
   * Click on *Register Your Application*
   * Set Category to *Website Integration* and then click *create*
 
   * Go to your developer console and click *manage* on your newly created App
-  * Set *OAuth Redirect URLs* to ```your_heroku_app_domain/accountstwitch/login/callback/``` or ```http://localhost:8000//accountstwitch/login/callback/``` 
+  * Set *OAuth Redirect URLs* to ```your_heroku_app_domain/accountstwitch/login/callback/``` it also supports localhost
   
   env.py
   ```
@@ -280,19 +289,96 @@ pip install -r requirements.txt //to install the requirements in the current env
   ```
   APP_TOKEN remains empty, Appscheduler will populate it  after 6 hours from deploiment
 
-  * run your django Project
+  * In your settings.py file
+  ```
+  INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.sites',
+    'django.contrib.staticfiles',
+    'apscheduler',
+    'tundorul',
+    'suggestion',
+    'django_unicorn',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'allauth.socialaccount.providers.twitch',
+    'cloudinary_storage',
+    'cloudinary',
+    'asyncio',
+    'twitchAPI',
+    'django_extensions',
+]
+  ACCOUNT_EMAIL_VERIFICATION = 'none'
+  LOGIN_REDIRECT_URL = '/'
+  LOGOUT_REDIRECT_URL = '/'
+  SOCIALACCOUNT_STORE_TOKENS = True
+  SOCIALACCOUNT_PROVIDERS = {
+      'twitch': {
+          'SCOPE': ['user_read', 'user:read:follows'],
+          'AUTH_PARAMS': {'access_type': 'online'},
+          'METHOD': 'oauth2',
+      },
+  }
+  ```
+  * In your project terminal
 
+  ``` 
+    python manage.py makemigrations
+    python manage.py migrate
+  ```
 
-* ## Create Heroku Application
+  * run your django Project with 
+  ```
+    python3 manage.py runserver
+  ```
+  * create a superuser with
+  ```
+    python manage.py createsuperuser
+  ```
+  * log into your django admin panel
+  * Go to ```Sites``` Model
+  * Edit the site that django generated to point to your heroku app url ex ```https://tundorul.herokuapp.com/```
+  * click save
 
+  * Go to SocialApplications model and create a new instance
+    * Provider: ```Twitch```
+    * Name: ```your heroku app, twitch app and this Social App would be great to have the same names for consistency reasons``` 
+    * Client id: ``` your twitch App client id ```
+    * Secret key: ``` your twitch App secret ```
+    * Key: ``` blank ```
+    * sites: ```select the site you created previously and click the arrow to move it to the right box```
+  * click save
 
-* ## Settings.py
+</br>
 
+## Create a procfile
+  * In your root directory create a file named ```Procfile``` </br>
 
-* ## create a procfile
+Procfile
+```
+  web: gunicorn tundorul_django.wsgi
+```
+</br>
 
-
+#  /////////// Make extra sure you have ```Debug = False``` in your settings.py \\\\\\\\\\\\\\\\\\\
+## Setup Heroku App for deploiment
+* Go on Heroku select your application and click ```settings```
+* ```Reveal Config Vars```
+* Fill in all the environment variables you have in env.py
+* add ```PORT 8000```
+* Go to ```Deploy```
+* connect your github repository to heroku, sellect the branch and Hit ```deploy branch```
+</br>
+</br>
+## Voilla! if everything went well the app is up and running.
 </br></br></br>
+
+
 # Testing
 ## UX & UI
 
@@ -303,15 +389,18 @@ pip install -r requirements.txt //to install the requirements in the current env
 * Windows Desktop Brave, Chrome, Mozila, Opera
 
 ## Manual Testing
+* all the features were manualy tested by me during development and by me, friends and family after development
+* I waited for all the time intervals for 5 times consecutively and checked the application's logs on heroku, everything was running smoothly. 
 
 ## Database Testing
 * The web app was developed with a Django default database
 * Tested with the default database, migrate to a production Database, and tested again with the production Database
-* 
 
 ## Unit Tests
 ![coverage tests report](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685522855/coverage_report_hosh5h.png)
+
 In order to run the tests you need to go in settings.py and use Django default database. 
+
 ```
 DATABASES = {
    'default': {
@@ -329,5 +418,32 @@ and then run all tests with
 python manage.py test 
 ```
 
+ # //// Important /////
+  * the ```suggestion app```, ```Appscheduler``` and ```other Twitch Api Calls``` were manually and carefully tested 
+  * They were left outside the ```unitests``` Since the first is using Django Unicorn Library with Ajax calls and the later could end with a ban from twitch on my Twitch Application, which in fact happened once due to an error loop in Jobs directory that makes use of ```Appscheduler```.  
 
-X End
+# Validators
+
+
+
+</br></br></br>
+
+# Credits
+## Stack Overflow
+  * I managed to overcome a lot of issues by just going on this amazing resource with a copy paste of my errors.
+
+
+## Twitch Developers Discord
+  * At one point I was encoutering a problem with Allauth library, specifficly with it's sociallogin configuration.
+  * I went on the discord server in the Authentication chat at 4 AM and 3 people responded in 2 minutes. It was a great feeling regardless of the timezone of each person involved. They managed to give me the most accurate direction pointing to my configuration after quickly inspecting the library Code and declaring it functionall. </br>
+  //////////////////// Cudos to this people \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+## Chat GPT
+  * I used Chat GPT to navigate Django's main concepts, As a beginner I found it the quickest way to see how this Django's Lego pieces were coming together.
+  * I learned to use this tool mainly for general and consistent concepts and documentations rather than specific libraries, since it's training consists of lying and deceiving about it's actual knowledge. 
+  * Lesson I learned from Chat GPT : ```If you have to change your question, go elsewere for the most acurate response```
+ 
+## My two mentors Reuben Ferante and Brian Macharia 
+  * Reuben Helped me at the beggining with great examples and general directions as well as the best practices
+  * Towards the end of the project Reuben stepped down from Code Institute. On this regard I am thanking him for the previous help and his work as a mentor in this time.   
+  * Brian Helped me a lot towards the end of the project, knowing how to press the Turbo Button 
