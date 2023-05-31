@@ -9,7 +9,7 @@ def twitch_app_token():
     """
     Will make a request to retrieve an app access token from twitch
     """
-    app_token_url = ' https://id.twitch.tv/oauth2/token'
+    app_token_url = 'https://id.twitch.tv/oauth2/token'
     params = {
         'client_id': os.environ.get('CLIENT_ID'),
         'client_secret': os.environ.get('CLIENT_SECRET'),

@@ -150,15 +150,9 @@ A delete button will be displayed along with any suggestion
 
 
 # Models
-wireframe mocup
-UserProfile
-Vods
-
-
+[See the models wireframe](https://www.figma.com/community/file/1245677960849513360/Bogdan-Branzaniuc)
+<iframe style="border: 1px solid rgba(0, 0, 0, 0.1);" width="800" height="450" src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FHhIMKlJfVKrVmcr996Rcfa%2FUntitled%3Ftype%3Dwhiteboard%26node-id%3D0%253A1%26t%3DN877HhRN5DFHiUEq-1" allowfullscreen></iframe>
 # Twitch API
-## Endpoints:
-
-
 ## Scheduled Requests
 * Appscheduler requests to twitch API
   - every 6 hours to retrieve the last version of the Icalendar then updates the static file twitchdev.ics.
@@ -168,55 +162,46 @@ Vods
     The Application. b Token is stored in the environment variable "APP_TOKEN" and refreshed after a given interval. The Twitch Response is also providing this 
     interval, but a hardcoded interval was used due to insufficient time to figure out how to store the interval without calling the API twice.
     This will be addressed in following versions. 
+* Appscheduler is runed from jobs directory in root directory.
+
+## Signal based Requests
+  - in tundorul.views.user_profile_build I used the receiver @receiver(user_logged_in) to trigger a request that creates or updates the UserProfile instance of the user,
+  - Thea method is_follower() checks if the user is a follower to Tundorul's Channel and if true updates join_date with the response 'followed on' data. 
+  - This helps keeping user data updated every time they change something to their account, like, the name, email, profile immage
+
+## Endpoints Used:
+[Get Followed Channels](https://dev.twitch.tv/docs/api/reference/#get-followed-channels)
+[Get Channel iCalendar](https://dev.twitch.tv/docs/api/reference/#get-channel-icalendar)
+[Get Videos](https://dev.twitch.tv/docs/api/reference/#get-videos)
+[App Access Token](https://dev.twitch.tv/docs/authentication/#app-access-tokens)
 
 VI Libraries
-1. Gsap
-2. Allauth
+2. Allauth social login
 3. Django_Unicorn
 
 
-VIII Testing
-   Name                                                          Stmts   Miss  Cover
----------------------------------------------------------------------------------
-tundorul/__init__.py                                              0      0   100%
-tundorul/admin.py                                                 4      0   100%
-tundorul/apps.py                                                  7      0   100%
-tundorul/migrations/0001_initial.py                               7      0   100%
-tundorul/migrations/0002_auto_20230515_1449.py                    6      0   100%
-tundorul/migrations/0003_userprofile_profile_picture_url.py       4      0   100%
-tundorul/migrations/0004_alter_vods_stream_id.py                  4      0   100%
-tundorul/migrations/0005_suggestions.py                           4      0   100%
-tundorul/migrations/0006_alter_vods_published_at.py               4      0   100%
-tundorul/migrations/0007_auto_20230516_1721.py                    4      0   100%
-tundorul/migrations/0008_suggestions_slug.py                      4      0   100%
-tundorul/migrations/0009_alter_suggestions_slug.py                4      0   100%
-tundorul/migrations/0010_auto_20230517_0207.py                    4      0   100%
-tundorul/migrations/0011_suggestions_body.py                      4      0   100%
-tundorul/migrations/0012_auto_20230517_0331.py                    4      0   100%
-tundorul/migrations/0013_auto_20230518_1229.py                    5      0   100%
-tundorul/migrations/0014_auto_20230518_1230.py                    4      0   100%
-tundorul/migrations/0015_alter_userprofile_join_date.py           4      0   100%
-tundorul/migrations/0016_delete_suggestions.py                    4      0   100%
-tundorul/migrations/0017_alter_vods_published_at.py               4      0   100%
-tundorul/migrations/__init__.py                                   0      0   100%
-tundorul/models.py                                               28      2    93%
-tundorul/tests.py                                                72      7    90%
-tundorul/urls.py                                                  7      0   100%
-tundorul/views/__init__.py                                        3      0   100%
-tundorul/views/banned_user.py                                     3      0   100%
-tundorul/views/handler_error_page.py                              9      4    56%
-tundorul/views/home.py                                           40      3    92%
-tundorul/views/pending_approval.py                               24     18    25%
-tundorul/views/user_profile.py                                   14      1    93%
-tundorul/views/user_profile_build.py                             47     35    26%
-tundorul/views/vods.py                                           11      3    73%
----------------------------------------------------------------------------------
-TOTAL                                                           343     73    79%
+# Deployment
 
 
-
-IXDeployment
-
+# Testing
+![coverage tests report](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685522855/coverage_report_hosh5h.png)
+In order to run the tests you need to go in settings.py and use Django default database. 
+```
+DATABASES = {
+   'default': {
+       'ENGINE': 'django.db.backends.sqlite3',
+       'NAME': BASE_DIR / 'db.sqlite3',
+   }
+}
+```
+also make sure to start the virtual env
+```
+. my_env/bin/activate
+```
+and then run all tests with
+```
+python manage.py test 
+```
 
 
 X End
