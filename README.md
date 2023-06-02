@@ -568,17 +568,18 @@ python manage.py test
   //////////////////// Cudos to this people \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 ## Chat GPT
-  * I used Chat GPT to navigate Django's main concepts, As a beginner I found it the quickest way to see how this Django's Lego pieces were coming together.
-  * I learned to use this tool mainly for general and consistent concepts and documentations rather than specific libraries, since it's training consists of lying and deceiving about it's actual knowledge. 
-  * Lesson I learned from Chat GPT : ```If you have to change your question, go elsewere for the most acurate response```
+  * I used Chat GPT to navigate Django's main concepts, As a beginner I found it the quickest way to see how Django's Lego pieces were coming together.
+  * I learned to use this tool mainly for general and consistent concepts and documentations rather than specifics within libraries, since it's training consists of lying and deceiving about it's actual knowledge. 
+  * Lesson I learned from Chat GPT : ```When encountering Looping responses from it, try finding the answer elsewhere```
  
 ## Code Institute
-  * For enforcing high standards of good practices on my project
+  * For enforcing and encouraging high standards of good practices on my projects
   * For compacting and providing valuable information and know-how in their course
 
 ## Me
   * For designing the architecture of the website 
   * For creating a decent product that meets the requirements of both Code Institute and Tundorul's Business
+  * For understanding and writing all the code needed to interchange data between all the architectural parts and technologies used
 
 # Acknowledgements
 ## My two mentors Reuben Ferante and Brian Macharia 
