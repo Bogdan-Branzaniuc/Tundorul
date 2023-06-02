@@ -6,7 +6,7 @@
 
 <link href="{% static 'css/style.css' %}" rel="stylesheet">
 <link href="{% static 'css/home.css' %}" rel="stylesheet">
-<script src= "https://player.twitch.tv/js/embed/v1.js"></script>
+<script src="https://player.twitch.tv/js/embed/v1.js"></script>
 
 
 <section class="intro-section row g-0">
@@ -14,23 +14,24 @@
         <div>
             <h1> WELCOME IN </h1>
             <p>
-            My name is Tudor and I will be your host at tundorul.tv.
+                My name is Tudor and I will be your host at tundorul.tv.
             </p>
             <p>
-            Here, we strive to build a community of people that love video-games or
-            aspects of video-games. And we try to build that community by
-            a safe, fun, enjoyable environment where we can chat while you
-            watch me die thousands of times in video-games played on ungodly
-            levels of difficulty.
+                Here, we strive to build a community of people that love video-games or
+                aspects of video-games. And we try to build that community by
+                a safe, fun, enjoyable environment where we can chat while you
+                watch me die thousands of times in video-games played on ungodly
+                levels of difficulty.
             </p>
             <p>
-            Disclaimer: Once we know a game is a good vibe, we treat it with the utmost respect, meaning we don't skip any cinematic /lore /loot /collectible /trophy /achievement. In for a penny, in for a pound.
-        </p>
+                Disclaimer: Once we know a game is a good vibe, we treat it with the utmost respect, meaning we don't
+                skip any cinematic /lore /loot /collectible /trophy /achievement. In for a penny, in for a pound.
+            </p>
         </div>
 
     </div>
     <div class="col-12 live-embed-wrapper">
-       <div id="TundorulLive"></div>
+        <div id="TundorulLive"></div>
     </div>
 
 
@@ -56,7 +57,7 @@
             dailyHours.push({
                 day: '{{ segment.weekday_integer }}',
                 time: '{{ segment.start_time }}',
-                })
+            })
         </script>
         <div class="col-12 col-sm-6 col-lg-4 segment-body {{segment.day}}">
             <h1>{{segment.day}}</h1>
@@ -72,9 +73,8 @@
 <section class="rules-section">
     <div class="row g-0">
         <div class="col-12">
-
             <ul>
-                <h1> Rules </h1>
+                <h2> Rules </h2>
                 <li>
                     <p>No Spoilers</p>
                 </li>

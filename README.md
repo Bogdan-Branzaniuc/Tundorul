@@ -13,7 +13,24 @@ A romanian Streamer that plays games on "ungodly levels of difficulty".
 meaning we don't skip any cinematic /lore /loot /collectible /trophy /achievement. 
 In for a penny, in for a pound."
 
+</br>
+</br>
+</br>
 
+# Table Of Contents
+* [Parties](#all-parties-involved-and-their-goals)
+* [Display](#display-and-layout-across-devices)
+* [Features](#features)
+* [Models](#models)
+* [Parts and applications](#parts-and-applications)
+* [Technologies used](#technologies)
+* [Deploiment](#deployment)
+* [Testing](#testing)
+* [Vlaidators](#validators)
+* [Credits](#credits)
+* [Acknowledgements](#acknowledgements)
+
+# All Parties involved and their goals
 ### The business goals for this website are:
 * Keeping in touch with the community
 * Setting grounds for future projects
@@ -201,17 +218,30 @@ A delete button will be displayed along with any suggestion
 * [Get Videos](https://dev.twitch.tv/docs/api/reference/#get-videos)
 * [App Access Token](https://dev.twitch.tv/docs/authentication/#app-access-tokens)
 </br></br></br></br>
+
 # Technologies
+* JS 
 * Python and [pycharm](https://www.jetbrains.com/pycharm/) IDE
-* [Twitch Api](https://dev.twitch.tv/docs/api/)
 * [Django framework](https://www.djangoproject.com/)
 * Django Libraries:
-  * Django Allauth
-  * Django Unicorn
-  * Appscheduler
-* Postgres [Elephant SQL]()  
-* Heroku 
+  * [Django Allauth](https://django-allauth.readthedocs.io/en/latest/)
+  * [Django Unicorn](https://www.django-unicorn.com/)
+  * [Appscheduler](https://pypi.org/project/django-apscheduler/)
+* [Gunicorn](https://gunicorn.org/)
+* [Jquery](https://jquery.com/)
+* [Bootstrap](https://getbootstrap.com/)
+* [Twitch Api](https://dev.twitch.tv/docs/api/)
+* [Elephant SQL](https://www.elephantsql.com/)  
+* [Postgres](https://www.postgresql.org/)
+* [Heroku](https://dashboard.heroku.com/login)
+* [Cloudinary](https://cloudinary.com/)
+* [Figma](https://www.figma.com/)
+* [Adobe Illustrator](https://www.adobe.com/products/illustrator.html)
+* [Lottie Files](https://lottiefiles.com/)
+* [Google Fonts](https://fonts.google.com/)
+* [Fontawesome](https://fontawesome.com/)
 </br></br></br></br>
+
 # Deployment
 * If you are using Gitpod with Pycharm, run this command in order to be able to install requirements to Django
 ```
@@ -397,11 +427,61 @@ Procfile
 
 ## Manual Testing
 * all the features were manualy tested by me during development and by me, friends and family after development
- 
+
+  * Create A suggestion Test:
+    * wrote the title '123' while complying with the live form feedback 
+    * wrote the suggestion body '12345678910' while complying with the live form feedback
+    * pressed Send
+    * Got a green message saying ('Your suggestion is awaiting approval')
+
+  * Create A suggestion with the same title:
+    * wrote the title '123' while complying with the live form feedback 
+    * wrote the suggestion body '12345678910' while complying with the live form feedback
+    * pressed Send
+    * Got a red message saying ('There is one suggestion with this title Already, you can change the title or upvote the current one if it's content is the same')  
+
+  * Upvote Suggestion
+    * If logged in, went on suggestions page and clicked the dark arrow up to a suggestion
+    * The arrow turned green and the sugegstion votes were updated instantly.
+
+  * Edit Suggestion
+    * If logged in, went on suggestions page and clicked the dark pencil icon to edit one of my suggestions
+    * a form with two buttons appeared. a green check mark(submit button) and a yellow X 
+    * if wanted to edit
+      * Completed the form with new valid data and submitted by pressing the green check mark button
+      * Got a green message with "Your edit is awaiting approval."
+      * When trying to use an existing title got a red message with "Sorry!, There is one suggestion with this title Already"
+    * if wanted to return
+      * pressed the yellow X icon button and returned at the current state of the displayed suggestion 
+
+  * Delete Suggestion
+    * If logged in, went on suggestions page and clicked on one of my suggestion's red bin icon 
+    * two more buttons came in , a yellow X and a red check mark, 
+    * pressed on the red check mark and the suggestion was deleted,
+    * pressed on the yellow X icon and returned at the current state of the displayed suggestion.
+
+  * Login
+    * If logged in on twitch allready
+    * pressed the log in button in the navbar 
+    * On login page press Sign In 
+    * Wait for the twitch verification or Authorise Tundorul Website in twitch confirmation pgae,
+    * Redirected on the Home page with a green message "Successfuly signed in as 'my username'"
+
+  * Login
+    * If not logged in on twitch allready
+    * pressed the log in button in the navbar 
+    * On login page press Sign In 
+    * Log in with my twitch account in the login form provided by twitch
+    * Redirected on the Home page with a green message "Successfuly signed in as 'my username'"
+
+  * Logout
+    * Once loged in on Tundorul, pressed the Log out button in the nav,
+    * On logout page pressed the Sign Out
+    * Redirected to the home page with green message "You have signed out".
 
 ## Database Testing
 * The web app was developed with a Django default database
-* Tested with the default database, migrate to a production Database, and tested again with the production Database
+* Tested with the default database, migrated to a production Database, and tested again with the production Database
 
 ## Unit Tests
 ![coverage tests report](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685522855/coverage_report_hosh5h.png)
@@ -431,13 +511,37 @@ python manage.py test
   * I waited for all the time intervals up to 5 times consecutively and checked the application's logs on heroku and everything was running smoothly.
 
 # Validators
+  * html Validator.w3
+    * [Home page](https://validator.w3.org/nu/?doc=https%3A%2F%2Ftundorul.herokuapp.com%2F)
+    * [Vods page](https://validator.w3.org/nu/?doc=https%3A%2F%2Ftundorul.herokuapp.com%2Fvods)
+    * [Profile page](https://validator.w3.org/nu/?doc=https%3A%2F%2Ftundorul.herokuapp.com%2Fuser_profile)
+    * [Suggestions page](https://validator.w3.org/nu/?doc=https%3A%2F%2Ftundorul.herokuapp.com%2Fsuggestions)
+    * [Log out](https://validator.w3.org/nu/?doc=https%3A%2F%2Ftundorul.herokuapp.com%2Faccountslogout%2F)
+    * [Log in](https://validator.w3.org/nu/?doc=https%3A%2F%2Ftundorul.herokuapp.com%2Faccountstwitch%2Flogin%2F)
 
+  * Css Validator
+    * [style.css](https://jigsaw.w3.org/css-validator/validator)
+    * [home.css](https://jigsaw.w3.org/css-validator/validator)
+    * [suggestions.css](https://jigsaw.w3.org/css-validator/validator)
+    * [user-profile.css](https://jigsaw.w3.org/css-validator/validator)
+    * [vods.css](https://jigsaw.w3.org/css-validator/validator)
 
+  * Python Validator
+    * As I developed this project in Pycharm, all the code is pep8 complient.
+
+  * Js Validator for streamschedule.js file
+    ![Streamschedule JS](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685695546/hint_js_zu6fbg.png)
+      * The variable ```dailyHours``` is an array built in a for loop in a template rendered by django with python backed data. 
+      </br></br></br></br></br></br>
+
+  * Lighthouse
+    ![Lighthouse immage](https://res.cloudinary.com/dgzv7gan8/image/upload/v1685694289/lighthouse_rgplid.png)
+    * Some accessibility errors are django related, they will be solved in future versions
+  
 
 </br></br></br>
 
 # Credits
-
 ## Django Developers 
 ## Django Allauth Library Developers
 ## Django Unicorn Library Developers
@@ -482,4 +586,8 @@ python manage.py test
   * Towards the end of the project Reuben stepped down from Code Institute. On this regard I am thanking him for the previous help and his work as a mentor in this time.   
   * Brian Helped me a lot towards the end of the project, knowing how to press the Turbo Button 
 
-## My brother for trusting me with his brand and immage 
+## Tundorul 
+  * for offering me the opportunity to build my project around his business.
+
+## Student Care Team
+  * For giving me the needed help and responding quickly to my requests.
