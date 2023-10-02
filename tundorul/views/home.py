@@ -52,6 +52,6 @@ class Home(View):
 
         return render(
             request,
-            'index.html',
+            'work_in_progress.html',
             context,
         )

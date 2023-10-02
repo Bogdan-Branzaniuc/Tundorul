@@ -23,7 +23,7 @@ def is_follower(extra_data, token):
     following_streams_request = requests.get(url, headers=headers, params=params)
     following_streams = json.loads(following_streams_request.content.decode("utf-8"))['data']
     following = False
-    followed_at = '0000-00-00'
+    followed_at = None
     if following_streams:
         for followed in following_streams:
             print(followed)
@@ -57,7 +57,8 @@ def update_user_profile(request, user, **kwargs):
         instance.current_name = extra_data['display_name']
         instance.email = extra_data['email']
         instance.profile_picture_url = extra_data['profile_image_url']
-        instance.join_date = is_following['followed_at']
+        if is_following['is_following']:
+            instance.join_date = is_following['followed_at']
         instance.is_follower = is_following['is_following']
         instance.save()
     else:

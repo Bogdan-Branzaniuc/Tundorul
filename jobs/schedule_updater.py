@@ -10,4 +10,4 @@ def start():
     scheduler.add_job(twitch_app_token, 'interval', seconds=4704769)
     scheduler.add_job(twitch_schedule_callendar, 'interval', hours=6)
     scheduler.add_job(twitch_get_vods, 'interval', hours=6)
-    scheduler.start()
+    # scheduler.start()

@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
 class UserProfile(models.Model):
     username = models.ForeignKey(User, on_delete=models.CASCADE, related_name='%(class)s_related')
     uid = models.CharField(max_length=200, default='')
@@ -9,7 +10,7 @@ class UserProfile(models.Model):
     is_subscribed = models.BooleanField(default=False)
     is_follower = models.BooleanField(default=False)
     is_banned = models.BooleanField(default=False)
-    join_date = models.DateField(blank=True)
+    join_date = models.DateField(blank=True, null=True)
     profile_picture_url = models.TextField(blank=True)
 
     class Meta:
